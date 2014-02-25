@@ -16,6 +16,7 @@
 /* Imports */
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
@@ -148,9 +149,26 @@ public class View extends JFrame {
 	 * Generates the draw panel.
 	 */
 	private void buildDrawPanel() {
-		JPanel drawPanel = new JPanel();
-		drawPanel.setBackground(new Color(255, 255, 255));
+		DrawPanel drawPanel = new DrawPanel();
+		
 		add(drawPanel, BorderLayout.CENTER);
+		drawPanel.repaint();
+		drawPanel.setBackground(new Color(255, 255, 255)); //not working unsure why
+		System.out.println("bloooo");
 	}
-
+	public class DrawPanel extends JPanel {
+	    @Override public void paintComponent(Graphics g) {
+	        g.drawRect(50, 50, 20, 10); // <-- draws a rect on the panel
+	        System.out.println("X");
+	    }
+	}
+	/*
+	@Override public void paintComponents(Graphics g)
+	{
+		super.paintComponents(g);
+		g.drawRect(10, 20, 20, 10);
+		System.out.println("oi");
+	
+	}
+	*/
 }
