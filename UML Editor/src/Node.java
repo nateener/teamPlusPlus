@@ -1,28 +1,48 @@
 public class Node {
-	int xCoor;
-	int yCoor;
-	String name;
-	String attributes;
-	String methods;
-	int width;
-	int height;
-	int leftX;
-	int rightX;
-	int topY;
-	int bottomY;
+	private int xCoor;
+	private int yCoor;
+	private String name;
+	private String attributes;
+	private String methods;
+	private int width;
+	private int height;
+	private int leftX;
+	private int rightX;
+	private int topY;
+	private int bottomY;
 
 
 public Node(int x, int y){
-	width = 20;
-	height = 10;
-	xCoor = x + width/2;
-	yCoor = y + height/2;
+	width = 80;
+	height = 80;
+	xCoor = x;
+	yCoor = y;
 	findDimensions();
  }
 
 public void setPosition(int x, int y){
 	xCoor = x;
 	yCoor = y;
+}
+
+public int getX(){
+	
+	return xCoor;
+	
+}
+
+public int getY() {
+	
+	return yCoor;
+	
+}
+
+public int getWidth() {
+	return width;
+}
+
+public int getHeight() {
+	return height;
 }
 
 public void findDimensions(){

@@ -18,7 +18,13 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -33,7 +39,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 @SuppressWarnings("serial")
-public class View extends JFrame {
+public class View extends JFrame implements ActionListener {
 	
 	/* Default constructor for the View class.
 	 * Parameters: None
@@ -125,14 +131,22 @@ public class View extends JFrame {
 	 * Return: Void
 	 * Generates the tool bar and buttons.
 	 */
+	private JButton classButton;
+	private JButton button;
+	//private JButton button;
+	//private JButton button;
+	
 	private void buildToolBar() {
 		JToolBar toolBar;
-		JButton button;
+		
 		toolBar = new JToolBar(JToolBar.VERTICAL);
 		toolBar.setFloatable(false);
 		add(toolBar, BorderLayout.LINE_START);
-		button = new JButton("Class");
-		toolBar.add(button);
+		
+		classButton = new JButton("Class");
+		classButton.addActionListener(this);
+		toolBar.add(classButton);
+		
 		toolBar.addSeparator();
 		button = new JButton("Aggregation");
 		toolBar.add(button);
@@ -143,25 +157,134 @@ public class View extends JFrame {
 		toolBar.add(button);
 	}
 	
+	int numclicks = 0;
+	public void actionPerformed(ActionEvent e) { 
+		Object src = e.getSource();
+		if(src.equals(classButton)){
+			Controller.classButton();
+		}
+	}
+	
+	public void setText(String text){
+		classButton.setText(text);
+	}
 	/* Builder function for the tool bar.
 	 * Parameters: None
 	 * Return: Void
 	 * Generates the draw panel.
 	 */
+	DrawPanel drawPanel;
+	
 	private void buildDrawPanel() {
-		DrawPanel drawPanel = new DrawPanel();
-		
-		add(drawPanel, BorderLayout.CENTER);
-		drawPanel.repaint();
-		drawPanel.setBackground(new Color(255, 255, 255)); //not working unsure why
-		System.out.println("bloooo");
+		drawPanel = new DrawPanel();
+		this.add(drawPanel);
+		//add(drawPanel, BorderLayout.CENTER);
+		//drawPanel.repaint();
+		//drawPanel.setBackground(new Color(255, 255, 255)); //not working unsure why
+		//System.out.println("bloooo");
 	}
-	public class DrawPanel extends JPanel {
+	
+	public void drawObjects(ArrayList<NodeInfo> nodeInfo){
+		
+		drawPanel.setNodeInfo(nodeInfo);
+		drawPanel.repaint();
+		
+		
+	}
+	
+	
+	
+	
+	private class DrawPanel extends JPanel implements MouseListener, MouseMotionListener { 
+		
+		private ArrayList<NodeInfo> nodeInfo;
+		
+		public DrawPanel(){
+			super();
+			
+			addMouseListener(this);
+			addMouseMotionListener(this);
+			
+		}
+		
+		public void setNodeInfo(ArrayList<NodeInfo> nodeInfo){
+			
+			this.nodeInfo = nodeInfo;
+			
+		}
+		
+		public void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			Iterator<NodeInfo>	itr = nodeInfo.iterator();
+			
+			while(itr.hasNext()){
+				NodeInfo curInfo = itr.next();
+				
+				g.fillRect(curInfo.getxCoor(), curInfo.getyCoor(), curInfo.getWidth(), curInfo.getHeight() );
+				
+			}
+			
+			
+			
+		}
+		
+		@Override
+		public void mouseClicked(MouseEvent mouse) {
+			Controller.mouseClick(mouse.getX(), mouse.getY());
+			System.out.print("Component");
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		
+		
+		@Override
+		public void mouseDragged(MouseEvent mouse) {
+			// TODO Auto-generated method stub
+			
+			Controller.moveNode(mouse.getX(), mouse.getY());
+			
+		}
+
+		@Override
+		public void mouseMoved(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		
+	}
+	/*
+	private class DrawPanel extends JPanel {
 	    @Override public void paintComponent(Graphics g) {
 	        g.drawRect(50, 50, 20, 10); // <-- draws a rect on the panel
 	        System.out.println("X");
 	    }
 	}
+	
+	
 	/*
 	@Override public void paintComponents(Graphics g)
 	{
@@ -171,4 +294,9 @@ public class View extends JFrame {
 	
 	}
 	*/
+
+
+
+
+
 }
