@@ -8,9 +8,8 @@ public class Controller {
 
 	private static ArrayList<Node> nodes;
 	private static ArrayList<Association> asses;
-	private static int clickValue = 1;
+	private static int clickValue = -1;
 
-	@SuppressWarnings("unused")
 	private static View view;
 
 	public static void main(String[] args) {
@@ -40,7 +39,7 @@ public class Controller {
 
 	public static void moveNode(int x, int y){
 		
-		if(isNodeFull(x, y)){
+		if(clickValue != 1 && isNodeFull(x, y)){ //Don't try to drag nodes in delete mode
 			
 			Node curNode = grabNode(x, y);
 			
@@ -49,6 +48,16 @@ public class Controller {
 			
 		}
 		
+	}
+	
+	public static void deleteNode(int x, int y) {
+		if(isNodeFull(x, y)) {
+			Node curNode = grabNode(x, y);
+			
+			nodes.remove(curNode);
+			
+			serveNodes();
+		}
 	}
 	
  	private static void serveNodes() {
@@ -69,10 +78,16 @@ public class Controller {
 	}
 
 	public static void mouseClick(int x, int y) {
-		if (clickValue == 0) { // class
+		/*if (clickValue == 0) { // class
 
 			createNode(x, y);
 
+		}*/
+		
+		switch (clickValue) {
+		case 0: createNode(x, y); return; //Class
+		case 1: deleteNode(x, y); return; //Delete
+		default: return;
 		}
 	}
 
@@ -123,5 +138,9 @@ public class Controller {
 		// Model
 		clickValue = 0;
 	}
+ 	
+ 	public static void deleteButton() {
+ 		clickValue = 1;
+ 	}
 
 }
