@@ -1,37 +1,65 @@
 public class Association {
-	String associationType;
-	Node startNode;
-	Node endNode;
-	int startX;
-	int startY;
-	int endX;
-	int endY;
+	private String associationType;
+	private Node startNode;
+	private Node endNode;
+	private int startX;
+	private int startY;
+	private int endX;
+	private int endY;
 
 
 public Association(Node sNode, String type){
 	associationType = type;
 	startNode = sNode;
-	setStartPosition(startNode.xCoor, startNode.yCoor);
-
+	setStartPosition();
  }
 
-public void setEndpoint( Node eNode){
+public void setEndpoint(Node eNode){
 	endNode = eNode;
-	setEndPosition(endNode.xCoor, endNode.yCoor);
-}
-public void setStartPosition(int x, int y){
-	startX = x;
-	startY = y;
+	setEndPosition();
 }
 
-public void setEndPosition(int x, int y){
-	endX = x;
-	endY = y;
+public void recalculateEndPoints() {
+	setStartPosition();
+	setEndPosition();
 }
 
-public void updatePosition(){
-	setStartPosition(startNode.xCoor, startNode.yCoor);
-	setEndPosition(endNode.xCoor, endNode.yCoor);
+public boolean involvesNode(Node in) {
+	return (startNode.equals(in) || endNode.equals(in));
+}
+
+public int getStartX() {
+	return startX;
+}
+
+public int getStartY() {
+	return startY;
+}
+
+public int getEndX() {
+	return endX;
+}
+
+public int getEndY() {
+	return endY;
+}
+
+public String getAssociationType() {
+	return associationType;
+}
+
+private void setStartPosition(){
+	if (startNode != null) {
+		startX = startNode.getX() + startNode.getWidth() / 2;
+		startY = startNode.getY() + startNode.getHeight();
+	}
+}
+
+private void setEndPosition(){
+	if(endNode != null) {
+		endX = endNode.getX() + endNode.getWidth() / 2;
+		endY = endNode.getY() + endNode.getHeight();
+	}
 }
 
 public void printAssociation(){

@@ -15,7 +15,6 @@
 
 /* Imports */
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,6 +31,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
@@ -132,9 +132,9 @@ public class View extends JFrame implements ActionListener {
 	 * Generates the tool bar and buttons.
 	 */
 	private JButton classButton;
-	private JButton button;
-	//private JButton button;
-	//private JButton button;
+	private JButton deleteButton;
+	private JButton aggButton;
+	private JButton compButton;
 	
 	private void buildToolBar() {
 		JToolBar toolBar;
@@ -148,13 +148,18 @@ public class View extends JFrame implements ActionListener {
 		toolBar.add(classButton);
 		
 		toolBar.addSeparator();
-		button = new JButton("Aggregation");
-		toolBar.add(button);
-		button = new JButton("Composition");
-		toolBar.add(button);
+		aggButton = new JButton("Aggregation");
+		aggButton.addActionListener(this);
+		toolBar.add(aggButton);
+		
+		compButton = new JButton("Composition");
+		compButton.addActionListener(this);
+		toolBar.add(compButton);
+		
 		toolBar.addSeparator();
-		button = new JButton("Delete");
-		toolBar.add(button);
+		deleteButton = new JButton("Delete");
+		deleteButton.addActionListener(this);
+		toolBar.add(deleteButton);
 	}
 	
 	int numclicks = 0;
@@ -162,6 +167,12 @@ public class View extends JFrame implements ActionListener {
 		Object src = e.getSource();
 		if(src.equals(classButton)){
 			Controller.classButton();
+		} else if (src.equals(deleteButton)) {
+			Controller.deleteButton();
+		} else if (src.equals(aggButton)) {
+			Controller.aggButton();
+		} else if (src.equals(compButton)) {
+			Controller.compButton();
 		}
 	}
 	
@@ -184,20 +195,24 @@ public class View extends JFrame implements ActionListener {
 		//System.out.println("bloooo");
 	}
 	
-	public void drawObjects(ArrayList<NodeInfo> nodeInfo){
+	public void drawObjects(ArrayList<NodeInfo> nodeInfo, ArrayList<AssocInfo> assocInfo){
 		
 		drawPanel.setNodeInfo(nodeInfo);
+		drawPanel.setAssocInfo(assocInfo);
 		drawPanel.repaint();
 		
 		
 	}
 	
-	
-	
+	public boolean confirmMessage(String title, String message) {
+		//If the function returns 0, it means the user selected "yes"
+		return (JOptionPane.showConfirmDialog(this, message, title, JOptionPane.YES_NO_OPTION) == 0);
+	}
 	
 	private class DrawPanel extends JPanel implements MouseListener, MouseMotionListener { 
 		
 		private ArrayList<NodeInfo> nodeInfo;
+		private ArrayList<AssocInfo> assocInfo;
 		
 		public DrawPanel(){
 			super();
@@ -213,15 +228,26 @@ public class View extends JFrame implements ActionListener {
 			
 		}
 		
+		public void setAssocInfo(ArrayList<AssocInfo> assocInfo) {
+			this.assocInfo = assocInfo;
+		}
+		
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
-			Iterator<NodeInfo>	itr = nodeInfo.iterator();
+			Iterator<NodeInfo>	nodeItr = nodeInfo.iterator();
+			Iterator<AssocInfo> assItr = assocInfo.iterator();
 			
-			while(itr.hasNext()){
-				NodeInfo curInfo = itr.next();
+			while(nodeItr.hasNext()){
+				NodeInfo curInfo = nodeItr.next();
 				
 				g.fillRect(curInfo.getxCoor(), curInfo.getyCoor(), curInfo.getWidth(), curInfo.getHeight() );
 				
+			}
+			
+			while(assItr.hasNext()) {
+				AssocInfo curInfo = assItr.next();
+				
+				g.drawLine(curInfo.getStartX(), curInfo.getStartY(), curInfo.getEndX(), curInfo.getEndY());
 			}
 			
 			
