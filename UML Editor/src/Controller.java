@@ -1,3 +1,4 @@
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -11,9 +12,12 @@ public class Controller {
 	private static int clickValue = -1;
 
 	private static View view;
+	
+	private static Node tempNode; //For use in creating associations
 
 	public static void main(String[] args) {
 		nodes = new ArrayList<Node>();
+		asses = new ArrayList<Association>();
 		view = new View();
 		createNode(30, 30);
 		createNode(300, 300);
@@ -24,71 +28,101 @@ public class Controller {
 		// Code that creates a new node object.
 		Node node = new Node(x, y);
 
-		if(!isNodeFull(node.getX(), node.getY()) && 
-		   !isNodeFull(node.getX() + node.getWidth(), node.getY()) &&
-		   !isNodeFull(node.getX(), node.getY() + node.getHeight()) &&
-		   !isNodeFull(node.getX()+node.getWidth(), node.getY()+node.getHeight())
-				){
-		
+		if (!isNodeFull(node.getX(), node.getY())
+				&& !isNodeFull(node.getX() + node.getWidth(), node.getY())
+				&& !isNodeFull(node.getX(), node.getY() + node.getHeight())
+				&& !isNodeFull(node.getX() + node.getWidth(), node.getY()
+						+ node.getHeight())) {
+
 			nodes.add(node);
 			// Call method serveNodes
 
-			serveNodes();
+			serveObjects();
 		}
 	}
 
-	public static void moveNode(int x, int y){
-		
-		if(clickValue != 1 && isNodeFull(x, y)){ //Don't try to drag nodes in delete mode
-			
-			Node curNode = grabNode(x, y);
-			
-			curNode.setPosition(x - curNode.getWidth()/2, y - curNode.getHeight()/2);
-			serveNodes();
-			
-		}
-		
+	private static void createAssociation(Node start, Node end, String type) {
+		Association newAssoc = new Association(start, type);
+		newAssoc.setEndpoint(end);
+
+		asses.add(newAssoc);
+
+		serveObjects();
 	}
-	
+
+	public static void moveNode(int x, int y) {
+
+		if (clickValue != 1 && isNodeFull(x, y)) { // Don't try to drag nodes in
+													// delete mode
+
+			Node curNode = grabNode(x, y);
+
+			curNode.setPosition(x - curNode.getWidth() / 2,
+					y - curNode.getHeight() / 2);
+			serveObjects();
+
+		}
+
+	}
+
 	public static void deleteNode(int x, int y) {
-		//Conditionals in the if statement are in this order so that the confirmation only appears if you click on a node
-		if(isNodeFull(x, y) && view.confirmMessage("Deletion confirmation", "Are you sure you want to delete this?")) {
+		// Conditionals in the if statement are in this order so that the
+		// confirmation only appears if you click on a node
+		if (isNodeFull(x, y)
+				&& view.confirmMessage("Deletion confirmation",
+						"Are you sure you want to delete this?")) {
 			Node curNode = grabNode(x, y);
-			
+
 			nodes.remove(curNode);
-			
-			serveNodes();
+
+			serveObjects();
 		}
 	}
-	
- 	private static void serveNodes() {
-		// needs to serve everything simultaneously
-		ArrayList<NodeInfo> info = new ArrayList<NodeInfo>();
-		Iterator<Node> itr = nodes.iterator();
 
-		while (itr.hasNext()) {
-			Node curNode = itr.next();
+	private static void serveObjects() {
+		// needs to serve everything simultaneously
+		ArrayList<NodeInfo> nodeInfo = new ArrayList<NodeInfo>();
+		ArrayList<AssocInfo> assocInfo = new ArrayList<AssocInfo>();
+		Iterator<Node> nodeItr = nodes.iterator();
+		Iterator<Association> assItr = asses.iterator();
+
+		while (nodeItr.hasNext()) {
+			Node curNode = nodeItr.next();
 			NodeInfo curInfo = new NodeInfo(curNode.getX(), curNode.getY(),
 					curNode.getWidth(), curNode.getHeight());
 
-			info.add(curInfo);
+			nodeInfo.add(curInfo);
 
 		}
-		view.drawObjects(info);
+
+		while (assItr.hasNext()) {
+			Association curAss = assItr.next();
+			curAss.recalculateEndPoints(); //Make sure they point to the right places
+			AssocInfo curInfo = new AssocInfo(curAss.getStartX(), curAss.getStartY(), curAss.getEndX(), curAss.getEndY());
+			
+			assocInfo.add(curInfo);
+		}
+
+		view.drawObjects(nodeInfo, assocInfo);
 
 	}
 
 	public static void mouseClick(int x, int y) {
-		/*if (clickValue == 0) { // class
-
-			createNode(x, y);
-
-		}*/
-		
 		switch (clickValue) {
-		case 0: createNode(x, y); return; //Class
-		case 1: deleteNode(x, y); return; //Delete
-		default: return;
+		case 0:
+			createNode(x, y);
+			return; // Class
+		case 1:
+			deleteNode(x, y);
+			return; // Delete
+		case 2:
+			prepAssoc(x, y, "Aggregation");
+			return; // Aggregation
+		case 3:
+			prepAssoc(x, y, "Composition");
+			return; // Composition
+		default:
+			return;
 		}
 	}
 
@@ -113,9 +147,9 @@ public class Controller {
 		return false;
 	}
 
-	public static Node grabNode (int x, int y){
+	public static Node grabNode(int x, int y) {
 		Iterator<Node> itr = nodes.iterator();
-		
+
 		while (itr.hasNext()) {
 			Node curNode = itr.next();
 
@@ -131,17 +165,41 @@ public class Controller {
 
 		} // end loop
 
-		
 		return null;
 	}
 	
- 	public static void classButton() {
+	private static void prepAssoc(int x, int y, String type) {
+		if (tempNode != null && isNodeFull(x, y)) {
+			createAssociation(tempNode, grabNode(x, y), type);
+			tempNode = null;
+		} else if (isNodeFull(x, y)) {
+			tempNode = grabNode(x, y);
+		}
+	}
+	
+	private static void clearClickMode() { //Make sure we don't store clickmode specific stuff when changing clickmodes
+		tempNode = null;
+	}
+
+	public static void classButton() {
 		// Model
+		clearClickMode();
 		clickValue = 0;
 	}
- 	
- 	public static void deleteButton() {
- 		clickValue = 1;
- 	}
+
+	public static void deleteButton() {
+		clearClickMode();
+		clickValue = 1;
+	}
+	
+	public static void aggButton() {
+		clearClickMode();
+		clickValue = 2;
+	}
+	
+	public static void compButton() {
+		clearClickMode();
+		clickValue = 3;
+	}
 
 }

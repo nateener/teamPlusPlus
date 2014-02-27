@@ -11,27 +11,51 @@ public class Association {
 public Association(Node sNode, String type){
 	associationType = type;
 	startNode = sNode;
-	setStartPosition(startNode.getX(), startNode.getY());
-
+	setStartPosition();
  }
 
-public void setEndpoint( Node eNode){
+public void setEndpoint(Node eNode){
 	endNode = eNode;
-	setEndPosition(endNode.getX(), endNode.getY());
-}
-public void setStartPosition(int x, int y){
-	startX = x;
-	startY = y;
+	setEndPosition();
 }
 
-public void setEndPosition(int x, int y){
-	endX = x;
-	endY = y;
+public void recalculateEndPoints() {
+	setStartPosition();
+	setEndPosition();
 }
 
-public void updatePosition(){
-	setStartPosition(startNode.getX(), startNode.getY());
-	setEndPosition(endNode.getX(), endNode.getY());
+public int getStartX() {
+	return startX;
+}
+
+public int getStartY() {
+	return startY;
+}
+
+public int getEndX() {
+	return endX;
+}
+
+public int getEndY() {
+	return endY;
+}
+
+public String getAssociationType() {
+	return associationType;
+}
+
+private void setStartPosition(){
+	if (startNode != null) {
+		startX = startNode.getX() + startNode.getWidth() / 2;
+		startY = startNode.getY() + startNode.getHeight();
+	}
+}
+
+private void setEndPosition(){
+	if(endNode != null) {
+		endX = endNode.getX() + endNode.getWidth() / 2;
+		endY = endNode.getY() + endNode.getHeight();
+	}
 }
 
 public void printAssociation(){

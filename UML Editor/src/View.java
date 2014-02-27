@@ -134,8 +134,8 @@ public class View extends JFrame implements ActionListener {
 	 */
 	private JButton classButton;
 	private JButton deleteButton;
-	private JButton button;
-	//private JButton button;
+	private JButton aggButton;
+	private JButton compButton;
 	
 	private void buildToolBar() {
 		JToolBar toolBar;
@@ -149,10 +149,14 @@ public class View extends JFrame implements ActionListener {
 		toolBar.add(classButton);
 		
 		toolBar.addSeparator();
-		button = new JButton("Aggregation");
-		toolBar.add(button);
-		button = new JButton("Composition");
-		toolBar.add(button);
+		aggButton = new JButton("Aggregation");
+		aggButton.addActionListener(this);
+		toolBar.add(aggButton);
+		
+		compButton = new JButton("Composition");
+		compButton.addActionListener(this);
+		toolBar.add(compButton);
+		
 		toolBar.addSeparator();
 		deleteButton = new JButton("Delete");
 		deleteButton.addActionListener(this);
@@ -166,6 +170,10 @@ public class View extends JFrame implements ActionListener {
 			Controller.classButton();
 		} else if (src.equals(deleteButton)) {
 			Controller.deleteButton();
+		} else if (src.equals(aggButton)) {
+			Controller.aggButton();
+		} else if (src.equals(compButton)) {
+			Controller.compButton();
 		}
 	}
 	
@@ -188,9 +196,10 @@ public class View extends JFrame implements ActionListener {
 		//System.out.println("bloooo");
 	}
 	
-	public void drawObjects(ArrayList<NodeInfo> nodeInfo){
+	public void drawObjects(ArrayList<NodeInfo> nodeInfo, ArrayList<AssocInfo> assocInfo){
 		
 		drawPanel.setNodeInfo(nodeInfo);
+		drawPanel.setAssocInfo(assocInfo);
 		drawPanel.repaint();
 		
 		
@@ -204,6 +213,7 @@ public class View extends JFrame implements ActionListener {
 	private class DrawPanel extends JPanel implements MouseListener, MouseMotionListener { 
 		
 		private ArrayList<NodeInfo> nodeInfo;
+		private ArrayList<AssocInfo> assocInfo;
 		
 		public DrawPanel(){
 			super();
@@ -219,15 +229,26 @@ public class View extends JFrame implements ActionListener {
 			
 		}
 		
+		public void setAssocInfo(ArrayList<AssocInfo> assocInfo) {
+			this.assocInfo = assocInfo;
+		}
+		
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
-			Iterator<NodeInfo>	itr = nodeInfo.iterator();
+			Iterator<NodeInfo>	nodeItr = nodeInfo.iterator();
+			Iterator<AssocInfo> assItr = assocInfo.iterator();
 			
-			while(itr.hasNext()){
-				NodeInfo curInfo = itr.next();
+			while(nodeItr.hasNext()){
+				NodeInfo curInfo = nodeItr.next();
 				
 				g.fillRect(curInfo.getxCoor(), curInfo.getyCoor(), curInfo.getWidth(), curInfo.getHeight() );
 				
+			}
+			
+			while(assItr.hasNext()) {
+				AssocInfo curInfo = assItr.next();
+				
+				g.drawLine(curInfo.getStartX(), curInfo.getStartY(), curInfo.getEndX(), curInfo.getEndY());
 			}
 			
 			
