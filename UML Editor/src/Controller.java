@@ -74,6 +74,23 @@ public class Controller {
 			Node curNode = grabNode(x, y);
 
 			nodes.remove(curNode);
+			
+			//Also delete associations involving that node
+			Iterator<Association> itr = asses.iterator();
+			ArrayList<Association> toBeRemoved = new ArrayList<Association>();
+			while(itr.hasNext()) {
+				Association curAssoc = itr.next();
+				
+				if(curAssoc.involvesNode(curNode)) {
+					toBeRemoved.add(curAssoc); //Can't just remove it outright because we're in the middle of iterating over this list
+				}
+			}
+			
+			Iterator<Association> revItr = toBeRemoved.iterator();
+			
+			while(revItr.hasNext()) { //There has to be a neater way to do this, but I'm too tired to think of one
+				asses.remove(revItr.next());
+			}
 
 			serveObjects();
 		}

@@ -24,6 +24,10 @@ public void recalculateEndPoints() {
 	setEndPosition();
 }
 
+public boolean involvesNode(Node in) {
+	return (startNode.equals(in) || endNode.equals(in));
+}
+
 public int getStartX() {
 	return startX;
 }
