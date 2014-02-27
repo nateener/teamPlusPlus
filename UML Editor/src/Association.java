@@ -1,23 +1,23 @@
 public class Association {
-	String associationType;
-	Node startNode;
-	Node endNode;
-	int startX;
-	int startY;
-	int endX;
-	int endY;
+	private String associationType;
+	private Node startNode;
+	private Node endNode;
+	private int startX;
+	private int startY;
+	private int endX;
+	private int endY;
 
 
 public Association(Node sNode, String type){
 	associationType = type;
 	startNode = sNode;
-	setStartPosition(startNode.xCoor, startNode.yCoor);
+	setStartPosition(startNode.getX(), startNode.getY());
 
  }
 
 public void setEndpoint( Node eNode){
 	endNode = eNode;
-	setEndPosition(endNode.xCoor, endNode.yCoor);
+	setEndPosition(endNode.getX(), endNode.getY());
 }
 public void setStartPosition(int x, int y){
 	startX = x;
@@ -30,8 +30,8 @@ public void setEndPosition(int x, int y){
 }
 
 public void updatePosition(){
-	setStartPosition(startNode.xCoor, startNode.yCoor);
-	setEndPosition(endNode.xCoor, endNode.yCoor);
+	setStartPosition(startNode.getX(), startNode.getY());
+	setEndPosition(endNode.getX(), endNode.getY());
 }
 
 public void printAssociation(){

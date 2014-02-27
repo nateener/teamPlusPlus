@@ -5,7 +5,7 @@ public class test {
 		
 		
 		Node test = new Node(0, 0);
-		test.name = "Class Block";
+		//test.name = "Class Block";
 		test.printNodeInfo();
 		
 	}
