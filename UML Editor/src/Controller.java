@@ -51,7 +51,8 @@ public class Controller {
 	}
 	
 	public static void deleteNode(int x, int y) {
-		if(isNodeFull(x, y)) {
+		//Conditionals in the if statement are in this order so that the confirmation only appears if you click on a node
+		if(isNodeFull(x, y) && view.confirmMessage("Deletion confirmation", "Are you sure you want to delete this?")) {
 			Node curNode = grabNode(x, y);
 			
 			nodes.remove(curNode);

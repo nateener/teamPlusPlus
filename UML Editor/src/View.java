@@ -32,6 +32,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
@@ -195,8 +196,10 @@ public class View extends JFrame implements ActionListener {
 		
 	}
 	
-	
-	
+	public boolean confirmMessage(String title, String message) {
+		//If the function returns 0, it means the user selected "yes"
+		return (JOptionPane.showConfirmDialog(this, message, title, JOptionPane.YES_NO_OPTION) == 0);
+	}
 	
 	private class DrawPanel extends JPanel implements MouseListener, MouseMotionListener { 
 		
