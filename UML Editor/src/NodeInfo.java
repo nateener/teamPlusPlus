@@ -4,24 +4,18 @@ public class NodeInfo {
 	private int yCoor;
 	private int width;
 	private int height;
-<<<<<<< HEAD
 	private String name;
 	private boolean high;
 	
 	public NodeInfo(int x, int y, int w, int h, String n) {
-=======
-	
-	public NodeInfo(int x, int y, int w, int h) {
->>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
+
 		xCoor = x;
 		yCoor = y;
 		width = w;
 		height = h;
-<<<<<<< HEAD
 		name = n;
 		setHigh(false);
-=======
->>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
+
 		
 	}
 	
@@ -57,7 +51,6 @@ public class NodeInfo {
 	public void setHeight(int height) {
 		this.height = height;
 	}
-<<<<<<< HEAD
 	
 	public String getName(){
 		
@@ -74,7 +67,6 @@ public class NodeInfo {
 	public void setHigh(boolean high) {
 		this.high = high;
 	}
-=======
->>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
+
 
 }

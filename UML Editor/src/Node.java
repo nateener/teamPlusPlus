@@ -1,10 +1,8 @@
-<<<<<<< HEAD
+
 import java.io.Serializable;
 
 public class Node implements Serializable {
-=======
-public class Node {
->>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
+
 	private int xCoor;
 	private int yCoor;
 	private String name;
@@ -21,13 +19,9 @@ public class Node {
 public Node(int x, int y){
 	width = 80;
 	height = 80;
-<<<<<<< HEAD
 	setPosition(x, y);
 	name = "Class";
-=======
-	xCoor = x;
-	yCoor = y;
->>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
+
 	findDimensions();
  }
 
@@ -104,25 +98,6 @@ public void setName(String name) {
 	this.name = name;
 }
 
-public int getX(){
-	
-	return xCoor;
-	
-}
-
-public int getY() {
-	
-	return yCoor;
-	
-}
-
-public int getWidth() {
-	return width;
-}
-
-public int getHeight() {
-	return height;
-}
 
 public void findDimensions(){
 	leftX = xCoor - width/2;

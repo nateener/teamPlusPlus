@@ -15,12 +15,9 @@
 
 /* Imports */
 import java.awt.BorderLayout;
-<<<<<<< HEAD
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-=======
->>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -169,12 +166,6 @@ public class View extends JFrame implements ActionListener {
 		toolBar.add(deleteButton);
 	}
 	
-<<<<<<< HEAD
-	
-	
-=======
-	int numclicks = 0;
->>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
 	public void actionPerformed(ActionEvent e) { 
 		Object src = e.getSource();
 		if(src.equals(classButton)){
@@ -185,7 +176,6 @@ public class View extends JFrame implements ActionListener {
 			Controller.aggButton();
 		} else if (src.equals(compButton)) {
 			Controller.compButton();
-<<<<<<< HEAD
 		} else if (src.equals(itemExit)) {
 			Controller.exit();
 		} else if (src.equals(itemSaveAs)) {
@@ -203,14 +193,7 @@ public class View extends JFrame implements ActionListener {
 	}
 	
 	
-=======
-		}
-	}
-	
-	public void setText(String text){
-		classButton.setText(text);
-	}
->>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
+
 	/* Builder function for the tool bar.
 	 * Parameters: None
 	 * Return: Void
@@ -221,7 +204,6 @@ public class View extends JFrame implements ActionListener {
 	private void buildDrawPanel() {
 		drawPanel = new DrawPanel();
 		this.add(drawPanel);
-<<<<<<< HEAD
 		
 	}
 	
@@ -449,121 +431,7 @@ public class View extends JFrame implements ActionListener {
 		
 		
 	}
-=======
-		//add(drawPanel, BorderLayout.CENTER);
-		//drawPanel.repaint();
-		//drawPanel.setBackground(new Color(255, 255, 255)); //not working unsure why
-		//System.out.println("bloooo");
-	}
-	
-	public void drawObjects(ArrayList<NodeInfo> nodeInfo, ArrayList<AssocInfo> assocInfo){
-		
-		drawPanel.setNodeInfo(nodeInfo);
-		drawPanel.setAssocInfo(assocInfo);
-		drawPanel.repaint();
-		
-		
-	}
-	
-	public boolean confirmMessage(String title, String message) {
-		//If the function returns 0, it means the user selected "yes"
-		return (JOptionPane.showConfirmDialog(this, message, title, JOptionPane.YES_NO_OPTION) == 0);
-	}
-	
-	private class DrawPanel extends JPanel implements MouseListener, MouseMotionListener { 
-		
-		private ArrayList<NodeInfo> nodeInfo;
-		private ArrayList<AssocInfo> assocInfo;
-		
-		public DrawPanel(){
-			super();
-			
-			addMouseListener(this);
-			addMouseMotionListener(this);
-			
-		}
-		
-		public void setNodeInfo(ArrayList<NodeInfo> nodeInfo){
-			
-			this.nodeInfo = nodeInfo;
-			
-		}
-		
-		public void setAssocInfo(ArrayList<AssocInfo> assocInfo) {
-			this.assocInfo = assocInfo;
-		}
-		
-		public void paintComponent(Graphics g) {
-			super.paintComponent(g);
-			Iterator<NodeInfo>	nodeItr = nodeInfo.iterator();
-			Iterator<AssocInfo> assItr = assocInfo.iterator();
-			
-			while(nodeItr.hasNext()){
-				NodeInfo curInfo = nodeItr.next();
-				
-				g.fillRect(curInfo.getxCoor(), curInfo.getyCoor(), curInfo.getWidth(), curInfo.getHeight() );
-				
-			}
-			
-			while(assItr.hasNext()) {
-				AssocInfo curInfo = assItr.next();
-				
-				g.drawLine(curInfo.getStartX(), curInfo.getStartY(), curInfo.getEndX(), curInfo.getEndY());
-			}
-			
-			
-			
-		}
-		
-		@Override
-		public void mouseClicked(MouseEvent mouse) {
-			Controller.mouseClick(mouse.getX(), mouse.getY());
-			System.out.print("Component");
-		}
 
-		@Override
-		public void mouseEntered(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseExited(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mousePressed(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		
-		
-		@Override
-		public void mouseDragged(MouseEvent mouse) {
-			// TODO Auto-generated method stub
-			
-			Controller.moveNode(mouse.getX(), mouse.getY());
-			
-		}
-
-		@Override
-		public void mouseMoved(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-		
-	}
->>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
 	/*
 	private class DrawPanel extends JPanel {
 	    @Override public void paintComponent(Graphics g) {
@@ -582,12 +450,5 @@ public class View extends JFrame implements ActionListener {
 	
 	}
 	*/
-
-
-
-<<<<<<< HEAD
-=======
-
->>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
 
 }

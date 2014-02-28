@@ -1,11 +1,9 @@
-<<<<<<< HEAD
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-=======
->>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -16,25 +14,19 @@ public class Controller {
 
 	private static ArrayList<Node> nodes;
 	private static ArrayList<Association> asses;
-<<<<<<< HEAD
 	private static int clickValue = -1; 
-=======
-	private static int clickValue = -1;
 
->>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
 	private static View view;
 	private static Node tempNode; // For use in creating associations
 	private static String curFile = "";
 	
 	
 	
-	private static Node tempNode; //For use in creating associations
 
 	public static void main(String[] args) {
 		nodes = new ArrayList<Node>();
 		asses = new ArrayList<Association>();
 		view = new View();
-<<<<<<< HEAD
 		serveObjects();
 	}
 
@@ -42,12 +34,7 @@ public class Controller {
 	 * Node Functions
 	 */
 
-=======
-		createNode(30, 30);
-		createNode(300, 300);
-	}
 
->>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
 	private static void createNode(int x, int y) {
 
 		// Code that creates a new node object.
@@ -66,26 +53,11 @@ public class Controller {
 		}
 	}
 
-<<<<<<< HEAD
 	public static void moveNode(int x, int y) {
 
 		if (clickValue == 0 && isNodeFull(x, y)) { // Don't try to drag nodes
 													// unless in class mode
-=======
-	private static void createAssociation(Node start, Node end, String type) {
-		Association newAssoc = new Association(start, type);
-		newAssoc.setEndpoint(end);
 
-		asses.add(newAssoc);
-
-		serveObjects();
-	}
-
-	public static void moveNode(int x, int y) {
-
-		if (clickValue != 1 && isNodeFull(x, y)) { // Don't try to drag nodes in
-													// delete mode
->>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
 
 			Node curNode = grabNode(x, y);
 
@@ -97,7 +69,7 @@ public class Controller {
 
 	}
 
-<<<<<<< HEAD
+
 	public static void editNode(Node node) {
 		String newName = view.showCurInfo(node.getName(), node.getAttributes(), node.getMethods());
 		
@@ -110,8 +82,6 @@ public class Controller {
 	}
 
 	
-=======
->>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
 	public static void deleteNode(int x, int y) {
 		// Conditionals in the if statement are in this order so that the
 		// confirmation only appears if you click on a node
@@ -121,7 +91,6 @@ public class Controller {
 			Node curNode = grabNode(x, y);
 
 			nodes.remove(curNode);
-<<<<<<< HEAD
 
 			// Also delete associations involving that node
 			Iterator<Association> itr = asses.iterator();
@@ -141,23 +110,7 @@ public class Controller {
 			while (revItr.hasNext()) { // There has to be a neater way to do
 										// this, but I'm too tired to think of
 										// one
-=======
-			
-			//Also delete associations involving that node
-			Iterator<Association> itr = asses.iterator();
-			ArrayList<Association> toBeRemoved = new ArrayList<Association>();
-			while(itr.hasNext()) {
-				Association curAssoc = itr.next();
-				
-				if(curAssoc.involvesNode(curNode)) {
-					toBeRemoved.add(curAssoc); //Can't just remove it outright because we're in the middle of iterating over this list
-				}
-			}
-			
-			Iterator<Association> revItr = toBeRemoved.iterator();
-			
-			while(revItr.hasNext()) { //There has to be a neater way to do this, but I'm too tired to think of one
->>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
+
 				asses.remove(revItr.next());
 			}
 
@@ -165,56 +118,6 @@ public class Controller {
 		}
 	}
 
-<<<<<<< HEAD
-=======
-	private static void serveObjects() {
-		// needs to serve everything simultaneously
-		ArrayList<NodeInfo> nodeInfo = new ArrayList<NodeInfo>();
-		ArrayList<AssocInfo> assocInfo = new ArrayList<AssocInfo>();
-		Iterator<Node> nodeItr = nodes.iterator();
-		Iterator<Association> assItr = asses.iterator();
-
-		while (nodeItr.hasNext()) {
-			Node curNode = nodeItr.next();
-			NodeInfo curInfo = new NodeInfo(curNode.getX(), curNode.getY(),
-					curNode.getWidth(), curNode.getHeight());
-
-			nodeInfo.add(curInfo);
-
-		}
-
-		while (assItr.hasNext()) {
-			Association curAss = assItr.next();
-			curAss.recalculateEndPoints(); //Make sure they point to the right places
-			AssocInfo curInfo = new AssocInfo(curAss.getStartX(), curAss.getStartY(), curAss.getEndX(), curAss.getEndY());
-			
-			assocInfo.add(curInfo);
-		}
-
-		view.drawObjects(nodeInfo, assocInfo);
-
-	}
-
-	public static void mouseClick(int x, int y) {
-		switch (clickValue) {
-		case 0:
-			createNode(x, y);
-			return; // Class
-		case 1:
-			deleteNode(x, y);
-			return; // Delete
-		case 2:
-			prepAssoc(x, y, "Aggregation");
-			return; // Aggregation
-		case 3:
-			prepAssoc(x, y, "Composition");
-			return; // Composition
-		default:
-			return;
-		}
-	}
-
->>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
 	public static boolean isNodeFull(int x, int y) {
 		Iterator<Node> itr = nodes.iterator();
 
@@ -235,11 +138,6 @@ public class Controller {
 
 		return false;
 	}
-<<<<<<< HEAD
-	
-=======
-
->>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
 	public static Node grabNode(int x, int y) {
 		Iterator<Node> itr = nodes.iterator();
 
@@ -261,7 +159,6 @@ public class Controller {
 		return null;
 	}
 	
-<<<<<<< HEAD
 	
 	/*
 	 * Association Functions
@@ -274,40 +171,6 @@ public class Controller {
 		asses.add(newAssoc);
 
 		serveObjects();
-=======
-	private static void prepAssoc(int x, int y, String type) {
-		if (tempNode != null && isNodeFull(x, y)) {
-			createAssociation(tempNode, grabNode(x, y), type);
-			tempNode = null;
-		} else if (isNodeFull(x, y)) {
-			tempNode = grabNode(x, y);
-		}
-	}
-	
-	private static void clearClickMode() { //Make sure we don't store clickmode specific stuff when changing clickmodes
-		tempNode = null;
-	}
-
-	public static void classButton() {
-		// Model
-		clearClickMode();
-		clickValue = 0;
-	}
-
-	public static void deleteButton() {
-		clearClickMode();
-		clickValue = 1;
-	}
-	
-	public static void aggButton() {
-		clearClickMode();
-		clickValue = 2;
-	}
-	
-	public static void compButton() {
-		clearClickMode();
-		clickValue = 3;
->>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
 	}
 
 	private static void deleteAssociation(int x, int y) {
