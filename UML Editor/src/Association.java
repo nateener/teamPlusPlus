@@ -1,4 +1,10 @@
+<<<<<<< HEAD
+import java.io.Serializable;
+
+public class Association implements Serializable {
+=======
 public class Association {
+>>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
 	private String associationType;
 	private Node startNode;
 	private Node endNode;
@@ -17,6 +23,7 @@ public Association(Node sNode, String type){
 public void setEndpoint(Node eNode){
 	endNode = eNode;
 	setEndPosition();
+<<<<<<< HEAD
 }
 
 public void recalculateEndPoints() {
@@ -32,6 +39,23 @@ public int getStartX() {
 	return startX;
 }
 
+=======
+}
+
+public void recalculateEndPoints() {
+	setStartPosition();
+	setEndPosition();
+}
+
+public boolean involvesNode(Node in) {
+	return (startNode.equals(in) || endNode.equals(in));
+}
+
+public int getStartX() {
+	return startX;
+}
+
+>>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
 public int getStartY() {
 	return startY;
 }
@@ -46,6 +70,15 @@ public int getEndY() {
 
 public String getAssociationType() {
 	return associationType;
+<<<<<<< HEAD
+}
+
+public boolean isSelfAss(){
+	
+	return startNode.equals(endNode);
+	
+=======
+>>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
 }
 
 private void setStartPosition(){

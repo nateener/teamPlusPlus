@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+=======
+>>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -8,9 +16,17 @@ public class Controller {
 
 	private static ArrayList<Node> nodes;
 	private static ArrayList<Association> asses;
+<<<<<<< HEAD
+	private static int clickValue = -1; 
+=======
 	private static int clickValue = -1;
 
+>>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
 	private static View view;
+	private static Node tempNode; // For use in creating associations
+	private static String curFile = "";
+	
+	
 	
 	private static Node tempNode; //For use in creating associations
 
@@ -18,10 +34,20 @@ public class Controller {
 		nodes = new ArrayList<Node>();
 		asses = new ArrayList<Association>();
 		view = new View();
+<<<<<<< HEAD
+		serveObjects();
+	}
+
+	/*
+	 * Node Functions
+	 */
+
+=======
 		createNode(30, 30);
 		createNode(300, 300);
 	}
 
+>>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
 	private static void createNode(int x, int y) {
 
 		// Code that creates a new node object.
@@ -40,6 +66,12 @@ public class Controller {
 		}
 	}
 
+<<<<<<< HEAD
+	public static void moveNode(int x, int y) {
+
+		if (clickValue == 0 && isNodeFull(x, y)) { // Don't try to drag nodes
+													// unless in class mode
+=======
 	private static void createAssociation(Node start, Node end, String type) {
 		Association newAssoc = new Association(start, type);
 		newAssoc.setEndpoint(end);
@@ -53,6 +85,7 @@ public class Controller {
 
 		if (clickValue != 1 && isNodeFull(x, y)) { // Don't try to drag nodes in
 													// delete mode
+>>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
 
 			Node curNode = grabNode(x, y);
 
@@ -64,6 +97,21 @@ public class Controller {
 
 	}
 
+<<<<<<< HEAD
+	public static void editNode(Node node) {
+		String newName = view.showCurInfo(node.getName(), node.getAttributes(), node.getMethods());
+		
+		int newNameLength = newName.length();
+		node.setWidth(newNameLength * 12);
+		
+		node.setName(newName);
+		serveObjects();
+		
+	}
+
+	
+=======
+>>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
 	public static void deleteNode(int x, int y) {
 		// Conditionals in the if statement are in this order so that the
 		// confirmation only appears if you click on a node
@@ -73,6 +121,27 @@ public class Controller {
 			Node curNode = grabNode(x, y);
 
 			nodes.remove(curNode);
+<<<<<<< HEAD
+
+			// Also delete associations involving that node
+			Iterator<Association> itr = asses.iterator();
+			ArrayList<Association> toBeRemoved = new ArrayList<Association>();
+			while (itr.hasNext()) {
+				Association curAssoc = itr.next();
+
+				if (curAssoc.involvesNode(curNode)) {
+					toBeRemoved.add(curAssoc); // Can't just remove it outright
+												// because we're in the middle
+												// of iterating over this list
+				}
+			}
+
+			Iterator<Association> revItr = toBeRemoved.iterator();
+
+			while (revItr.hasNext()) { // There has to be a neater way to do
+										// this, but I'm too tired to think of
+										// one
+=======
 			
 			//Also delete associations involving that node
 			Iterator<Association> itr = asses.iterator();
@@ -88,6 +157,7 @@ public class Controller {
 			Iterator<Association> revItr = toBeRemoved.iterator();
 			
 			while(revItr.hasNext()) { //There has to be a neater way to do this, but I'm too tired to think of one
+>>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
 				asses.remove(revItr.next());
 			}
 
@@ -95,6 +165,8 @@ public class Controller {
 		}
 	}
 
+<<<<<<< HEAD
+=======
 	private static void serveObjects() {
 		// needs to serve everything simultaneously
 		ArrayList<NodeInfo> nodeInfo = new ArrayList<NodeInfo>();
@@ -142,6 +214,7 @@ public class Controller {
 		}
 	}
 
+>>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
 	public static boolean isNodeFull(int x, int y) {
 		Iterator<Node> itr = nodes.iterator();
 
@@ -162,7 +235,11 @@ public class Controller {
 
 		return false;
 	}
+<<<<<<< HEAD
+	
+=======
 
+>>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
 	public static Node grabNode(int x, int y) {
 		Iterator<Node> itr = nodes.iterator();
 
@@ -184,6 +261,20 @@ public class Controller {
 		return null;
 	}
 	
+<<<<<<< HEAD
+	
+	/*
+	 * Association Functions
+	 */
+
+	private static void createAssociation(Node start, Node end, String type) {
+		Association newAssoc = new Association(start, type);
+		newAssoc.setEndpoint(end);
+
+		asses.add(newAssoc);
+
+		serveObjects();
+=======
 	private static void prepAssoc(int x, int y, String type) {
 		if (tempNode != null && isNodeFull(x, y)) {
 			createAssociation(tempNode, grabNode(x, y), type);
@@ -216,6 +307,250 @@ public class Controller {
 	public static void compButton() {
 		clearClickMode();
 		clickValue = 3;
+>>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
 	}
 
+	private static void deleteAssociation(int x, int y) {
+		if (isAssocFull(x, y)
+				&& view.confirmMessage("Deletion confirmation",
+						"Are you sure you want to delete this?")) {
+			Association curAss = grabAss(x, y);
+
+			asses.remove(curAss);
+
+			serveObjects();
+		}
+	}
+
+	public static boolean isAssocFull(int x, int y) {
+		Iterator<Association> itr = asses.iterator();
+
+		while (itr.hasNext()) {
+			Association curAss = itr.next();
+
+			if ((x <= curAss.getStartX() + 10 && x >= curAss.getStartX() - 10
+					&& y <= curAss.getStartY() + 10 && y >= curAss.getStartY() - 10)
+					|| (x <= curAss.getEndX() + 10
+							&& x >= curAss.getEndX() - 10
+							&& y <= curAss.getEndY() + 10 && y >= curAss
+							.getEndY() - 10)) {
+				return true;
+			}
+
+		}
+
+		return false;
+
+	}
+
+	public static Association grabAss(int x, int y) {
+
+		Iterator<Association> itr = asses.iterator();
+
+		while (itr.hasNext()) {
+			Association curAss = itr.next();
+
+			if ((x <= curAss.getStartX() + 10 && x >= curAss.getStartX() - 10
+					&& y <= curAss.getStartY() + 10 && y >= curAss.getStartY() - 10)
+					|| (x <= curAss.getEndX() + 10
+							&& x >= curAss.getEndX() - 10
+							&& y <= curAss.getEndY() + 10 && y >= curAss
+							.getEndY() - 10)) {
+				return curAss;
+			}
+
+		}
+
+		return null;
+
+	}
+	
+	private static void prepAssoc(int x, int y, String type) {
+		if (tempNode != null && isNodeFull(x, y)) {
+			createAssociation(tempNode, grabNode(x, y), type);
+			tempNode = null;
+		} else if (isNodeFull(x, y)) {
+			tempNode = grabNode(x, y);
+		}
+		
+		serveObjects();
+	}
+	
+	
+	
+	/*
+	 * View Functions
+	 */
+
+	private static void serveObjects() {
+		// needs to serve everything simultaneously
+		ArrayList<NodeInfo> nodeInfo = new ArrayList<NodeInfo>();
+		ArrayList<AssocInfo> assocInfo = new ArrayList<AssocInfo>();
+		Iterator<Node> nodeItr = nodes.iterator();
+		Iterator<Association> assItr = asses.iterator();
+
+		while (nodeItr.hasNext()) {
+			Node curNode = nodeItr.next();
+			NodeInfo curInfo = new NodeInfo(curNode.getX(), curNode.getY(),
+					curNode.getWidth(), curNode.getHeight(), curNode.getName());
+			if(curNode.equals(tempNode)){
+				curInfo.setHigh(true);
+			}
+			nodeInfo.add(curInfo);
+
+		}
+
+		while (assItr.hasNext()) {
+			Association curAss = assItr.next();
+			curAss.recalculateEndPoints(); // Make sure they point to the right
+											// places
+			AssocInfo curInfo = new AssocInfo(curAss.getStartX(),
+					curAss.getStartY(), curAss.getEndX(), curAss.getEndY(), curAss.isSelfAss(), curAss.getAssociationType());
+
+			assocInfo.add(curInfo);
+		}
+
+		view.drawObjects(nodeInfo, assocInfo);
+
+	}
+
+	public static void mouseClick(int x, int y) {
+		switch (clickValue) {
+		case 0:
+			createNode(x, y);
+			return; // Class
+		case 1:
+			deleteNode(x, y);
+			deleteAssociation(x, y);
+			return; // Delete
+		case 2:
+			prepAssoc(x, y, "Aggregation");
+			return; // Aggregation
+		case 3:
+			prepAssoc(x, y, "Composition");
+			return; // Composition
+		default:
+			return;
+		}
+	}
+
+	public static void mouseClickRight(int x, int y){
+		switch (clickValue) {
+		case 0:
+			if(isNodeFull(x, y)){
+				Node node = grabNode(x, y);
+				editNode(node);
+				
+			}
+			return; // Class
+		default:
+			return;
+		}
+		
+	}
+	
+	private static void clearClickMode() { // Make sure we don't store clickmode
+											// specific stuff when changing								
+											// clickmodes
+		tempNode = null;
+		serveObjects();
+	}
+
+	public static void classButton() {
+		// Model
+		clearClickMode();
+		clickValue = 0;
+	}
+
+	public static void deleteButton() {
+		clearClickMode();
+		clickValue = 1;
+	}
+
+	public static void aggButton() {
+		clearClickMode();
+		clickValue = 2;
+	}
+
+	public static void compButton() {
+		clearClickMode();
+		clickValue = 3;
+	}
+
+	public static void exit(){
+		if(view.confirmMessage("Exit confirmation",
+						"Are you sure you want to exit?")){
+			System.exit(0);
+		}
+		
+	}
+
+	
+	
+	/*
+	 * Other Functions
+	 */
+	
+	public static void save(String file){
+		if(file.equals("")){
+			if(curFile.equals("")){
+				view.showFileSaver();
+				
+			} else  {
+				file = curFile;
+			}
+		}
+		curFile = file;
+		try
+	      {
+	        FileOutputStream fileOut =
+	        new FileOutputStream(file);
+	        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+	        out.writeObject(nodes);
+	        out.writeObject(asses);
+	        out.close();
+	        fileOut.close();
+	        System.out.printf("Serialized data is saved in H:/save.uml");
+	      }catch(IOException i)
+	      {
+	          i.printStackTrace();
+	      }
+	}
+	
+	public static void load(String file){
+		nodes.clear();
+		asses.clear();
+		System.out.println(file);
+		curFile = file;
+		try
+	      {
+	         FileInputStream fileIn = new FileInputStream(file);
+	         ObjectInputStream in = new ObjectInputStream(fileIn);
+	         nodes = (ArrayList<Node>) in.readObject();
+	         asses = (ArrayList<Association>) in.readObject();
+	         in.close();
+	         fileIn.close();
+	      }catch(IOException i)
+	      {
+	         i.printStackTrace();
+	         return;
+	      }catch(ClassNotFoundException c)
+	      {
+	         System.out.println("Employee class not found");
+	         c.printStackTrace();
+	         return;
+	      }
+		
+		serveObjects();
+	}
+
+	public static void newUML(){
+		
+		nodes.clear();
+		asses.clear();
+		curFile = "";
+		clearClickMode();
+		
+	}
+	
 }

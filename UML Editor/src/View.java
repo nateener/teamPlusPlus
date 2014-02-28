@@ -15,6 +15,12 @@
 
 /* Imports */
 import java.awt.BorderLayout;
+<<<<<<< HEAD
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+=======
+>>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,14 +33,17 @@ import java.util.Iterator;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -66,6 +75,7 @@ public class View extends JFrame implements ActionListener {
 		this.setTitle("UML Editor v1.0");
 		this.setSize(800,600);
 		this.setVisible(true);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 	
 	/* Builder function for the menu bar.
@@ -73,6 +83,14 @@ public class View extends JFrame implements ActionListener {
 	 * Return: Void
 	 * Generates the menu bar, menus, and menu items.
 	 */
+	
+	private JMenuItem itemExit;
+	private JMenuItem itemSave;
+	private JMenuItem itemSaveAs;
+	private JMenuItem itemOpen;
+	private JMenuItem itemNew;
+	
+	
 	private void buildMenuBar() {
 		JMenuBar menuBar;
 		JMenu menu;
@@ -81,48 +99,36 @@ public class View extends JFrame implements ActionListener {
 		menuBar = new JMenuBar();
 		menu = new JMenu("File");
 		menuBar.add(menu);
-		item = new JMenuItem("New");
-		item.setMnemonic(KeyEvent.VK_N);
-		item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
-		menu.add(item);
-		item = new JMenuItem("Open...");
-		item.setMnemonic(KeyEvent.VK_O);
-		item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
-		menu.add(item);
+		itemNew = new JMenuItem("New");
+		itemNew.setMnemonic(KeyEvent.VK_N);
+		itemNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
+		menu.add(itemNew);
+		itemNew.addActionListener(this);
+		
+		itemOpen = new JMenuItem("Open...");
+		itemOpen.setMnemonic(KeyEvent.VK_O);
+		itemOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
+		menu.add(itemOpen);
+		itemOpen.addActionListener(this);
+		
 		menu.addSeparator();
-		item = new JMenuItem("Save");
-		item.setMnemonic(KeyEvent.VK_S);
-		item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
-		menu.add(item);
-		item = new JMenuItem("Save As...");
-		item.setMnemonic(KeyEvent.VK_A);
-		item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK | ActionEvent.SHIFT_MASK));
-		menu.add(item);
+		itemSave = new JMenuItem("Save");
+		itemSave.setMnemonic(KeyEvent.VK_S);
+		itemSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
+		menu.add(itemSave);
+		itemSave.addActionListener(this);
+		itemSaveAs = new JMenuItem("Save As...");
+		itemSaveAs.setMnemonic(KeyEvent.VK_A);
+		itemSaveAs.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK | ActionEvent.SHIFT_MASK));
+		menu.add(itemSaveAs);
+		itemSaveAs.addActionListener(this);
 		menu.addSeparator();
-		item = new JMenuItem("Exit");
-		item.setIcon(new ImageIcon("exit.png"));
-		menu.add(item);
-		menu = new JMenu("Tools");
-		menuBar.add(menu);
-		subMenu = new JMenu("Add Node");
-		subMenu.setMnemonic(KeyEvent.VK_N);
-		menu.add(subMenu);
-		item = new JMenuItem("Class");
-		item.setMnemonic(KeyEvent.VK_C);
-		subMenu.add(item);
-		subMenu = new JMenu("Add Association");
-		subMenu.setMnemonic(KeyEvent.VK_A);
-		menu.add(subMenu);
-		item = new JMenuItem("Aggregation");
-		item.setMnemonic(KeyEvent.VK_G);
-		subMenu.add(item);
-		item = new JMenuItem("Composition");
-		item.setMnemonic(KeyEvent.VK_C);
-		subMenu.add(item);
-		menu.addSeparator();
-		item = new JMenuItem("Delete");
-		item.setMnemonic(KeyEvent.VK_D);
-		menu.add(item);
+		itemExit = new JMenuItem("Exit");
+		itemExit.setIcon(new ImageIcon("exit.png"));
+		menu.add(itemExit);
+		itemExit.addActionListener(this);
+		
+		
 		this.setJMenuBar(menuBar);
 	}
 	
@@ -137,6 +143,7 @@ public class View extends JFrame implements ActionListener {
 	private JButton compButton;
 	
 	private void buildToolBar() {
+
 		JToolBar toolBar;
 		
 		toolBar = new JToolBar(JToolBar.VERTICAL);
@@ -162,7 +169,12 @@ public class View extends JFrame implements ActionListener {
 		toolBar.add(deleteButton);
 	}
 	
+<<<<<<< HEAD
+	
+	
+=======
 	int numclicks = 0;
+>>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
 	public void actionPerformed(ActionEvent e) { 
 		Object src = e.getSource();
 		if(src.equals(classButton)){
@@ -173,12 +185,32 @@ public class View extends JFrame implements ActionListener {
 			Controller.aggButton();
 		} else if (src.equals(compButton)) {
 			Controller.compButton();
+<<<<<<< HEAD
+		} else if (src.equals(itemExit)) {
+			Controller.exit();
+		} else if (src.equals(itemSaveAs)) {
+			 showFileSaver();
+		} else if (src.equals(itemSave))	{
+	
+			Controller.save("");
+		
+		} else if (src.equals(itemOpen)) {
+			
+			showFileOpener();
+		} else if (src.equals(itemNew)){
+			Controller.newUML();
+		}
+	}
+	
+	
+=======
 		}
 	}
 	
 	public void setText(String text){
 		classButton.setText(text);
 	}
+>>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
 	/* Builder function for the tool bar.
 	 * Parameters: None
 	 * Return: Void
@@ -189,6 +221,235 @@ public class View extends JFrame implements ActionListener {
 	private void buildDrawPanel() {
 		drawPanel = new DrawPanel();
 		this.add(drawPanel);
+<<<<<<< HEAD
+		
+	}
+	
+	
+	// Controller/View Methods
+	
+	public void showFileSaver(){
+		JFileChooser c = new JFileChooser();
+	      // Demonstrate "Save" dialog:
+	      int rVal = c.showSaveDialog(View.this);
+	      if (rVal == JFileChooser.APPROVE_OPTION) {
+	    	  Controller.save( c.getSelectedFile().toString());
+	      }
+	      if (rVal == JFileChooser.CANCEL_OPTION) {
+	    	  	// Do nothing! YAY!
+	      }
+	}
+	
+	public void showFileOpener(){
+		
+		final JFileChooser fc = new JFileChooser();
+		 JFileChooser c = new JFileChooser();
+	      //
+	      int rVal = c.showOpenDialog(View.this);
+	      if (rVal == JFileChooser.APPROVE_OPTION) {
+	    	  
+	        Controller.load( c.getSelectedFile().toString());
+	      }
+	      if (rVal == JFileChooser.CANCEL_OPTION) {
+	    	  // Do nothing! Yay!
+	      }
+	}
+	
+	public void drawObjects(ArrayList<NodeInfo> nodeInfo, ArrayList<AssocInfo> assocInfo){
+		
+		drawPanel.setNodeInfo(nodeInfo);
+		drawPanel.setAssocInfo(assocInfo);
+		drawPanel.repaint();
+		
+		
+	}
+	
+	public String showCurInfo(String name, String attributes, String methods){
+		// Currently only deals with name!
+		String newName = JOptionPane.showInputDialog(name);
+		
+		if(newName != null){
+			
+			return newName;
+			
+		} 
+		
+		return " ";
+		
+		
+	}
+	
+	public boolean confirmMessage(String title, String message) {
+		//If the function returns 0, it means the user selected "yes"
+		return (JOptionPane.showConfirmDialog(this, message, title, JOptionPane.YES_NO_OPTION) == 0);
+	}
+	
+	
+	
+	private class DrawPanel extends JPanel implements MouseListener, MouseMotionListener { 
+		
+		private ArrayList<NodeInfo> nodeInfo;
+		private ArrayList<AssocInfo> assocInfo;
+		
+		public DrawPanel(){
+			super();
+			
+			addMouseListener(this);
+			addMouseMotionListener(this);
+			
+		}
+		
+		public void setNodeInfo(ArrayList<NodeInfo> nodeInfo){
+			
+			this.nodeInfo = nodeInfo;
+			
+		}
+		
+		public void setAssocInfo(ArrayList<AssocInfo> assocInfo) {
+			this.assocInfo = assocInfo;
+		}
+		
+		
+		
+		public void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			Iterator<NodeInfo>	nodeItr = nodeInfo.iterator();
+			Iterator<AssocInfo> assItr = assocInfo.iterator();
+			
+			// Draw Background
+			this.setBackground(Color.WHITE);
+			
+			// Draw Grid
+			g.setColor(new Color(225, 236, 242));
+			Dimension size = drawPanel.getSize();
+			int panelWidth = (int)size.getWidth();
+			int panelHeight = (int)size.getHeight();
+			for(int i = 0; i < panelWidth; i+=10){	
+				g.drawLine(i, 0, i, panelHeight);
+			}
+			for(int i = 0; i < panelHeight; i+=10){
+				g.drawLine(0, i, panelWidth, i);
+			}
+			
+			
+			// Draw associations
+			g.setColor(Color.BLACK);
+			while(assItr.hasNext()) {
+				AssocInfo curInfo = assItr.next();
+				if(curInfo.isSelfAss()){
+					
+					g.drawRect(curInfo.getStartX(), curInfo.getStartY(), 40, 40);
+				} else {
+				
+					//g.drawLine(curInfo.getStartX(), curInfo.getStartY(), curInfo.getEndX(), curInfo.getEndY());
+					
+					int midpoint = curInfo.getStartY() + ((curInfo.getEndY() - curInfo.getStartY()) / 2);
+					
+					g.drawLine(curInfo.getStartX(), curInfo.getStartY(), curInfo.getStartX(), midpoint);
+					g.drawLine(curInfo.getEndX(), curInfo.getEndY(), curInfo.getEndX(), midpoint);
+					g.drawLine(curInfo.getStartX(), midpoint, curInfo.getEndX(), midpoint);
+					
+					//if(curInfo)
+					//int xPoly[] = {curInfo.getEndX(), curInfo.getEndX()+5, curInfo.getEndX(), curInfo.getEndX()-5};
+					//int yPoly[] = {curInfo.getEndY(), curInfo.getEndY()+5, curInfo.getEndY()+10, curInfo.getEndY()+5};
+					// Draw triangles on ENDPOINTS!
+					//g.fillPolygon(xPoly , yPoly, 4);
+					
+					
+					
+				}
+			
+			}
+			
+			// Draw nodes
+			while(nodeItr.hasNext()){
+				NodeInfo curInfo = nodeItr.next();
+				//System.out.println(curInfo.getName());
+				g.setColor(Color.WHITE);
+				g.fillRect(curInfo.getxCoor(), curInfo.getyCoor(), curInfo.getWidth(), curInfo.getHeight() );
+				
+				g.setColor(Color.BLACK);
+				if(curInfo.isHigh()){
+					g.setColor(Color.RED);
+				}
+				
+				g.drawRect(curInfo.getxCoor(), curInfo.getyCoor(), curInfo.getWidth(), curInfo.getHeight());
+				
+				// Draw Text
+				g.setColor(Color.BLACK);
+				g.setFont(new Font("Monospaced", Font.PLAIN, 12));
+				
+				String name;
+				if(curInfo.getName().length() > 25){		
+					name = curInfo.getName().substring(0, 22) + "...";
+				} else {
+					name = curInfo.getName();
+				}
+					
+				g.drawString(name, curInfo.getxCoor()+10, curInfo.getyCoor()+10); // Must be drawn last!
+			}
+			}
+			
+			
+		
+		
+		@Override
+		public void mouseClicked(MouseEvent mouse) {
+			
+			if(SwingUtilities.isRightMouseButton(mouse)){
+		        
+				Controller.mouseClickRight(mouse.getX(), mouse.getY());
+				
+		    } else {
+			
+			Controller.mouseClick(mouse.getX(), mouse.getY());
+			
+		    }
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		
+		
+		@Override
+		public void mouseDragged(MouseEvent mouse) {
+			// TODO Auto-generated method stub
+			
+			Controller.moveNode(mouse.getX(), mouse.getY());
+			
+		}
+
+		@Override
+		public void mouseMoved(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		
+	}
+=======
 		//add(drawPanel, BorderLayout.CENTER);
 		//drawPanel.repaint();
 		//drawPanel.setBackground(new Color(255, 255, 255)); //not working unsure why
@@ -302,6 +563,7 @@ public class View extends JFrame implements ActionListener {
 		
 		
 	}
+>>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
 	/*
 	private class DrawPanel extends JPanel {
 	    @Override public void paintComponent(Graphics g) {
@@ -323,6 +585,9 @@ public class View extends JFrame implements ActionListener {
 
 
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> db3e4c72a361bc49f49ce588b120949ae19cb970
 
 }
