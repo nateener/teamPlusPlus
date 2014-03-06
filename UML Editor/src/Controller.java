@@ -272,8 +272,11 @@ public class Controller {
 
 			assocInfo.add(curInfo);
 		}
-
-		view.drawObjects(nodeInfo, assocInfo);
+		NodeInfo halfAss = null;
+		if(tempNode != null){
+			halfAss = new NodeInfo(tempNode.getX(), tempNode.getY(), tempNode.getWidth(), tempNode.getHeight(), tempNode.getName());
+		}
+		view.drawObjects(nodeInfo, assocInfo, halfAss);
 
 	}
 

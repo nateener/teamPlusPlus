@@ -27,7 +27,14 @@ public void setEndpoint(Node eNode){
 public void recalculateEndPoints() {
 	setStartPosition();
 	setEndPosition();
+
+		if(isSelfAss()){
+			startX = startNode.getX();
+			startY = startNode.getY();
+			
+		}
 }
+
 
 public boolean involvesNode(Node in) {
 	return (startNode.equals(in) || endNode.equals(in));
