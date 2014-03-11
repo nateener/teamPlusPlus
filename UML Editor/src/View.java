@@ -134,6 +134,7 @@ public class View extends JFrame implements ActionListener {
 	 * Return: Void
 	 * Generates the tool bar and buttons.
 	 */
+	private JButton selectorButton;
 	private JButton classButton;
 	private JButton deleteButton;
 	private JButton aggButton;
@@ -146,6 +147,10 @@ public class View extends JFrame implements ActionListener {
 		toolBar = new JToolBar(JToolBar.VERTICAL);
 		toolBar.setFloatable(false);
 		add(toolBar, BorderLayout.LINE_START);
+		
+		selectorButton = new JButton("Selector");
+		selectorButton.addActionListener(this);
+		toolBar.add(selectorButton);
 		
 		classButton = new JButton("Class");
 		classButton.addActionListener(this);
@@ -170,6 +175,8 @@ public class View extends JFrame implements ActionListener {
 		Object src = e.getSource();
 		if(src.equals(classButton)){
 			Controller.classButton();
+		} else if (src.equals(selectorButton)) {
+			Controller.selectorButton();	
 		} else if (src.equals(deleteButton)) {
 			Controller.deleteButton();
 		} else if (src.equals(aggButton)) {

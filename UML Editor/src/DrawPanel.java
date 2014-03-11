@@ -78,12 +78,10 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 					g.drawLine(curInfo.getEndX(), curInfo.getEndY(), curInfo.getEndX(), midpoint);
 					g.drawLine(curInfo.getStartX(), midpoint, curInfo.getEndX(), midpoint);
 					
-					//if(curInfo)
-					//int xPoly[] = {curInfo.getEndX(), curInfo.getEndX()+5, curInfo.getEndX(), curInfo.getEndX()-5};
-					//int yPoly[] = {curInfo.getEndY(), curInfo.getEndY()+5, curInfo.getEndY()+10, curInfo.getEndY()+5};
-					// Draw triangles on ENDPOINTS!
-					//g.fillPolygon(xPoly , yPoly, 4);
-					
+						//int xPoly[] = {curInfo.getEndX(), curInfo.getEndX()+5, curInfo.getEndX(), curInfo.getEndX()-5};
+						//int yPoly[] = {curInfo.getEndY(), curInfo.getEndY()+5, curInfo.getEndY()+10, curInfo.getEndY()+5};
+					 //Draw triangles on ENDPOINTS!
+						//g.fillPolygon(xPoly , yPoly, 4);
 					
 					
 				}

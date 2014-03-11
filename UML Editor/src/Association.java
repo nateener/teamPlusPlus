@@ -40,6 +40,14 @@ public boolean involvesNode(Node in) {
 	return (startNode.equals(in) || endNode.equals(in));
 }
 
+public Node getStartNode() {
+	return startNode;
+}
+
+public Node getEndNode() {
+	return endNode;
+}
+
 public int getStartX() {
 	return startX;
 }

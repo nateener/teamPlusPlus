@@ -55,7 +55,7 @@ public class Controller {
 
 	public static void moveNode(int x, int y) {
 
-		if (clickValue == 0 && isNodeFull(x, y)) { // Don't try to drag nodes
+		if ((clickValue == 0 || clickValue == 1) && isNodeFull(x, y)) { // Don't try to drag nodes
 													// unless in class mode
 
 
@@ -87,7 +87,7 @@ public class Controller {
 		// confirmation only appears if you click on a node
 		if (isNodeFull(x, y)
 				&& view.confirmMessage("Deletion confirmation",
-						"Are you sure you want to delete this?")) {
+						"Are you sure you want to delete this node?")) {
 			Node curNode = grabNode(x, y);
 
 			nodes.remove(curNode);
@@ -174,14 +174,17 @@ public class Controller {
 	}
 
 	private static void deleteAssociation(int x, int y) {
-		if (isAssocFull(x, y)
-				&& view.confirmMessage("Deletion confirmation",
-						"Are you sure you want to delete this?")) {
+		if (isAssocFull(x, y)){
 			Association curAss = grabAss(x, y);
-
+			String message = "Are you sure you want to delete this association between node " + curAss.getStartNode().getName() + " and node " + curAss.getEndNode().getName() + "?";
+			Boolean delete = view.confirmMessage("Deletion confirmation",
+						message);
+		
+			
+			if ( delete ){
 			asses.remove(curAss);
-
 			serveObjects();
+			}
 		}
 	}
 
@@ -283,16 +286,18 @@ public class Controller {
 	public static void mouseClick(int x, int y) {
 		switch (clickValue) {
 		case 0:
-			createNode(x, y);
 			return; // Class
 		case 1:
+			createNode(x, y);
+			return; // Class
+		case 2:
 			deleteNode(x, y);
 			deleteAssociation(x, y);
 			return; // Delete
-		case 2:
+		case 3:
 			prepAssoc(x, y, "Aggregation");
 			return; // Aggregation
-		case 3:
+		case 4:
 			prepAssoc(x, y, "Composition");
 			return; // Composition
 		default:
@@ -303,6 +308,7 @@ public class Controller {
 	public static void mouseClickRight(int x, int y){
 		switch (clickValue) {
 		case 0:
+		case 1:
 			if(isNodeFull(x, y)){
 				Node node = grabNode(x, y);
 				editNode(node);
@@ -322,25 +328,31 @@ public class Controller {
 		serveObjects();
 	}
 
-	public static void classButton() {
+	public static void selectorButton() {
 		// Model
 		clearClickMode();
 		clickValue = 0;
 	}
-
-	public static void deleteButton() {
+	
+	public static void classButton() {
+		// Model
 		clearClickMode();
 		clickValue = 1;
 	}
 
-	public static void aggButton() {
+	public static void deleteButton() {
 		clearClickMode();
 		clickValue = 2;
 	}
 
-	public static void compButton() {
+	public static void aggButton() {
 		clearClickMode();
 		clickValue = 3;
+	}
+
+	public static void compButton() {
+		clearClickMode();
+		clickValue = 4;
 	}
 
 	public static void exit(){
