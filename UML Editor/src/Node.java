@@ -3,20 +3,24 @@ import java.io.Serializable;
 
 public class Node implements Serializable {
 
+	/**
+	 * 
+	 */
+	// I put in this id to shut up the warning, don't actually know if we Need it
+	private static final long serialVersionUID = 1L;
 	private int xCoor;
 	private int yCoor;
-	private String name;
-	private String attributes;
-	private String methods;
 	private int width;
 	private int height;
 	private int leftX;
 	private int rightX;
 	private int topY;
 	private int bottomY;
+	private String name;
+	private String attributes;
+	private String methods;
 
-
-public Node(int x, int y){
+public Node(int x, int y) {
 	width = 80;
 	height = 80;
 	setPosition(x, y);
@@ -25,7 +29,7 @@ public Node(int x, int y){
 	findDimensions();
  }
 
-public void setPosition(int x, int y){
+public void setPosition(int x, int y) {
 	
 	// x or y % 10 allows snapping to a grid.
 	xCoor = x - (x%10);
@@ -35,7 +39,7 @@ public void setPosition(int x, int y){
 	//yCoor = y;
 }
 
-public int getX(){
+public int getX() {
 	
 	return xCoor;
 	
@@ -48,11 +52,15 @@ public int getY() {
 }
 
 public int getWidth() {
+	
 	return width;
+	
 }
 
 public int getHeight() {
+	
 	return height;
+	
 }
 
 public String getName() {
@@ -79,39 +87,54 @@ public void setWidth(int width) {
 }
 
 public String getAttributes() {
+	
 	return attributes;
+	
 }
 
 public void setAttributes(String attributes) {
+	
 	this.attributes = attributes;
+	
 }
 
 public String getMethods() {
+	
 	return methods;
+	
 }
 
 public void setMethods(String methods) {
+	
 	this.methods = methods;
+	
 }
 
 public void setName(String name) {
+	
 	this.name = name;
+	
 }
 
 
-public void findDimensions(){
+public void findDimensions() {
+	
 	leftX = xCoor - width/2;
 	rightX = xCoor + width/2;
 	topY = yCoor - height/2;
 	bottomY = yCoor + height/2;
+	
 }
 
-public void findCenter(){
+public void findCenter() {
+	
 	xCoor = xCoor + width/2;
 	yCoor = yCoor + height/2;
+	
 }
 
-public void printNodeInfo(){
+public void printNodeInfo() {
+	
     System.out.println("Name:"+ name );
     System.out.println("Attributes:" + attributes );
     System.out.println("Methods:" + methods );
@@ -120,5 +143,6 @@ public void printNodeInfo(){
     System.out.println("Position:" + xCoor + "," + yCoor);
     System.out.println("Dimensions: Left: " + leftX + ", Right: " + rightX + ", Top: " + topY + ", Bottom: " + bottomY);
     System.out.println();
+    
  }
 }

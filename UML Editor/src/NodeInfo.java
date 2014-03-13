@@ -16,57 +16,72 @@ public class NodeInfo {
 		name = n;
 		setHigh(false);
 
+	}
+	
+	public int getxCoor() {
+		
+		return xCoor;
 		
 	}
 	
-	
-	public int getxCoor() {
-		return xCoor;
-	}
-	
 	public void setxCoor(int xCoor) {
+		
 		this.xCoor = xCoor;
+		
 	}
 	
 	public int getyCoor() {
+		
 		return yCoor;
+		
 	}
 	
 	public void setyCoor(int yCoor) {
+		
 		this.yCoor = yCoor;
+		
 	}
 	
 	public int getWidth() {
+		
 		return width;
+		
 	}
 	
 	public void setWidth(int width) {
+		
 		this.width = width;
+		
 	}
 	
 	public int getHeight() {
+		
 		return height;
+		
 	}
 	
 	public void setHeight(int height) {
+		
 		this.height = height;
+		
 	}
 	
-	public String getName(){
+	public String getName() {
 		
 		return name;
 		
 	}
 
-
 	public boolean isHigh() {
+		
 		return high;
+		
 	}
-
 
 	public void setHigh(boolean high) {
+		
 		this.high = high;
+		
 	}
-
 
 }

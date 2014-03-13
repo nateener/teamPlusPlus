@@ -14,12 +14,13 @@ import javax.swing.SwingUtilities;
 class DrawPanel extends JPanel implements MouseListener, MouseMotionListener { 
 		
 		private ArrayList<NodeInfo> nodeInfo;
-		private ArrayList<AssocInfo> assocInfo;
-		public NodeInfo halfAss;
+		private ArrayList<RelInfo> relInfo;
+		public NodeInfo halfRel;
 		private int mouseX;
 		private int mouseY;
 		
-		public DrawPanel(){
+		public DrawPanel() {
+			
 			super();
 			
 			addMouseListener(this);
@@ -27,22 +28,24 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 			
 		}
 		
-		public void setNodeInfo(ArrayList<NodeInfo> nodeInfo){
+		public void setNodeInfo(ArrayList<NodeInfo> nodeInfo) {
 			
 			this.nodeInfo = nodeInfo;
 			
 		}
 		
-		public void setAssocInfo(ArrayList<AssocInfo> assocInfo) {
-			this.assocInfo = assocInfo;
+		public void setRelInfo(ArrayList<RelInfo> relInfo) {
+			
+			this.relInfo = relInfo;
 		}
 		
 		
 		
 		public void paintComponent(Graphics g) {
+			
 			super.paintComponent(g);
 			Iterator<NodeInfo>	nodeItr = nodeInfo.iterator();
-			Iterator<AssocInfo> assItr = assocInfo.iterator();
+			Iterator<RelInfo> relItr = relInfo.iterator();
 			
 			// Draw Background
 			this.setBackground(Color.WHITE);
@@ -52,20 +55,20 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 			Dimension size = this.getSize();
 			int panelWidth = (int)size.getWidth();
 			int panelHeight = (int)size.getHeight();
-			for(int i = 0; i < panelWidth; i+=10){	
+			for(int i = 0; i < panelWidth; i+=10) {	
 				g.drawLine(i, 0, i, panelHeight);
 			}
-			for(int i = 0; i < panelHeight; i+=10){
+			for(int i = 0; i < panelHeight; i+=10) {
 				g.drawLine(0, i, panelWidth, i);
 			}
 			
 			
-			// Draw associations
+			// Draw relationships
 			g.setColor(Color.BLACK);
 			
-			while(assItr.hasNext()) {
-				AssocInfo curInfo = assItr.next();
-				if(curInfo.isSelfAss()){
+			while(relItr.hasNext()) {
+				RelInfo curInfo = relItr.next();
+				if(curInfo.isSelfRel()) {
 					
 					g.drawRect(curInfo.getStartX() - 20, curInfo.getStartY() - 20, 40, 40);
 				} else {
@@ -89,7 +92,7 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 			}
 			
 			// Draw nodes
-			while(nodeItr.hasNext()){
+			while(nodeItr.hasNext()) {
 				NodeInfo curInfo = nodeItr.next();
 				//System.out.println(curInfo.getName());
 				g.setColor(Color.WHITE);
@@ -117,17 +120,15 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 			}
 			
 			
-			if(halfAss != null ){
-				g.setColor(Color.RED);
-				g.drawLine(halfAss.getxCoor() + (halfAss.getWidth() / 2), halfAss.getyCoor() + (halfAss.getHeight() / 2), mouseX, mouseY);
+			if(halfRel != null ) {
 				
+				g.setColor(Color.RED);
+				g.drawLine(halfRel.getxCoor() + (halfRel.getWidth() / 2), halfRel.getyCoor() + (halfRel.getHeight() / 2), mouseX, mouseY);
 				
 			}
 		}
 			
-			
-		
-		
+
 		@Override
 		public void mouseClicked(MouseEvent mouse) {
 			

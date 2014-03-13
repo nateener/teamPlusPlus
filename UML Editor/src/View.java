@@ -55,6 +55,7 @@ public class View extends JFrame implements ActionListener {
 	 * Initializes the display settings.
 	 */
 	public View() {
+		
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (ClassNotFoundException e) {
@@ -73,6 +74,7 @@ public class View extends JFrame implements ActionListener {
 		this.setSize(800,600);
 		this.setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		
 	}
 	
 	/* Builder function for the menu bar.
@@ -89,6 +91,7 @@ public class View extends JFrame implements ActionListener {
 	
 	
 	private void buildMenuBar() {
+		
 		JMenuBar menuBar;
 		JMenu menu;
 		JMenu subMenu;
@@ -125,8 +128,8 @@ public class View extends JFrame implements ActionListener {
 		menu.add(itemExit);
 		itemExit.addActionListener(this);
 		
-		
 		this.setJMenuBar(menuBar);
+		
 	}
 	
 	/* Builder function for the tool bar.
@@ -194,9 +197,11 @@ public class View extends JFrame implements ActionListener {
 		deleteButton = new JButton("Delete");
 		deleteButton.addActionListener(this);
 		toolBar.add(deleteButton);
+		
 	}
 	
-	public void actionPerformed(ActionEvent e) { 
+	public void actionPerformed(ActionEvent e) {
+		
 		Object src = e.getSource();
 		if(src.equals(classButton)){
 			Controller.classButton();
@@ -233,8 +238,6 @@ public class View extends JFrame implements ActionListener {
 			Controller.newUML();
 		}
 	}
-	
-	
 
 	/* Builder function for the tool bar.
 	 * Parameters: None
@@ -244,6 +247,7 @@ public class View extends JFrame implements ActionListener {
 	DrawPanel drawPanel;
 	
 	private void buildDrawPanel() {
+		
 		drawPanel = new DrawPanel();
 		this.add(drawPanel);
 		
@@ -252,7 +256,8 @@ public class View extends JFrame implements ActionListener {
 	
 	// Controller/View Methods
 	
-	public void showFileSaver(){
+	public void showFileSaver() {
+		
 		JFileChooser c = new JFileChooser();
 	      // Demonstrate "Save" dialog:
 	      int rVal = c.showSaveDialog(View.this);
@@ -262,9 +267,10 @@ public class View extends JFrame implements ActionListener {
 	      if (rVal == JFileChooser.CANCEL_OPTION) {
 	    	  	// Do nothing! YAY!
 	      }
+	      
 	}
 	
-	public void showFileOpener(){
+	public void showFileOpener() {
 		
 		final JFileChooser fc = new JFileChooser();
 		 JFileChooser c = new JFileChooser();
@@ -277,23 +283,24 @@ public class View extends JFrame implements ActionListener {
 	      if (rVal == JFileChooser.CANCEL_OPTION) {
 	    	  // Do nothing! Yay!
 	      }
+	      
 	}
 	
-	public void drawObjects(ArrayList<NodeInfo> nodeInfo, ArrayList<AssocInfo> assocInfo, NodeInfo halfAss){
+	public void drawObjects(ArrayList<NodeInfo> nodeInfo, ArrayList<RelInfo> relInfo, NodeInfo halfRel ){
 		
 		drawPanel.setNodeInfo(nodeInfo);
-		drawPanel.setAssocInfo(assocInfo);
-		drawPanel.halfAss = halfAss;
+		drawPanel.setRelInfo(relInfo);
+		drawPanel.halfRel = halfRel;
 		drawPanel.repaint();
-		
 		
 	}
 	
-	public String showCurInfo(String name, String attributes, String methods){
+	public String showCurInfo(String name, String attributes, String methods) {
+		
 		// Currently only deals with name!
 		String newName = JOptionPane.showInputDialog(name);
 		
-		if(newName != null){
+		if(newName != null) {
 			
 			return newName;
 			
@@ -301,15 +308,14 @@ public class View extends JFrame implements ActionListener {
 		
 		return " ";
 		
-		
 	}
 	
 	public boolean confirmMessage(String title, String message) {
+		
 		//If the function returns 0, it means the user selected "yes"
 		return (JOptionPane.showConfirmDialog(this, message, title, JOptionPane.YES_NO_OPTION) == 0);
+		
 	}
-	
-	
 	
 	
 
