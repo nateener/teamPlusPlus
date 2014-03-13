@@ -15,7 +15,7 @@ public class AssocInfo {
 		this.endX = endX;
 		this.endY = endY;
 		this.setSelfAss(self);
-		this.assType = type;
+		this.setAssType(type);
 
 	}
 	
@@ -57,6 +57,14 @@ public class AssocInfo {
 
 	public void setSelfAss(boolean selfAss) {
 		this.selfAss = selfAss;
+	}
+
+	public String getAssType() {
+		return assType;
+	}
+
+	public void setAssType(String assType) {
+		this.assType = assType;
 	}
 	
 	

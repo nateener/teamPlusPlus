@@ -139,6 +139,11 @@ public class View extends JFrame implements ActionListener {
 	private JButton deleteButton;
 	private JButton aggButton;
 	private JButton compButton;
+	private JButton genButton;
+	private JButton assButton;
+	private JButton dependButton;
+	private JButton impButton;
+	private JButton basicButton;
 	
 	private void buildToolBar() {
 
@@ -165,6 +170,26 @@ public class View extends JFrame implements ActionListener {
 		compButton.addActionListener(this);
 		toolBar.add(compButton);
 		
+		genButton = new JButton("Generalization");
+		genButton.addActionListener(this);
+		toolBar.add(genButton);
+		
+		assButton = new JButton("Association");
+		assButton.addActionListener(this);
+		toolBar.add(assButton);
+		
+		dependButton = new JButton("Depend");
+		dependButton.addActionListener(this);
+		toolBar.add(dependButton);
+		
+		impButton = new JButton("Implements");
+		impButton.addActionListener(this);
+		toolBar.add(impButton);
+		
+		basicButton = new JButton("Basic");
+		basicButton.addActionListener(this);
+		toolBar.add(basicButton);
+		
 		toolBar.addSeparator();
 		deleteButton = new JButton("Delete");
 		deleteButton.addActionListener(this);
@@ -183,6 +208,16 @@ public class View extends JFrame implements ActionListener {
 			Controller.aggButton();
 		} else if (src.equals(compButton)) {
 			Controller.compButton();
+		} else if (src.equals(genButton)) {
+			Controller.genButton();
+		} else if (src.equals(assButton)) {
+			Controller.assButton();
+		} else if (src.equals(dependButton)) {
+			Controller.dependButton();
+		} else if (src.equals(impButton)) {
+			Controller.impButton();
+		} else if (src.equals(basicButton)) {
+			Controller.basicButton();
 		} else if (src.equals(itemExit)) {
 			Controller.exit();
 		} else if (src.equals(itemSaveAs)) {

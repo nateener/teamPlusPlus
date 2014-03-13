@@ -176,7 +176,7 @@ public class Controller {
 	private static void deleteAssociation(int x, int y) {
 		if (isAssocFull(x, y)){
 			Association curAss = grabAss(x, y);
-			String message = "Are you sure you want to delete this association between node " + curAss.getStartNode().getName() + " and node " + curAss.getEndNode().getName() + "?";
+			String message = "Are you sure you want to delete this " + curAss.getAssociationType() + " between node " + curAss.getStartNode().getName() + " and node " + curAss.getEndNode().getName() + "?";
 			Boolean delete = view.confirmMessage("Deletion confirmation",
 						message);
 		
@@ -300,6 +300,21 @@ public class Controller {
 		case 4:
 			prepAssoc(x, y, "Composition");
 			return; // Composition
+		case 5:
+			prepAssoc(x, y, "Generalization");
+			return; // Generalization
+		case 6:
+			prepAssoc(x, y, "Association");
+			return; // Association
+		case 7:
+			prepAssoc(x, y, "Depend");
+			return; // Depend
+		case 8:
+			prepAssoc(x, y, "Implements");
+			return; // Implements	
+		case 9:
+			prepAssoc(x, y, "Basic");
+			return; // Basic		
 		default:
 			return;
 		}
@@ -354,7 +369,33 @@ public class Controller {
 		clearClickMode();
 		clickValue = 4;
 	}
+	
+	public static void genButton() {
+		clearClickMode();
+		clickValue = 5;
+	}
 
+	public static void assButton() {
+		clearClickMode();
+		clickValue = 6;
+	}
+	
+	public static void dependButton() {
+		clearClickMode();
+		clickValue = 7;
+	}
+	
+	public static void impButton() {
+		clearClickMode();
+		clickValue = 8;
+	}
+	
+	public static void basicButton() {
+		clearClickMode();
+		clickValue = 9;
+	} 
+	
+	
 	public static void exit(){
 		if(view.confirmMessage("Exit confirmation",
 						"Are you sure you want to exit?")){
