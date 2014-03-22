@@ -1,3 +1,4 @@
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -77,16 +78,52 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 					
 					int midpoint = curInfo.getStartY() + ((curInfo.getEndY() - curInfo.getStartY()) / 2);
 					
-					g.drawLine(curInfo.getStartX(), curInfo.getStartY(), curInfo.getStartX(), midpoint);
-					g.drawLine(curInfo.getEndX(), curInfo.getEndY(), curInfo.getEndX(), midpoint);
-					g.drawLine(curInfo.getStartX(), midpoint, curInfo.getEndX(), midpoint);
-					
-						//int xPoly[] = {curInfo.getEndX(), curInfo.getEndX()+5, curInfo.getEndX(), curInfo.getEndX()-5};
-						//int yPoly[] = {curInfo.getEndY(), curInfo.getEndY()+5, curInfo.getEndY()+10, curInfo.getEndY()+5};
-					 //Draw triangles on ENDPOINTS!
-						//g.fillPolygon(xPoly , yPoly, 4);
-					
-					
+					if (curInfo.getRelType() == "Implements" || curInfo.getRelType() == "Depend" ) {
+						// Draw dotted line
+						g.drawLine(curInfo.getStartX(), curInfo.getStartY(), curInfo.getStartX(), midpoint);
+						g.drawLine(curInfo.getEndX(), curInfo.getEndY(), curInfo.getEndX(), midpoint);
+						g.drawLine(curInfo.getStartX(), midpoint, curInfo.getEndX(), midpoint);
+					} else {
+						// Draw regular line
+						g.drawLine(curInfo.getStartX(), curInfo.getStartY(), curInfo.getStartX(), midpoint);
+						g.drawLine(curInfo.getEndX(), curInfo.getEndY(), curInfo.getEndX(), midpoint);
+						g.drawLine(curInfo.getStartX(), midpoint, curInfo.getEndX(), midpoint);
+					}
+					// Cap with white diamond
+					if (curInfo.getRelType() == "Aggregation") {
+						g.setColor(Color.WHITE);
+						int xPoly[] = {curInfo.getEndX(), curInfo.getEndX()+5, curInfo.getEndX(), curInfo.getEndX()-5};
+						int yPoly[] = {curInfo.getEndY(), curInfo.getEndY()+5, curInfo.getEndY()+10, curInfo.getEndY()+5};
+						//Draw triangles on ENDPOINTS!
+						g.fillPolygon(xPoly , yPoly, 4);
+						g.setColor(Color.BLACK);
+						g.drawPolygon(xPoly , yPoly, 4);
+					}
+					// Cap with black diamond
+					if (curInfo.getRelType() == "Composition") {
+						g.setColor(Color.BLACK);
+						int xPoly[] = {curInfo.getEndX(), curInfo.getEndX()+5, curInfo.getEndX(), curInfo.getEndX()-5};
+						int yPoly[] = {curInfo.getEndY(), curInfo.getEndY()+5, curInfo.getEndY()+10, curInfo.getEndY()+5};
+						//Draw triangles on ENDPOINTS!
+						g.fillPolygon(xPoly , yPoly, 4);
+					}
+					// Cap with white triangle
+					if (curInfo.getRelType() == "Generalization" || curInfo.getRelType() == "Implements") {
+						g.setColor(Color.WHITE);
+						int xPoly[] = {curInfo.getEndX(), curInfo.getEndX()+5,  curInfo.getEndX()-5};
+						int yPoly[] = {curInfo.getEndY(), curInfo.getEndY()+10,  curInfo.getEndY()+10};
+						//Draw triangles on ENDPOINTS!
+						g.fillPolygon(xPoly , yPoly, 3);
+						g.setColor(Color.BLACK);
+						g.drawPolygon(xPoly , yPoly, 3);
+					}
+					// Cap with black arrow
+					if (curInfo.getRelType() == "Association" || curInfo.getRelType() == "Depend") {
+						g.setColor(Color.BLACK);
+						g.drawLine(curInfo.getEndX(), curInfo.getEndY(), curInfo.getEndX() - 5, curInfo.getEndY() + 7);
+						g.drawLine(curInfo.getEndX(), curInfo.getEndY(), curInfo.getEndX() + 5, curInfo.getEndY() + 7);
+					}
+
 				}
 			
 			}
