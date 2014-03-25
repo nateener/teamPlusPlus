@@ -12,12 +12,12 @@ import java.util.Iterator;
  */
 public class Controller {
 
-	private static ArrayList<Node> nodes;
-	private static ArrayList<Relationship> rels;
-	private static int clickValue = -1; 
+	public static ArrayList<Node> nodes;
+	public static ArrayList<Relationship> rels;
+	public static int clickValue = -1; 
 
-	private static View view;
-	private static Node tempNode; // For use in creating relationships
+	public static View view;
+	public static Node tempNode; // For use in creating relationships
 	private static String curFile = "";
 	
 	
@@ -36,7 +36,7 @@ public class Controller {
 	 * Node Functions
 	 */
 
-
+/*
 	private static void createNode(int x, int y) {
 
 		// Code that creates a new node object.
@@ -54,6 +54,7 @@ public class Controller {
 			serveObjects();
 		}
 	}
+
 
 	public static void moveNode(int x, int y) {
 		// Don't try to drag nodes                  unless in class mode
@@ -161,11 +162,11 @@ public class Controller {
 		return null;
 		
 	}
-	
+		
 	/*
 	 * Relationship Functions
 	 */
-
+/*
 	private static void createRelationship(Node start, Node end, String type) {
 		
 		Relationship newRel = new Relationship(start, type);
@@ -240,24 +241,24 @@ public class Controller {
 	
 	private static void prepRel(int x, int y, String type) {
 		
-		if (tempNode != null && isNodeFull(x, y)) {
-			createRelationship(tempNode, grabNode(x, y), type);
+		if (tempNode != null && NodeController.isNodeFull(x, y)) {
+			createRelationship(tempNode, NodeController.grabNode(x, y), type);
 			tempNode = null;
-		} else if (isNodeFull(x, y)) {
-			tempNode = grabNode(x, y);
+		} else if (NodeController.isNodeFull(x, y)) {
+			tempNode = NodeController.grabNode(x, y);
 		}
 		
 		serveObjects();
 		
 	}
 	
-	
+	*/
 	
 	/*
 	 * View Functions
 	 */
 
-	private static void serveObjects() {
+	public static void serveObjects() {
 		
 		// needs to serve everything simultaneously
 		ArrayList<NodeInfo> nodeInfo = new ArrayList<NodeInfo>();
@@ -299,32 +300,32 @@ public class Controller {
 		case 0:
 			return; // Class
 		case 1:
-			createNode(x, y);
+			NodeController.createNode(x, y);
 			return; // Class
 		case 2:
-			deleteNode(x, y);
-			deleteRelationship(x, y);
+			NodeController.deleteNode(x, y);
+			RelationshipController.deleteRelationship(x, y);
 			return; // Delete
 		case 3:
-			prepRel(x, y, "Aggregation");
+			RelationshipController.prepRel(x, y, "Aggregation");
 			return; // Aggregation
 		case 4:
-			prepRel(x, y, "Composition");
+			RelationshipController.prepRel(x, y, "Composition");
 			return; // Composition
 		case 5:
-			prepRel(x, y, "Generalization");
+			RelationshipController.prepRel(x, y, "Generalization");
 			return; // Generalization
 		case 6:
-			prepRel(x, y, "Association");
+			RelationshipController.prepRel(x, y, "Association");
 			return; // Association
 		case 7:
-			prepRel(x, y, "Depend");
+			RelationshipController.prepRel(x, y, "Depend");
 			return; // Depend
 		case 8:
-			prepRel(x, y, "Implements");
+			RelationshipController.prepRel(x, y, "Implements");
 			return; // Implements	
 		case 9:
-			prepRel(x, y, "Basic");
+			RelationshipController.prepRel(x, y, "Basic");
 			return; // Basic		
 		default:
 			return;
@@ -337,9 +338,9 @@ public class Controller {
 		switch (clickValue) {
 		case 0:
 		case 1:
-			if(isNodeFull(x, y)){
-				Node node = grabNode(x, y);
-				editNode(node);
+			if(NodeController.isNodeFull(x, y)){
+				Node node = NodeController.grabNode(x, y);
+				NodeController.editNode(node);
 				
 			}
 			return; // Class

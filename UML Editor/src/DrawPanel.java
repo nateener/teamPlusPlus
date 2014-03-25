@@ -3,9 +3,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Stroke;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.geom.Line2D;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -63,15 +67,24 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 				g.drawLine(0, i, panelWidth, i);
 			}
 			
+			Graphics2D g2d = (Graphics2D) g;
+			BasicStroke stroke = new BasicStroke(2.0f);
+			g2d.setStroke(stroke);
 			
 			// Draw relationships
-			g.setColor(Color.BLACK);
-			
+			g.setColor(Color.BLACK);		
 			while(relItr.hasNext()) {
 				RelInfo curInfo = relItr.next();
 				if(curInfo.isSelfRel()) {
-					
-					g.drawRect(curInfo.getStartX() - 20, curInfo.getStartY() - 20, 40, 40);
+					if (curInfo.getRelType() == "Implements" || curInfo.getRelType() == "Depend" ) {
+						Stroke drawingStroke = new BasicStroke(2, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{9}, 0);
+						Rectangle2D square = new Rectangle2D.Double(curInfo.getStartX() - 20, curInfo.getStartY() - 20, 40, 40);
+						g2d.setStroke(drawingStroke);
+						g2d.draw(square);
+						g2d.setStroke(stroke);
+					}else{
+						g.drawRect(curInfo.getStartX() - 20, curInfo.getStartY() - 20, 40, 40);
+					}
 				} else {
 				
 					//g.drawLine(curInfo.getStartX(), curInfo.getStartY(), curInfo.getEndX(), curInfo.getEndY());
@@ -80,9 +93,15 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 					
 					if (curInfo.getRelType() == "Implements" || curInfo.getRelType() == "Depend" ) {
 						// Draw dotted line
-						g.drawLine(curInfo.getStartX(), curInfo.getStartY(), curInfo.getStartX(), midpoint);
-						g.drawLine(curInfo.getEndX(), curInfo.getEndY(), curInfo.getEndX(), midpoint);
-						g.drawLine(curInfo.getStartX(), midpoint, curInfo.getEndX(), midpoint);
+						Stroke drawingStroke = new BasicStroke(2, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{9}, 0);
+						Line2D line1 = new Line2D.Double(curInfo.getStartX(), curInfo.getStartY(), curInfo.getStartX(), midpoint);
+						Line2D line2 = new Line2D.Double(curInfo.getEndX(), curInfo.getEndY(), curInfo.getEndX(), midpoint);
+						Line2D line3 = new Line2D.Double(curInfo.getStartX(), midpoint, curInfo.getEndX(), midpoint);
+						g2d.setStroke(drawingStroke);
+						g2d.draw(line1);
+						g2d.draw(line2);
+						g2d.draw(line3);
+						g2d.setStroke(stroke);
 					} else {
 						// Draw regular line
 						g.drawLine(curInfo.getStartX(), curInfo.getStartY(), curInfo.getStartX(), midpoint);
@@ -210,7 +229,7 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 		public void mouseDragged(MouseEvent mouse) {
 			// TODO Auto-generated method stub
 			
-			Controller.moveNode(mouse.getX(), mouse.getY());
+			NodeController.moveNode(mouse.getX(), mouse.getY());
 			
 		}
 
