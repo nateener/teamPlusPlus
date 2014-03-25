@@ -43,12 +43,12 @@ public class NodeController {
 
 	public static void editNode(Node node) {
 		
-		String newName = Controller.view.showCurInfo(node.getName(), node.getAttributes(), node.getMethods());
+		String[] newNames = Controller.view.showCurInfo(node.getName(), node.getAttributes(), node.getMethods());
 		
-		int newNameLength = newName.length();
+		int newNameLength = newNames[0].length();
 		node.setWidth(newNameLength * 12);
 		
-		node.setName(newName);
+		node.setName(newNames[0]);
 		Controller.serveObjects();
 		
 	}

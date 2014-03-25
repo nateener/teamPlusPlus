@@ -75,8 +75,10 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 			g.setColor(Color.BLACK);		
 			while(relItr.hasNext()) {
 				RelInfo curInfo = relItr.next();
+				//System.out.println("Drawing relationship");
+				//System.out.println(curInfo.getRelType());
 				if(curInfo.isSelfRel()) {
-					if (curInfo.getRelType() == "Implements" || curInfo.getRelType() == "Depend" ) {
+					if (curInfo.getRelType().equals( "Implements") || curInfo.getRelType().equals("Depend") ) {
 						Stroke drawingStroke = new BasicStroke(2, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{9}, 0);
 						Rectangle2D square = new Rectangle2D.Double(curInfo.getStartX() - 20, curInfo.getStartY() - 20, 40, 40);
 						g2d.setStroke(drawingStroke);
@@ -91,7 +93,7 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 					
 					int midpoint = curInfo.getStartY() + ((curInfo.getEndY() - curInfo.getStartY()) / 2);
 					
-					if (curInfo.getRelType() == "Implements" || curInfo.getRelType() == "Depend" ) {
+					if (curInfo.getRelType() .equals("Implements") || curInfo.getRelType()  .equals("Depend") ) {
 						// Draw dotted line
 						Stroke drawingStroke = new BasicStroke(2, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{9}, 0);
 						Line2D line1 = new Line2D.Double(curInfo.getStartX(), curInfo.getStartY(), curInfo.getStartX(), midpoint);
@@ -109,7 +111,7 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 						g.drawLine(curInfo.getStartX(), midpoint, curInfo.getEndX(), midpoint);
 					}
 					// Cap with white diamond
-					if (curInfo.getRelType() == "Aggregation") {
+					if (curInfo.getRelType() .equals("Aggregation") ) {
 						g.setColor(Color.WHITE);
 						int xPoly[] = {curInfo.getEndX(), curInfo.getEndX()+5, curInfo.getEndX(), curInfo.getEndX()-5};
 						int yPoly[] = {curInfo.getEndY(), curInfo.getEndY()+5, curInfo.getEndY()+10, curInfo.getEndY()+5};
@@ -119,7 +121,7 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 						g.drawPolygon(xPoly , yPoly, 4);
 					}
 					// Cap with black diamond
-					if (curInfo.getRelType() == "Composition") {
+					if (curInfo.getRelType() .equals( "Composition") ) {
 						g.setColor(Color.BLACK);
 						int xPoly[] = {curInfo.getEndX(), curInfo.getEndX()+5, curInfo.getEndX(), curInfo.getEndX()-5};
 						int yPoly[] = {curInfo.getEndY(), curInfo.getEndY()+5, curInfo.getEndY()+10, curInfo.getEndY()+5};
@@ -127,7 +129,7 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 						g.fillPolygon(xPoly , yPoly, 4);
 					}
 					// Cap with white triangle
-					if (curInfo.getRelType() == "Generalization" || curInfo.getRelType() == "Implements") {
+					if (curInfo.getRelType() .equals( "Generalization") || curInfo.getRelType() .equals( "Implements") ) {
 						g.setColor(Color.WHITE);
 						int xPoly[] = {curInfo.getEndX(), curInfo.getEndX()+5,  curInfo.getEndX()-5};
 						int yPoly[] = {curInfo.getEndY(), curInfo.getEndY()+10,  curInfo.getEndY()+10};
@@ -137,7 +139,7 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 						g.drawPolygon(xPoly , yPoly, 3);
 					}
 					// Cap with black arrow
-					if (curInfo.getRelType() == "Association" || curInfo.getRelType() == "Depend") {
+					if (curInfo.getRelType() .equals( "Association") || curInfo.getRelType() .equals( "Depend")) {
 						g.setColor(Color.BLACK);
 						g.drawLine(curInfo.getEndX(), curInfo.getEndY(), curInfo.getEndX() - 5, curInfo.getEndY() + 7);
 						g.drawLine(curInfo.getEndX(), curInfo.getEndY(), curInfo.getEndX() + 5, curInfo.getEndY() + 7);

@@ -295,18 +295,33 @@ public class View extends JFrame implements ActionListener {
 		
 	}
 	
-	public String showCurInfo(String name, String attributes, String methods) {
+	public String[] showCurInfo(String name, String attributes, String methods) {
 		
 		// Currently only deals with name!
 		String newName = JOptionPane.showInputDialog(name);
+		String newAttributes = JOptionPane.showInputDialog(attributes);
+		String newMethods = JOptionPane.showInputDialog(methods);
 		
+		String[] updateNamesArray = new String[3];
 		if(newName != null) {
 			
-			return newName;
+			updateNamesArray[0] = newName;
 			
 		} 
 		
-		return " ";
+		if(newAttributes != null) {
+			
+			updateNamesArray[1] = newAttributes;
+			
+		}
+
+		if(newMethods != null) {
+	
+			updateNamesArray[2] = newMethods;
+	
+		}
+		
+		return updateNamesArray;
 		
 	}
 	
