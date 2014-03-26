@@ -47,7 +47,7 @@ public class Controller {
 		while (nodeItr.hasNext()) {
 			Node curNode = nodeItr.next();
 			NodeInfo curInfo = new NodeInfo(curNode.getX(), curNode.getY(),
-					curNode.getWidth(), curNode.getHeight(), curNode.getName());
+					curNode.getWidth(), curNode.getHeight(), curNode.getName(), curNode.getAttributes(), curNode.getMethods());
 			if(curNode.equals(tempNode)){
 				curInfo.setHigh(true);
 			}
@@ -66,7 +66,7 @@ public class Controller {
 		}
 		NodeInfo halfRel = null;
 		if(tempNode != null){
-			halfRel = new NodeInfo(tempNode.getX(), tempNode.getY(), tempNode.getWidth(), tempNode.getHeight(), tempNode.getName());
+			halfRel = new NodeInfo(tempNode.getX(), tempNode.getY(), tempNode.getWidth(), tempNode.getHeight(), tempNode.getName(), tempNode.getAttributes(), tempNode.getMethods());
 		}
 		view.drawObjects(nodeInfo, relInfo, halfRel);
 

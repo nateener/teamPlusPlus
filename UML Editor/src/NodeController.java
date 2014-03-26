@@ -47,8 +47,15 @@ public class NodeController {
 		
 		int newNameLength = newNames[0].length();
 		node.setWidth(newNameLength * 12);
-		
 		node.setName(newNames[0]);
+		if( newNames[1].length() * 12 > node.getWidth()){
+			node.setWidth(newNames[1].length() * 12);
+		}
+		node.setAttributes(newNames[1]);
+		if( newNames[2].length() * 12 > node.getWidth()){
+			node.setWidth(newNames[2].length() * 12);
+		}
+		node.setMethods(newNames[2]);
 		Controller.serveObjects();
 		
 	}

@@ -25,6 +25,8 @@ public Node(int x, int y) {
 	height = 80;
 	setPosition(x, y);
 	name = "Class";
+	attributes = "";
+	methods = "";
 
 	findDimensions();
  }

@@ -174,7 +174,13 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 					name = curInfo.getName();
 				}
 					
-				g.drawString(name, curInfo.getxCoor()+10, curInfo.getyCoor()+10); // Must be drawn last!
+				g.drawString(name, curInfo.getxCoor()+6, curInfo.getyCoor()+10); // Must be drawn last!
+				if(!curInfo.getAttributes().equals("") || !curInfo.getMethods().equals("") ){
+					g.drawLine(curInfo.getxCoor(), curInfo.getyCoor() + 13, curInfo.getxCoor() + curInfo.getWidth(), curInfo.getyCoor() + 13);
+					g.drawString(curInfo.getAttributes(), curInfo.getxCoor()+10, curInfo.getyCoor()+24);
+					g.drawLine(curInfo.getxCoor(), curInfo.getyCoor() + 27, curInfo.getxCoor() + curInfo.getWidth(), curInfo.getyCoor() + 27);
+					g.drawString(curInfo.getMethods(), curInfo.getxCoor()+10, curInfo.getyCoor()+38);// Must be drawn last!
+				}
 			}
 			
 			

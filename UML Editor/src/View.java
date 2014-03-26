@@ -309,18 +309,18 @@ public class View extends JFrame implements ActionListener {
 			
 		} 
 		
-		if(newAttributes != null) {
-			
-			updateNamesArray[1] = newAttributes;
-			
-		}
 
-		if(newMethods != null) {
+			
+		updateNamesArray[1] = newAttributes;
+		System.out.println(newAttributes);
+
+
+
 	
-			updateNamesArray[2] = newMethods;
+		updateNamesArray[2] = newMethods;
+		System.out.println(newMethods);
 	
-		}
-		
+
 		return updateNamesArray;
 		
 	}
