@@ -38,6 +38,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
@@ -297,33 +298,39 @@ public class View extends JFrame implements ActionListener {
 		
 	}
 	
-	public String[] showCurInfo(String name, String attributes, String methods) {
+	public void showCurInfo(Node n) {
 		
-		// Currently only deals with name!
-		String newName = JOptionPane.showInputDialog(name);
-		String newAttributes = JOptionPane.showInputDialog(attributes);
-		String newMethods = JOptionPane.showInputDialog(methods);
+		JTextField newName = new JTextField(n.getName());
+		JTextArea newAttributes = new JTextArea(5,1);
+		for (int i = 0; i < n.getAttributes().length; i++){
+			newAttributes.append(n.getAttributes()[i]);
+		}
+		JTextArea newMethods = new JTextArea(5,1);
+		for (int i = 0; i < n.getMethods().length; i++){
+			newMethods.append(n.getMethods()[i]);
+		}
 		
-		String[] updateNamesArray = new String[3];
-		if(newName != null) {
-			
-			updateNamesArray[0] = newName;
-			
-		} 
+		Object[] message = {
+		    "Name:", newName,
+		    "Attributes:", newAttributes,
+		    "Methods:", newMethods
+		    
+		};
+
+		int option = JOptionPane.showConfirmDialog(null, message, "Edit Attributes", JOptionPane.OK_CANCEL_OPTION);
+		String[] attributesArray = (newAttributes.getText()).split("\\r?\\n");
+		String[] methodsArray = (newMethods.getText()).split("\\r?\\n");
 		
 
-			
-		updateNamesArray[1] = newAttributes;
-		System.out.println(newAttributes);
-
-
-
-	
-		updateNamesArray[2] = newMethods;
-		System.out.println(newMethods);
-	
-
-		return updateNamesArray;
+		if (option == JOptionPane.OK_OPTION) {
+			n.setName(newName.getText());
+			n.setAttributes(attributesArray);
+			n.setMethods(methodsArray);
+		}
+		else
+		{
+		    System.out.println("canceled");
+		}
 		
 	}
 	

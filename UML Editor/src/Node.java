@@ -17,16 +17,16 @@ public class Node implements Serializable {
 	private int topY;
 	private int bottomY;
 	private String name;
-	private String attributes;
-	private String methods;
+	private String[] attributes;
+	private String[] methods;
 
 public Node(int x, int y) {
 	width = 80;
 	height = 80;
 	setPosition(x, y);
 	name = "Class";
-	attributes = "";
-	methods = "";
+	attributes = new String[0];
+	methods = new String[0];
 
 	findDimensions();
  }
@@ -88,25 +88,29 @@ public void setWidth(int width) {
 	}
 }
 
-public String getAttributes() {
+public void setHeight (int height) {
+	this.height = height;
+}
+
+public String[] getAttributes() {
 	
 	return attributes;
 	
 }
 
-public void setAttributes(String attributes) {
+public void setAttributes(String[] attributes) {
 	
 	this.attributes = attributes;
 	
 }
 
-public String getMethods() {
+public String[] getMethods() {
 	
 	return methods;
 	
 }
 
-public void setMethods(String methods) {
+public void setMethods(String[] methods) {
 	
 	this.methods = methods;
 	

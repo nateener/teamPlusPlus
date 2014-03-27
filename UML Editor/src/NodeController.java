@@ -43,19 +43,22 @@ public class NodeController {
 
 	public static void editNode(Node node) {
 		
-		String[] newNames = Controller.view.showCurInfo(node.getName(), node.getAttributes(), node.getMethods());
+		Controller.view.showCurInfo(node);
 		
-		int newNameLength = newNames[0].length();
+		int newNameLength = node.getName().length();
 		node.setWidth(newNameLength * 12);
-		node.setName(newNames[0]);
-		if( newNames[1].length() * 12 > node.getWidth()){
-			node.setWidth(newNames[1].length() * 12);
+		for (int i = 0; i < node.getAttributes().length; i++){
+			if( node.getAttributes()[i].length() * 12 > node.getWidth()){
+				node.setWidth(node.getAttributes()[i].length() * 12);
+			}
 		}
-		node.setAttributes(newNames[1]);
-		if( newNames[2].length() * 12 > node.getWidth()){
-			node.setWidth(newNames[2].length() * 12);
+		for (int i = 0; i < node.getMethods().length; i++){
+			if( node.getMethods()[i].length() * 12 > node.getWidth()){
+				node.setWidth(node.getMethods()[i].length() * 12);
+			}
 		}
-		node.setMethods(newNames[2]);
+		
+		node.setHeight(80 + node.getAttributes().length * 8 + node.getMethods().length * 8 );
 		Controller.serveObjects();
 		
 	}

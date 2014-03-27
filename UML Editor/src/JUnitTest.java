@@ -14,8 +14,8 @@ public class JUnitTest {
 		int width = 80;
 		int height = 80;
 		String name = "Class";
-		String attributes = "";
-		String methods = "";
+		String[] attributes = new String[0];
+		String[] methods = new String[0];
 		
 		// Test constructor
 		Node node = new Node(x, y);
@@ -56,8 +56,8 @@ public class JUnitTest {
 		
 		// Test setName setAttributse setMethods
 		name = "testName";
-		attributes = "testAttributes";
-		methods = "testMethods";
+		attributes = new String[0];
+		methods = new String[0];
 		node.setName(name);
 		node.setAttributes(attributes);
 		node.setMethods(methods);
@@ -75,8 +75,8 @@ public class JUnitTest {
 		int width = 80;
 		int height = 80;
 		String name = "Class";
-		String attributes = "";
-		String methods = "";
+		String[] attributes = new String[0];
+		String[] methods = new String[0];
 		
 		// Test constructor
 		Node node = new Node(x, y);
@@ -112,8 +112,8 @@ public class JUnitTest {
 		
 		// Test setName setAttributse setMethods
 		name = ("" + rng.nextInt(1000));
-		attributes = ("" + rng.nextInt(1000));
-		methods = ("" + rng.nextInt(1000));
+		//attributes = ("" + rng.nextInt(1000));
+		//methods = ("" + rng.nextInt(1000));
 		node.setName(name);
 		node.setAttributes(attributes);
 		node.setMethods(methods);

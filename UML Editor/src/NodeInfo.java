@@ -5,11 +5,11 @@ public class NodeInfo {
 	private int width;
 	private int height;
 	private String name;
-	private String attributes;
-	private String methods;
+	private String[] attributes;
+	private String[] methods;
 	private boolean high;
 	
-	public NodeInfo(int x, int y, int w, int h, String n, String a, String m) {
+	public NodeInfo(int x, int y, int w, int h, String n, String[] a, String[] m) {
 
 		xCoor = x;
 		yCoor = y;
@@ -88,19 +88,19 @@ public class NodeInfo {
 		
 	}
 
-	public String getAttributes() {
+	public String[] getAttributes() {
 		return attributes;
 	}
 
-	public void setAttributes(String attributes) {
+	public void setAttributes(String[] attributes) {
 		this.attributes = attributes;
 	}
 
-	public String getMethods() {
+	public String[] getMethods() {
 		return methods;
 	}
 
-	public void setMethods(String methods) {
+	public void setMethods(String[] methods) {
 		this.methods = methods;
 	}
 
