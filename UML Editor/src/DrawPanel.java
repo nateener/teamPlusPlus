@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
 class DrawPanel extends JPanel implements MouseListener, MouseMotionListener { 
@@ -24,12 +25,16 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 		private int mouseX;
 		private int mouseY;
 		
+		
+		
 		public DrawPanel() {
 			
 			super();
 			
 			addMouseListener(this);
 			addMouseMotionListener(this);
+			setPreferredSize(new Dimension(200, 250));
+			
 			
 		}
 		
@@ -58,6 +63,10 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 			// Draw Grid
 			g.setColor(new Color(225, 236, 242));
 			Dimension size = this.getSize();
+			// Scroll Bar
+			
+			
+			
 			int panelWidth = (int)size.getWidth();
 			int panelHeight = (int)size.getHeight();
 			for(int i = 0; i < panelWidth; i+=10) {	
@@ -148,7 +157,8 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 				}
 			
 			}
-			
+			//Dimension dim = this.getPreferredSize();
+			Dimension highDim = new Dimension(100, 100);
 			// Draw nodes
 			while(nodeItr.hasNext()) {
 				NodeInfo curInfo = nodeItr.next();
@@ -159,6 +169,14 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 				g.setColor(Color.BLACK);
 				if(curInfo.isHigh()){
 					g.setColor(Color.RED);
+				}
+				
+				if(curInfo.getWidth() + curInfo.getxCoor() > highDim.width){
+					highDim.width = curInfo.getWidth() + curInfo.getxCoor();
+				}
+				
+				if(curInfo.getHeight() + curInfo.getyCoor() > highDim.height){
+					highDim.height = curInfo.getHeight() + curInfo.getyCoor();
 				}
 				
 				g.drawRect(curInfo.getxCoor(), curInfo.getyCoor(), curInfo.getWidth(), curInfo.getHeight());
@@ -183,6 +201,7 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 				}
 			}
 			
+			this.setPreferredSize(new Dimension(highDim.width, highDim.height));
 			
 			if(halfRel != null ) {
 				

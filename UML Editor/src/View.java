@@ -37,6 +37,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
@@ -249,8 +250,9 @@ public class View extends JFrame implements ActionListener {
 	private void buildDrawPanel() {
 		
 		drawPanel = new DrawPanel();
-		this.add(drawPanel);
-		
+		JScrollPane scroller = new JScrollPane(drawPanel);
+		drawPanel.setPreferredSize(new Dimension(500, 500));
+		this.add(scroller);
 	}
 	
 	
@@ -298,8 +300,6 @@ public class View extends JFrame implements ActionListener {
 	public String[] showCurInfo(String name, String attributes, String methods) {
 		
 		// Currently only deals with name!
-		/*
-		 * OLD WAY, this block should be ok to delete
 		String newName = JOptionPane.showInputDialog(name);
 		String newAttributes = JOptionPane.showInputDialog(attributes);
 		String newMethods = JOptionPane.showInputDialog(methods);
@@ -310,39 +310,21 @@ public class View extends JFrame implements ActionListener {
 			updateNamesArray[0] = newName;
 			
 		} 
-				
+		
+
+			
 		updateNamesArray[1] = newAttributes;
 		System.out.println(newAttributes);
+
+
+
 	
 		updateNamesArray[2] = newMethods;
 		System.out.println(newMethods);
 	
-		return updateNamesArray;
-		END OLD WAY, don't delete stuff after this
-		*/
-		String[] updatedInfo = new String[3];
-		JTextField newName = new JTextField(name);
-		JTextField newAttributes = new JTextField(attributes);
-		JTextField newMethods = new JTextField(methods);
-		
-		Object[] message = {
-		    "Name:", newName,
-		    "Attributes:", newAttributes,
-		    "Methods:", newMethods
-		    
-		};
 
-		int option = JOptionPane.showConfirmDialog(null, message, "Edit Attributes", JOptionPane.OK_CANCEL_OPTION);
-		if (option == JOptionPane.OK_OPTION) {
-			updatedInfo[0] = newName.getText();
-			updatedInfo[1] = newAttributes.getText();
-			updatedInfo[2] = newMethods.getText();
-		}
-		else
-		{
-		    System.out.println("canceled");
-		}
-		return updatedInfo;
+		return updateNamesArray;
+		
 	}
 	
 	public boolean confirmMessage(String title, String message) {
