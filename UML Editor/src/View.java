@@ -298,6 +298,8 @@ public class View extends JFrame implements ActionListener {
 	public String[] showCurInfo(String name, String attributes, String methods) {
 		
 		// Currently only deals with name!
+		/*
+		 * OLD WAY, this block should be ok to delete
 		String newName = JOptionPane.showInputDialog(name);
 		String newAttributes = JOptionPane.showInputDialog(attributes);
 		String newMethods = JOptionPane.showInputDialog(methods);
@@ -308,21 +310,39 @@ public class View extends JFrame implements ActionListener {
 			updateNamesArray[0] = newName;
 			
 		} 
-		
-
-			
+				
 		updateNamesArray[1] = newAttributes;
 		System.out.println(newAttributes);
-
-
-
 	
 		updateNamesArray[2] = newMethods;
 		System.out.println(newMethods);
 	
-
 		return updateNamesArray;
+		END OLD WAY, don't delete stuff after this
+		*/
+		String[] updatedInfo = new String[3];
+		JTextField newName = new JTextField(name);
+		JTextField newAttributes = new JTextField(attributes);
+		JTextField newMethods = new JTextField(methods);
 		
+		Object[] message = {
+		    "Name:", newName,
+		    "Attributes:", newAttributes,
+		    "Methods:", newMethods
+		    
+		};
+
+		int option = JOptionPane.showConfirmDialog(null, message, "Edit Attributes", JOptionPane.OK_CANCEL_OPTION);
+		if (option == JOptionPane.OK_OPTION) {
+			updatedInfo[0] = newName.getText();
+			updatedInfo[1] = newAttributes.getText();
+			updatedInfo[2] = newMethods.getText();
+		}
+		else
+		{
+		    System.out.println("canceled");
+		}
+		return updatedInfo;
 	}
 	
 	public boolean confirmMessage(String title, String message) {
