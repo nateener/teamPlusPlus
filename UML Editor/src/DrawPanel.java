@@ -38,12 +38,24 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 			
 		}
 		
+		/**
+		 * Sets the arrayList of nodeInfo to the DrawPanel
+		 * 
+		 * @param nodeInfo
+		 * ArrayList of nodeInfos to be set
+		 */
 		public void setNodeInfo(ArrayList<NodeInfo> nodeInfo) {
 			
 			this.nodeInfo = nodeInfo;
 			
 		}
 		
+		/**
+		 * Sets the arrayList of relInfo to the DrawPanel
+		 * 
+		 * @param relInfo
+		 * ArrayList of relInfos to be set
+		 */
 		public void setRelInfo(ArrayList<RelInfo> relInfo) {
 			
 			this.relInfo = relInfo;

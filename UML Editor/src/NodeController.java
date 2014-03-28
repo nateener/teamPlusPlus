@@ -12,6 +12,15 @@ public class NodeController {
 
 	}
 	
+	/**
+	 * Creates and saves a new node if there isn't already a node there
+	 * then serve and draw the objects
+	 * 
+	 * @param x
+	 * x-coordinate of the new node
+	 * @param y
+	 * y-coordinate of the new node
+	 */
 	public static void createNode(int x, int y) {
 
 		// Code that creates a new node object.
@@ -29,6 +38,15 @@ public class NodeController {
 		}
 	}
 
+	/**
+	 * Checks if in proper clickValue then grabs and updates the node
+	 * Then serve and draw the objects
+	 * 
+	 * @param x
+	 * x-coordinate of the node
+	 * @param y
+	 * y-coordinate of the node
+	 */
 	public static void moveNode(int x, int y) {
 		// Don't try to drag nodes                  unless in class mode
 		if ((Controller.clickValue == 0 || Controller.clickValue == 1) && isNodeFull(x, y)) { 
@@ -40,7 +58,14 @@ public class NodeController {
 		}
 
 	}
-
+	
+	/**
+	 * Updates the name, attributes, and methods of the node and the width based on length of the name, attributes, and methods
+	 * Then serve and draw the objects
+	 * 
+	 * @param node
+	 * Node to be edited
+	 */
 	public static void editNode(Node node) {
 		
 		Controller.view.showCurInfo(node);
@@ -63,7 +88,16 @@ public class NodeController {
 		
 	}
 
-	
+	/**
+	 * Find the indicated node and remove it from the list
+	 * Also delete all relationships attached to it
+	 * Then serve and draw objects
+	 * 
+	 * @param x
+	 * x-coordinate of Node
+	 * @param y
+	 * y-coordinate of Node
+	 */
 	public static void deleteNode(int x, int y) {
 		
 		// Conditionals in the if statement are in this order so that the
@@ -101,6 +135,16 @@ public class NodeController {
 		}
 	}
 
+	/**
+	 * Checks if the given coordinates contain a node
+	 * 
+	 * @param x
+	 * x-coordinate of Node
+	 * @param y
+	 * y-coordinate of Node
+	 * @return
+	 * Boolean value if given coordinates contains a node
+	 */
 	public static boolean isNodeFull(int x, int y) {
 		
 		Iterator<Node> itr = Controller.nodes.iterator();
@@ -123,6 +167,17 @@ public class NodeController {
 		return false;
 		
 	}
+	
+	/**
+	 * From the given coordinates, grab and return the node object that occupys that space
+	 * 
+	 * @param x
+	 * x-coordinate of node
+	 * @param y
+	 * y-coordinate of node
+	 * @return
+	 * The actual node object from the given coordinates
+	 */
 	public static Node grabNode(int x, int y) {
 		
 		Iterator<Node> itr = Controller.nodes.iterator();

@@ -11,6 +11,24 @@ public class NodeInfo {
 	private ArrayList<String> methods;
 	private boolean high;
 	
+	/**
+	 * NodeInfo constructor
+	 * 
+	 * @param x
+	 * x-coordinate of the node
+	 * @param y
+	 * y-coordinate of the node
+	 * @param w
+	 * width
+	 * @param h
+	 * height
+	 * @param n
+	 * name
+	 * @param a
+	 * attributes
+	 * @param m
+	 * methods
+	 */
 	public NodeInfo(int x, int y, int w, int h, String n, ArrayList<String> a, ArrayList<String> m) {
 
 		xCoor = x;

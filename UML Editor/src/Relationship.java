@@ -11,7 +11,13 @@ public class Relationship implements Serializable {
 	private int endX;
 	private int endY;
 
-
+/**
+ * Relationship constructor
+ * @param sNode
+ * starting Node object
+ * @param type
+ * Type of relationship
+ */
 public Relationship(Node sNode, String type) {
 	
 	relationshipType = type;
@@ -20,6 +26,11 @@ public Relationship(Node sNode, String type) {
 	
  }
 
+/**
+ * Sets end-point of relationship
+ * @param eNode
+ * end-point Node object
+ */
 public void setEndpoint(Node eNode) {
 	
 	endNode = eNode;
@@ -27,6 +38,9 @@ public void setEndpoint(Node eNode) {
 
 }
 
+/**
+ * Updates the positions of both points of the relationship
+ */
 public void recalculateEndPoints() {
 	
 	setStartPosition();
@@ -39,7 +53,14 @@ public void recalculateEndPoints() {
 		}
 }
 
-
+/**
+ * Checks if the given node has anything to do with the relationship
+ * 
+ * @param in
+ * Node object to be checked
+ * @return
+ * Bool if it involves the node
+ */
 public boolean involvesNode(Node in) {
 	
 	return (startNode.equals(in) || endNode.equals(in));
@@ -88,12 +109,19 @@ public String getRelationshipType() {
 	
 }
 
+/**
+ * @return
+ * Boolean if the relationship is with itself
+ */
 public boolean isSelfRel() {
 	
 	return startNode.equals(endNode);
 	
 }
 
+/**
+ * Sets the start coordinates of the relationship based on it's starting node
+ */
 private void setStartPosition() {
 	
 	if (startNode != null) {
@@ -103,6 +131,9 @@ private void setStartPosition() {
 	
 }
 
+/**
+ * Sets the end coordinates of the relationship based on it's ending node
+ */
 private void setEndPosition() {
 	
 	if(endNode != null) {
@@ -112,6 +143,10 @@ private void setEndPosition() {
 	
 }
 
+/**
+ * Prints out information about the relationship
+ * Useful for testing
+ */
 public void printRelationship() {
 	
     System.out.println("Type:"+ relationshipType);

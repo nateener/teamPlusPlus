@@ -21,6 +21,14 @@ public class Node implements Serializable {
 	private ArrayList<String> attributes;
 	private ArrayList<String> methods;
 
+/**
+ * Constructor for the node class
+ * 
+ * @param x
+ * x-coordinate of the new node
+ * @param y
+ * y-coordinate of the new node
+ */
 public Node(int x, int y) {
 	width = 80;
 	height = 80;
@@ -32,6 +40,14 @@ public Node(int x, int y) {
 	findDimensions();
  }
 
+/**
+ * Moves and snaps node to grid
+ * 
+ * @param x
+ * x-coordinate of the new node
+ * @param y
+ * y-coordinate of the new node
+ */
 public void setPosition(int x, int y) {
 	
 	// x or y % 10 allows snapping to a grid.
@@ -72,6 +88,10 @@ public String getName() {
 	
 }
 
+/**
+ * Sets width of node while maintaining a minimum of 80 and a maximum of 200
+ * @param width
+ */
 public void setWidth(int width) {
 	
 	if(width > 200){
@@ -99,11 +119,14 @@ public ArrayList<String> getAttributes() {
 	
 }
 
+/**
+ * First remove any empty strings from the arraylist, trim it, then save it to the node
+ * 
+ * @param attributes ArrayList of strings, each being an attribute of the node
+ */
 public void setAttributes(ArrayList<String> attributes) {
 	for (int i = 0; i < attributes.size(); i++){
-		System.out.println(attributes.get(i).isEmpty());
 		if(attributes.get(i).isEmpty() ){
-			System.out.println("remove");
 			attributes.remove(i);
 		}
 	}
@@ -118,6 +141,11 @@ public ArrayList<String> getMethods() {
 	
 }
 
+/**
+ * First remove any empty strings from the arraylist, trim it, then save it to the node
+ * 
+ * @param methods ArrayList of strings, each being a method of the node
+ */
 public void setMethods(ArrayList<String> methods) {
 	for (int i = 0; i < methods.size(); i++){
 		if(methods.get(i).isEmpty()){
@@ -135,7 +163,9 @@ public void setName(String name) {
 	
 }
 
-
+/**
+ * Finds the center coordinates of the top, bottom, left, and right sides of the node
+ */
 public void findDimensions() {
 	
 	leftX = xCoor - width/2;
@@ -145,13 +175,19 @@ public void findDimensions() {
 	
 }
 
+/**
+ * Finds the direct center of the node
+ */
 public void findCenter() {
 	
 	xCoor = xCoor + width/2;
 	yCoor = yCoor + height/2;
 	
 }
-
+ /**
+ * Prints out all the basic information about the node
+ * Useful for testing
+ */
 public void printNodeInfo() {
 	
     System.out.println("Name:"+ name );

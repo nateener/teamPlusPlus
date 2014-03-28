@@ -36,6 +36,11 @@ public class Controller {
 	 * View Functions
 	 */
 
+	/**
+	 * serveObjects readies the arraylist of nodes and relationships into their leaner Info variations for drawing
+	 * also handles keeping track of the tempNode/halfRel, this being the first node selected in creating a relationship
+	 * Once it's done readying it will call to draw the objects
+	 */
 	public static void serveObjects() {
 		
 		// needs to serve everything simultaneously
@@ -71,7 +76,14 @@ public class Controller {
 		view.drawObjects(nodeInfo, relInfo, halfRel);
 
 	}
-
+	
+	/**
+	 * This method runs when the mouse is clicked and does the correct action based on the current clickValue
+	 * 
+	 * @param x x-position of the mouse
+	 * @param y y-position of the mouse
+	 * 
+	 */
 	public static void mouseClick(int x, int y) {
 		
 		switch (clickValue) {
@@ -110,7 +122,13 @@ public class Controller {
 			
 		}
 	}
-
+	
+	/**
+	 * This method handles when the mouse is right-clicked and does the appropriate action based on the click value
+	 * 
+	 * @param x x-position of the mouse
+	 * @param y y-position of the mouse
+	 */
 	public static void mouseClickRight(int x, int y) {
 		
 		switch (clickValue) {
@@ -128,6 +146,9 @@ public class Controller {
 		
 	}
 	
+	/**
+	 * Runs when changing clickValue to empty out any variables still sticking around
+	 */
 	private static void clearClickMode() { // Make sure we don't store clickmode
 											// specific stuff when changing								
 											// clickmodes
@@ -208,7 +229,9 @@ public class Controller {
 		
 	} 
 	
-	
+	/**
+	 * Prompts user and exits program
+	 */
 	public static void exit() {
 		
 		if(view.confirmMessage("Exit confirmation",
@@ -224,6 +247,12 @@ public class Controller {
 	 * Other Functions
 	 */
 	
+	/**
+	 * Takes a serialized string of the objects and creates a save file
+	 * 
+	 * @param file
+	 * Contains both arrayLists serialized into a string
+	 */
 	public static void save(String file) {
 		
 		if(file.equals("")){
@@ -256,6 +285,12 @@ public class Controller {
 		
 	}
 	
+	/**
+	 * Takes in a serialized string of the objects and loads that information into the program
+	 * 
+	 * @param file
+	 * Contains both arrayLists serialized into a string
+	 */
 	public static void load(String file) {
 		
 		nodes.clear();
@@ -287,7 +322,10 @@ public class Controller {
 		
 		serveObjects();
 	}
-
+	
+	/**
+	 * Clear everything out and create a new, clean UML editor
+	 */
 	public static void newUML() {
 		
 		nodes.clear();
