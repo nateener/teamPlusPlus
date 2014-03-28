@@ -1,5 +1,6 @@
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Node implements Serializable {
 
@@ -17,16 +18,16 @@ public class Node implements Serializable {
 	private int topY;
 	private int bottomY;
 	private String name;
-	private String[] attributes;
-	private String[] methods;
+	private ArrayList<String> attributes;
+	private ArrayList<String> methods;
 
 public Node(int x, int y) {
 	width = 80;
 	height = 80;
 	setPosition(x, y);
 	name = "Class";
-	attributes = new String[0];
-	methods = new String[0];
+	attributes = new ArrayList<String>();
+	methods = new ArrayList<String>();
 
 	findDimensions();
  }
@@ -92,26 +93,38 @@ public void setHeight (int height) {
 	this.height = height;
 }
 
-public String[] getAttributes() {
+public ArrayList<String> getAttributes() {
 	
 	return attributes;
 	
 }
 
-public void setAttributes(String[] attributes) {
-	
+public void setAttributes(ArrayList<String> attributes) {
+	for (int i = 0; i < attributes.size(); i++){
+		System.out.println(attributes.get(i).isEmpty());
+		if(attributes.get(i).isEmpty() ){
+			System.out.println("remove");
+			attributes.remove(i);
+		}
+	}
+	attributes.trimToSize();
 	this.attributes = attributes;
 	
 }
 
-public String[] getMethods() {
+public ArrayList<String> getMethods() {
 	
 	return methods;
 	
 }
 
-public void setMethods(String[] methods) {
-	
+public void setMethods(ArrayList<String> methods) {
+	for (int i = 0; i < methods.size(); i++){
+		if(methods.get(i).isEmpty()){
+			methods.remove(i);
+		}
+	}
+	methods.trimToSize();
 	this.methods = methods;
 	
 }

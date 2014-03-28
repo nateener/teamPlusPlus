@@ -77,7 +77,7 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 			}
 			
 			Graphics2D g2d = (Graphics2D) g;
-			BasicStroke stroke = new BasicStroke(2.0f);
+			BasicStroke stroke = new BasicStroke(1.0f);
 			g2d.setStroke(stroke);
 			
 			// Draw relationships
@@ -193,15 +193,14 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 				}
 					
 				g.drawString(name, curInfo.getxCoor()+6, curInfo.getyCoor()+10); // Must be drawn last!
-				if(curInfo.getAttributes().length > 0 || curInfo.getMethods().length > 0){
-					System.out.println(curInfo.getAttributes().length);
+				if(!curInfo.getAttributes().isEmpty() || !curInfo.getMethods().isEmpty()){
 					g.drawLine(curInfo.getxCoor(), curInfo.getyCoor() + 13, curInfo.getxCoor() + curInfo.getWidth(), curInfo.getyCoor() + 13);
-					for (int i = 0; i < curInfo.getAttributes().length; i++){
-						g.drawString(curInfo.getAttributes()[i], curInfo.getxCoor()+10, curInfo.getyCoor()+24+(i*12));
+					for (int i = 0; i < curInfo.getAttributes().size(); i++){
+						g.drawString(curInfo.getAttributes().get(i), curInfo.getxCoor()+10, curInfo.getyCoor()+24+(i*12));
 					}
-						g.drawLine(curInfo.getxCoor(), curInfo.getyCoor() + 27 +  (curInfo.getAttributes().length * 12), curInfo.getxCoor() + curInfo.getWidth(), curInfo.getyCoor() + 27 +  (curInfo.getAttributes().length * 12));
-					for (int i = 0; i < curInfo.getMethods().length; i++){
-						g.drawString(curInfo.getMethods()[i], curInfo.getxCoor()+10, curInfo.getyCoor()+38+(i*12) +  (curInfo.getAttributes().length * 12));// Must be drawn last!
+						g.drawLine(curInfo.getxCoor(), curInfo.getyCoor() + 27 +  (curInfo.getAttributes().size() * 12), curInfo.getxCoor() + curInfo.getWidth(), curInfo.getyCoor() + 27 +  (curInfo.getAttributes().size() * 12));
+					for (int i = 0; i < curInfo.getMethods().size(); i++){
+						g.drawString(curInfo.getMethods().get(i), curInfo.getxCoor()+10, curInfo.getyCoor()+38+(i*12) +  (curInfo.getAttributes().size() * 12));// Must be drawn last!
 					}
 				}
 			}

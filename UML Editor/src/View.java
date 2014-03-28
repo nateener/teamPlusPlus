@@ -26,6 +26,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 
 import javax.swing.ImageIcon;
@@ -302,12 +303,12 @@ public class View extends JFrame implements ActionListener {
 		
 		JTextField newName = new JTextField(n.getName());
 		JTextArea newAttributes = new JTextArea(5,1);
-		for (int i = 0; i < n.getAttributes().length; i++){
-			newAttributes.append(n.getAttributes()[i]);
+		for (int i = 0; i < n.getAttributes().size(); i++){
+			newAttributes.append(n.getAttributes().get(i) + "\n");
 		}
 		JTextArea newMethods = new JTextArea(5,1);
-		for (int i = 0; i < n.getMethods().length; i++){
-			newMethods.append(n.getMethods()[i]);
+		for (int i = 0; i < n.getMethods().size(); i++){
+			newMethods.append(n.getMethods().get(i) + "\n");
 		}
 		
 		Object[] message = {
@@ -316,16 +317,18 @@ public class View extends JFrame implements ActionListener {
 		    "Methods:", newMethods
 		    
 		};
-
+		
 		int option = JOptionPane.showConfirmDialog(null, message, "Edit Attributes", JOptionPane.OK_CANCEL_OPTION);
 		String[] attributesArray = (newAttributes.getText()).split("\\r?\\n");
-		String[] methodsArray = (newMethods.getText()).split("\\r?\\n");
+		ArrayList<String> attrList = new ArrayList<String>(Arrays.asList(attributesArray));
 		
+		String[] methodsArray = (newMethods.getText()).split("\\r?\\n");
+		ArrayList<String> methList = new ArrayList<String>(Arrays.asList(methodsArray));
 
 		if (option == JOptionPane.OK_OPTION) {
 			n.setName(newName.getText());
-			n.setAttributes(attributesArray);
-			n.setMethods(methodsArray);
+			n.setAttributes(attrList);
+			n.setMethods(methList);
 		}
 		else
 		{

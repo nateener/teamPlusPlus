@@ -47,18 +47,18 @@ public class NodeController {
 		
 		int newNameLength = node.getName().length();
 		node.setWidth(newNameLength * 12);
-		for (int i = 0; i < node.getAttributes().length; i++){
-			if( node.getAttributes()[i].length() * 12 > node.getWidth()){
-				node.setWidth(node.getAttributes()[i].length() * 12);
+		for (int i = 0; i < node.getAttributes().size(); i++){
+			if( node.getAttributes().get(i).length() * 12 > node.getWidth()){
+				node.setWidth(node.getAttributes().get(i).length() * 12);
 			}
 		}
-		for (int i = 0; i < node.getMethods().length; i++){
-			if( node.getMethods()[i].length() * 12 > node.getWidth()){
-				node.setWidth(node.getMethods()[i].length() * 12);
+		for (int i = 0; i < node.getMethods().size(); i++){
+			if( node.getMethods().get(i).length() * 12 > node.getWidth()){
+				node.setWidth(node.getMethods().get(i).length() * 12);
 			}
 		}
 		
-		node.setHeight(80 + node.getAttributes().length * 8 + node.getMethods().length * 8 );
+		node.setHeight(80 + node.getAttributes().size() * 8 + node.getMethods().size() * 8 );
 		Controller.serveObjects();
 		
 	}

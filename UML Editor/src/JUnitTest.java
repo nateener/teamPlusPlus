@@ -1,5 +1,6 @@
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import org.junit.Test;
@@ -14,8 +15,8 @@ public class JUnitTest {
 		int width = 80;
 		int height = 80;
 		String name = "Class";
-		String[] attributes = new String[0];
-		String[] methods = new String[0];
+		ArrayList<String> attributes = new ArrayList<String>();
+		ArrayList<String> methods = new ArrayList<String>();
 		
 		// Test constructor
 		Node node = new Node(x, y);
@@ -56,8 +57,8 @@ public class JUnitTest {
 		
 		// Test setName setAttributse setMethods
 		name = "testName";
-		attributes = new String[0];
-		methods = new String[0];
+		attributes = new ArrayList<String>();
+		methods = new ArrayList<String>();
 		node.setName(name);
 		node.setAttributes(attributes);
 		node.setMethods(methods);
@@ -75,8 +76,8 @@ public class JUnitTest {
 		int width = 80;
 		int height = 80;
 		String name = "Class";
-		String[] attributes = new String[0];
-		String[] methods = new String[0];
+		ArrayList<String> attributes = new ArrayList<String>();
+		ArrayList<String> methods = new ArrayList<String>();
 		
 		// Test constructor
 		Node node = new Node(x, y);

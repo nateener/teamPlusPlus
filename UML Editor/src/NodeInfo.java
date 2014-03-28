@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 
 public class NodeInfo {
 	private int xCoor;
@@ -5,11 +7,11 @@ public class NodeInfo {
 	private int width;
 	private int height;
 	private String name;
-	private String[] attributes;
-	private String[] methods;
+	private ArrayList<String> attributes;
+	private ArrayList<String> methods;
 	private boolean high;
 	
-	public NodeInfo(int x, int y, int w, int h, String n, String[] a, String[] m) {
+	public NodeInfo(int x, int y, int w, int h, String n, ArrayList<String> a, ArrayList<String> m) {
 
 		xCoor = x;
 		yCoor = y;
@@ -88,19 +90,19 @@ public class NodeInfo {
 		
 	}
 
-	public String[] getAttributes() {
+	public ArrayList<String> getAttributes() {
 		return attributes;
 	}
 
-	public void setAttributes(String[] attributes) {
+	public void setAttributes(ArrayList<String> attributes) {
 		this.attributes = attributes;
 	}
 
-	public String[] getMethods() {
+	public ArrayList<String> getMethods() {
 		return methods;
 	}
 
-	public void setMethods(String[] methods) {
+	public void setMethods(ArrayList<String> methods) {
 		this.methods = methods;
 	}
 
