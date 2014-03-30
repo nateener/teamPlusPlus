@@ -12,6 +12,17 @@ public class RelationshipController {
 	}
 	
 
+	/**
+	 * Create a new relationship
+	 * Serve and draw objects
+	 * 
+	 * @param start
+	 * Starting Node object
+	 * @param end
+	 * Ending Node object
+	 * @param type
+	 * String type of the relationship
+	 */
 	private static void createRelationship(Node start, Node end, String type) {
 		
 		Relationship newRel = new Relationship(start, type);
@@ -22,7 +33,14 @@ public class RelationshipController {
 		Controller.serveObjects();
 		
 	}
-
+	
+	/**
+	 * Check if given coordinates contain a relationship, prompt to delete and if yes delete
+	 * @param x
+	 * clicked x-coordinate
+	 * @param y
+	 * clicked y-coordinate
+	 */
 	public static void deleteRelationship(int x, int y) {
 		
 		if (isRelFull(x, y)){
@@ -39,7 +57,16 @@ public class RelationshipController {
 		}
 		
 	}
-
+	
+	/**
+	 * Checks if given coordinates contain a relationship
+	 * @param x
+	 * clicked x-coordinate
+	 * @param y
+	 * clicked y-coordinate
+	 * @return
+	 * Boolean if the coordinates contain a relationship
+	 */
 	public static boolean isRelFull(int x, int y) {
 		
 		Iterator<Relationship> itr = Controller.rels.iterator();
@@ -61,7 +88,16 @@ public class RelationshipController {
 		return false;
 
 	}
-
+	
+	/**
+	 * Gets the actual Relationship object from the given coordinates
+	 * @param x
+	 * given x-coordinate
+	 * @param y
+	 * given y-coordinate
+	 * @return
+	 * Relationship object
+	 */
 	public static Relationship grabRel(int x, int y) {
 
 		Iterator<Relationship> itr = Controller.rels.iterator();
@@ -84,6 +120,15 @@ public class RelationshipController {
 
 	}
 	
+	/**
+	 * Starts the process of creating a relationship
+	 * @param x
+	 * clicked x-coordinate of the first node selected
+	 * @param y
+	 * clicked y-coordinate of the first node selected
+	 * @param type
+	 * string type of the new relationship
+	 */
 	public static void prepRel(int x, int y, String type) {
 		
 		if (Controller.tempNode != null && NodeController.isNodeFull(x, y)) {

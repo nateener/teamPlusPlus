@@ -8,6 +8,21 @@ public class RelInfo {
 	private boolean selfRel;
 	private String relType;
 	
+	/**
+	 * RelInfo constructor
+	 * @param startX
+	 * starting x-coordinate
+	 * @param startY
+	 * starting y-coordinate
+	 * @param endX
+	 * ending x-coordinate
+	 * @param endY
+	 * ending y-coordinate
+	 * @param self
+	 * if it has a relationship with itself
+	 * @param type
+	 * type of the relationship
+	 */
 	public RelInfo(int startX, int startY, int endX, int endY, boolean self, String type) {
 
 		this.startX = startX;

@@ -260,6 +260,9 @@ public class View extends JFrame implements ActionListener {
 	
 	// Controller/View Methods
 	
+	/**
+	 * Show file saver
+	 */
 	public void showFileSaver() {
 		
 		JFileChooser c = new JFileChooser();
@@ -274,6 +277,9 @@ public class View extends JFrame implements ActionListener {
 	      
 	}
 	
+	/**
+	 * Show file opener
+	 */
 	public void showFileOpener() {
 		
 		final JFileChooser fc = new JFileChooser();
@@ -290,6 +296,15 @@ public class View extends JFrame implements ActionListener {
 	      
 	}
 	
+	/**
+	 * Sets the draw panel information and sends command to draw them
+	 * @param nodeInfo
+	 * Arraylist of all the NodeInfos
+	 * @param relInfo
+	 * ArrayList of all the RelInfos
+	 * @param halfRel
+	 * NodeInfo if there is a relationship in the process of having an end node selected
+	 */
 	public void drawObjects(ArrayList<NodeInfo> nodeInfo, ArrayList<RelInfo> relInfo, NodeInfo halfRel ){
 		
 		drawPanel.setNodeInfo(nodeInfo);
@@ -299,6 +314,13 @@ public class View extends JFrame implements ActionListener {
 		
 	}
 	
+	/**
+	 * Creates and shows window asking for the name, attributes, and methods
+	 * then separates each line into a string that is stored into an arrayList which is then saved to the node
+	 * 
+	 * @param n
+	 * Node to show and edit current information
+	 */
 	public void showCurInfo(Node n) {
 		
 		JTextField newName = new JTextField(n.getName());
