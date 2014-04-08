@@ -9,6 +9,8 @@ public class Node implements Serializable {
 	 */
 	// I put in this id to shut up the warning, don't actually know if we Need it
 	private static final long serialVersionUID = 1L;
+	private int origX; //These keep track of where the node was actually set to be for copying purposes.
+	private int origY;
 	private int xCoor;
 	private int yCoor;
 	private int width;
@@ -53,6 +55,9 @@ public void setPosition(int x, int y) {
 	// x or y % 10 allows snapping to a grid.
 	xCoor = x - (x%10);
 	yCoor = y - (y%10);
+	
+	origX = x;
+	origY = y;
 	
 	//xCoor = x;
 	//yCoor = y;
@@ -200,4 +205,15 @@ public void printNodeInfo() {
     System.out.println();
     
  }
+
+/**
+ * Creates a copy of the Node.
+ * @return A copy of the Node.
+ */
+public Node copy() {
+	Node retVal = new Node(origX, origY);
+	retVal.setAttributes(this.getAttributes());
+	retVal.setMethods(this.getMethods());
+	return retVal;
+}
 }
