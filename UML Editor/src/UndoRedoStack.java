@@ -29,6 +29,9 @@ public class UndoRedoStack {
 	 * 		The State object that was placed on the stack.
 	 */
 	public State undoPush(ArrayList<Node> nodes, ArrayList<Relationship> rels) {
+		/*TODO: Create a copy of nodes/rels to push instead of just pushing them.
+		Figure out if there's a less painful way to copy relationships. 
+		Also: Maybe use a static long in Node and Relationship to create unique ids for them to ease equality checking*/
 		return undoStack.push(new State(nodes, rels));
 	}
 	
