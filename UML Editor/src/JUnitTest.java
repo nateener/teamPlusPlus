@@ -267,5 +267,5 @@ public class JUnitTest {
 		info.setSelfRel(self);
 		assertFalse(info.isSelfRel());
 	}
-
+	
 }

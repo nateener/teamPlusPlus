@@ -3,6 +3,10 @@ import java.io.Serializable;
 
 public class Relationship implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String relationshipType;
 	private Node startNode;
 	private Node endNode;
@@ -155,5 +159,22 @@ public void printRelationship() {
     System.out.println();
     
  }
+
+/**
+ * Creates a copy of the current relationship between the two given nodes.
+ * 
+ * @param startNode
+ * 		The start node for the copy
+ * @param endNode
+ * 		The end node for the copy
+ * @return
+ * 		A copy of the relationship
+ */
+public Relationship copy(Node startNode, Node endNode) {
+	Relationship retVal = new Relationship(startNode, this.relationshipType);
+	retVal.setEndpoint(endNode);
+	//TODO: See if there's a way to make this work without having to pass in copies of the end nodes
+	return retVal;
+}
 
 }
