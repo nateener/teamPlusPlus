@@ -33,6 +33,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -91,6 +92,7 @@ public class View extends JFrame implements ActionListener {
 	private JMenuItem itemSaveAs;
 	private JMenuItem itemOpen;
 	private JMenuItem itemNew;
+	private JMenuItem itemExportImage;
 	
 	
 	private void buildMenuBar() {
@@ -125,6 +127,10 @@ public class View extends JFrame implements ActionListener {
 		itemSaveAs.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK | ActionEvent.SHIFT_MASK));
 		menu.add(itemSaveAs);
 		itemSaveAs.addActionListener(this);
+		itemExportImage = new JMenuItem("Export as Image");
+		itemExportImage.setMnemonic(KeyEvent.VK_A);
+		menu.add(itemExportImage);
+		itemExportImage.addActionListener(this);
 		menu.addSeparator();
 		itemExit = new JMenuItem("Exit");
 		itemExit.setIcon(new ImageIcon("exit.png"));
@@ -237,6 +243,8 @@ public class View extends JFrame implements ActionListener {
 		} else if (src.equals(itemOpen)) {
 			
 			showFileOpener();
+		} else if (src.equals(itemExportImage)) {
+			 exportAsImage();
 		} else if (src.equals(itemNew)){
 			Controller.newUML();
 		}
@@ -296,6 +304,10 @@ public class View extends JFrame implements ActionListener {
 	      
 	}
 	
+	public void exportAsImage() {
+		System.out.println("I sure did export the view as an image");	
+	}
+	
 	/**
 	 * Sets the draw panel information and sends command to draw them
 	 * @param nodeInfo
@@ -332,15 +344,19 @@ public class View extends JFrame implements ActionListener {
 		for (int i = 0; i < n.getMethods().size(); i++){
 			newMethods.append(n.getMethods().get(i) + "\n");
 		}
+		JScrollPane attrScroll = new JScrollPane(newAttributes);
+		JScrollPane methScroll = new JScrollPane(newMethods);
 		
 		Object[] message = {
 		    "Name:", newName,
-		    "Attributes:", newAttributes,
-		    "Methods:", newMethods
+		    "Attributes:", attrScroll,
+		    "Methods:", methScroll
 		    
 		};
 		
-		int option = JOptionPane.showConfirmDialog(null, message, "Edit Attributes", JOptionPane.OK_CANCEL_OPTION);
+
+		
+		int option = JOptionPane.showConfirmDialog(null, message, "Edit Class", JOptionPane.OK_CANCEL_OPTION);
 		String[] attributesArray = (newAttributes.getText()).split("\\r?\\n");
 		ArrayList<String> attrList = new ArrayList<String>(Arrays.asList(attributesArray));
 		
