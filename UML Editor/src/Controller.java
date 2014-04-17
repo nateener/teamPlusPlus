@@ -1,4 +1,5 @@
 
+import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -6,6 +7,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import javax.swing.JPopupMenu;
 
 /*
  * TODO PLACEHOLDER FOR THE CONTROLLER CLASS.
@@ -129,20 +132,14 @@ public class Controller {
 	 * @param x x-position of the mouse
 	 * @param y y-position of the mouse
 	 */
+	@SuppressWarnings("deprecation")
 	public static void mouseClickRight(int x, int y) {
 		
-		switch (clickValue) {
-		case 0:
-		case 1:
 			if(NodeController.isNodeFull(x, y)){
 				Node node = NodeController.grabNode(x, y);
-				NodeController.editNode(node);
-				
+				ContextMenu popup = new ContextMenu(node);
+				popup.show(view.drawPanel, x, y);
 			}
-			return; // Class
-		default:
-			return;
-		}
 		
 	}
 	
