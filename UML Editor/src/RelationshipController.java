@@ -27,6 +27,17 @@ public class RelationshipController {
 		
 		Relationship newRel = new Relationship(start, type);
 		newRel.setEndpoint(end);
+		
+		Iterator<Relationship> itr = Controller.rels.iterator();
+		
+		while (itr.hasNext()) {
+			Relationship curRel = itr.next();
+			
+			if(curRel.involvesNode(start) && curRel.involvesNode(end)) {
+				Controller.rels.remove(curRel);
+				break;
+			}
+		}
 
 		Controller.rels.add(newRel);
 

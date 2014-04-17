@@ -9,6 +9,8 @@ public class Node implements Serializable {
 	 */
 	// I put in this id to shut up the warning, don't actually know if we Need it
 	private static final long serialVersionUID = 1L;
+	private static long nextId = 0;
+	private long nodeId;
 	private int origX; //These keep track of where the node was actually set to be for copying purposes.
 	private int origY;
 	private int xCoor;
@@ -38,6 +40,8 @@ public Node(int x, int y) {
 	name = "Class";
 	attributes = new ArrayList<String>();
 	methods = new ArrayList<String>();
+	
+	nodeId = nextId++;
 
 	findDimensions();
  }
@@ -207,11 +211,26 @@ public void printNodeInfo() {
  }
 
 /**
+ * Decides if nodes are equal based on their internal ids.
+ * 
+ * @param node
+ * 		Node to be compared.
+ * @return
+ * 		True if the nodes are equal
+ */
+public boolean equals(Node node) {
+	if(node == null)
+		return false;
+	return this.nodeId == node.nodeId;
+}
+
+/**
  * Creates a copy of the Node.
  * @return A copy of the Node.
  */
 public Node copy() {
 	Node retVal = new Node(origX, origY);
+	retVal.setName(this.getName());
 	retVal.setAttributes(this.getAttributes());
 	retVal.setMethods(this.getMethods());
 	return retVal;
