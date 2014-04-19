@@ -27,6 +27,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.IOException;
+import java.sql.Savepoint;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -313,7 +314,7 @@ public class View extends JFrame implements ActionListener {
 	}
 	
 	public void exportAsImage() {
-		System.out.println("I sure did export the view as an image");	
+		System.out.println("I sure did export the view as an image");
 	}
 	
 	/**

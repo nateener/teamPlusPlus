@@ -86,12 +86,11 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 			//Draw Relationships
 			drawRelationships(g,relInfo );
 			
-			//Draw in Process Relationship
-			drawHalfRelationship(g);
-			
 			//Draw Nodes
 			drawNodes(g, nodeInfo);
 			
+			//Draw in Process Relationship
+			drawHalfRelationship(g);
 			
 		}
 			
