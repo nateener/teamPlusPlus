@@ -66,8 +66,6 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 		public void paintComponent(Graphics g) {
 			
 			super.paintComponent(g);
-			Iterator<NodeInfo>	nodeItr = nodeInfo.iterator();
-			Iterator<RelInfo> relItr = relInfo.iterator();
 			
 			// Draw Background
 			this.setBackground(Color.WHITE);
@@ -76,9 +74,6 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 			g.setColor(new Color(225, 236, 242));
 			Dimension size = this.getSize();
 			// Scroll Bar
-			
-			
-			
 			int panelWidth = (int)size.getWidth();
 			int panelHeight = (int)size.getHeight();
 			for(int i = 0; i < panelWidth; i+=10) {	
@@ -88,10 +83,23 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 				g.drawLine(0, i, panelWidth, i);
 			}
 			
+			//Draw Relationships
+			drawRelationships(g,relInfo );
+			
+			//Draw Nodes
+			drawNodes(g, nodeInfo);
+			
+			//Draw in Process Relationship
+			drawHalfRelationship(g);
+			
+		}
+			
+		public void drawRelationships(Graphics g, ArrayList<RelInfo> relInfo) {
 			Graphics2D g2d = (Graphics2D) g;
 			BasicStroke stroke = new BasicStroke(1.0f);
 			g2d.setStroke(stroke);
 			
+			Iterator<RelInfo> relItr = relInfo.iterator();
 			// Draw relationships
 			g.setColor(Color.BLACK);		
 			while(relItr.hasNext()) {
@@ -169,6 +177,21 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 				}
 			
 			}
+			
+
+		}
+		
+		// If a relationship is in the process of being selected, show a highlighted line to the mouse pointer
+		public void drawHalfRelationship(Graphics g) {
+			if(halfRel != null ) {
+				g.setColor(Color.RED);
+				g.drawLine(halfRel.getxCoor() + (halfRel.getWidth() / 2), halfRel.getyCoor() + (halfRel.getHeight() / 2), mouseX, mouseY);
+			}
+		}
+		
+		// Draw nodes and set the size of the window
+		public void drawNodes(Graphics g, ArrayList<NodeInfo> nodeInfo) {
+			Iterator<NodeInfo>	nodeItr = nodeInfo.iterator();
 			//Dimension dim = this.getPreferredSize();
 			Dimension highDim = new Dimension(100, 100);
 			// Draw nodes
@@ -217,17 +240,10 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 				}
 			}
 			
-			this.setPreferredSize(new Dimension(highDim.width, highDim.height));
-			
-			if(halfRel != null ) {
-				
-				g.setColor(Color.RED);
-				g.drawLine(halfRel.getxCoor() + (halfRel.getWidth() / 2), halfRel.getyCoor() + (halfRel.getHeight() / 2), mouseX, mouseY);
-				
-			}
+			this.setPreferredSize(new Dimension(highDim.width, highDim.height));	
 		}
-			
-
+		
+		
 		@Override
 		public void mouseClicked(MouseEvent mouse) {
 			

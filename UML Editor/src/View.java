@@ -19,16 +19,19 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.IOException;
+import java.sql.Savepoint;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -91,6 +94,7 @@ public class View extends JFrame implements ActionListener {
 	private JMenuItem itemSaveAs;
 	private JMenuItem itemOpen;
 	private JMenuItem itemNew;
+	private JMenuItem itemExportImage;
 	
 	
 	private void buildMenuBar() {
@@ -125,6 +129,10 @@ public class View extends JFrame implements ActionListener {
 		itemSaveAs.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK | ActionEvent.SHIFT_MASK));
 		menu.add(itemSaveAs);
 		itemSaveAs.addActionListener(this);
+		itemExportImage = new JMenuItem("Export as Image");
+		itemExportImage.setMnemonic(KeyEvent.VK_A);
+		menu.add(itemExportImage);
+		itemExportImage.addActionListener(this);
 		menu.addSeparator();
 		itemExit = new JMenuItem("Exit");
 		itemExit.setIcon(new ImageIcon("exit.png"));
@@ -159,8 +167,15 @@ public class View extends JFrame implements ActionListener {
 		toolBar.setFloatable(false);
 		add(toolBar, BorderLayout.LINE_START);
 		
+		  
+		
 		selectorButton = new JButton("Selector");
 		selectorButton.addActionListener(this);
+		try {
+		    Image img = ImageIO.read(getClass().getResource("awesome_test.png"));
+		    selectorButton.setIcon(new ImageIcon(img));
+		  } catch (IOException ex) {
+		  }
 		toolBar.add(selectorButton);
 		
 		classButton = new JButton("Class");
@@ -237,6 +252,8 @@ public class View extends JFrame implements ActionListener {
 		} else if (src.equals(itemOpen)) {
 			
 			showFileOpener();
+		} else if (src.equals(itemExportImage)) {
+			 exportAsImage();
 		} else if (src.equals(itemNew)){
 			Controller.newUML();
 		}
@@ -296,6 +313,10 @@ public class View extends JFrame implements ActionListener {
 	      
 	}
 	
+	public void exportAsImage() {
+		System.out.println("I sure did export the view as an image");
+	}
+	
 	/**
 	 * Sets the draw panel information and sends command to draw them
 	 * @param nodeInfo
@@ -332,15 +353,19 @@ public class View extends JFrame implements ActionListener {
 		for (int i = 0; i < n.getMethods().size(); i++){
 			newMethods.append(n.getMethods().get(i) + "\n");
 		}
+		JScrollPane attrScroll = new JScrollPane(newAttributes);
+		JScrollPane methScroll = new JScrollPane(newMethods);
 		
 		Object[] message = {
 		    "Name:", newName,
-		    "Attributes:", newAttributes,
-		    "Methods:", newMethods
+		    "Attributes:", attrScroll,
+		    "Methods:", methScroll
 		    
 		};
 		
-		int option = JOptionPane.showConfirmDialog(null, message, "Edit Attributes", JOptionPane.OK_CANCEL_OPTION);
+
+		
+		int option = JOptionPane.showConfirmDialog(null, message, "Edit Class", JOptionPane.OK_CANCEL_OPTION);
 		String[] attributesArray = (newAttributes.getText()).split("\\r?\\n");
 		ArrayList<String> attrList = new ArrayList<String>(Arrays.asList(attributesArray));
 		

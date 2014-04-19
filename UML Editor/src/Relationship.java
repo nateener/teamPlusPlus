@@ -8,6 +8,8 @@ public class Relationship implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String relationshipType;
+	private String startDetail;
+	private String endDetail;
 	private Node startNode;
 	private Node endNode;
 	private int startX;
@@ -175,6 +177,22 @@ public Relationship copy(Node startNode, Node endNode) {
 	retVal.setEndpoint(endNode);
 	//TODO: See if there's a way to make this work without having to pass in copies of the end nodes
 	return retVal;
+}
+
+public String getStartDetail() {
+	return startDetail;
+}
+
+public void setStartDetail(String startDetail) {
+	this.startDetail = startDetail;
+}
+
+public String getEndDetail() {
+	return endDetail;
+}
+
+public void setEndDetail(String endDetail) {
+	this.endDetail = endDetail;
 }
 
 }
