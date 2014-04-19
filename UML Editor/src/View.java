@@ -19,21 +19,22 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -165,8 +166,15 @@ public class View extends JFrame implements ActionListener {
 		toolBar.setFloatable(false);
 		add(toolBar, BorderLayout.LINE_START);
 		
+		  
+		
 		selectorButton = new JButton("Selector");
 		selectorButton.addActionListener(this);
+		try {
+		    Image img = ImageIO.read(getClass().getResource("awesome_test.png"));
+		    selectorButton.setIcon(new ImageIcon(img));
+		  } catch (IOException ex) {
+		  }
 		toolBar.add(selectorButton);
 		
 		classButton = new JButton("Class");

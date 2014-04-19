@@ -7,6 +7,8 @@ public class RelInfo {
 
 	private boolean selfRel;
 	private String relType;
+	private String startDetail;
+	private String endDetail;
 	
 	/**
 	 * RelInfo constructor
@@ -104,6 +106,22 @@ public class RelInfo {
 		
 		this.relType = relType;
 		
+	}
+
+	public String getStartDetail() {
+		return startDetail;
+	}
+
+	public void setStartDetail(String startDetail) {
+		this.startDetail = startDetail;
+	}
+
+	public String getEndDetail() {
+		return endDetail;
+	}
+
+	public void setEndDetail(String endDetail) {
+		this.endDetail = endDetail;
 	}
 	
 }

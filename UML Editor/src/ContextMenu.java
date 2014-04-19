@@ -30,6 +30,8 @@ class ContextMenu extends JPopupMenu implements ActionListener {
 		Object src = e.getSource();
 		if (src.equals(editClass)) {
 			NodeController.editNode(node);
+		} else if(src.equals(editRels)) {
+			RelationshipController.editRelationship(node);
 		} else if(src.equals(delete)) {
 			NodeController.deleteNode(node.getX(), node.getY());
 		}

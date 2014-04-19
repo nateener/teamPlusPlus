@@ -83,7 +83,7 @@ public class NodeController {
 			}
 		}
 		
-		node.setHeight(80 + node.getAttributes().size() * 8 + node.getMethods().size() * 8 );
+		node.setHeight(80 + node.getAttributes().size() * 10 + node.getMethods().size() * 10 );
 		Controller.serveObjects();
 		
 	}
