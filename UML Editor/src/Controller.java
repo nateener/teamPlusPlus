@@ -14,6 +14,7 @@ public class Controller {
 
 	public static ArrayList<Node> nodes;
 	public static ArrayList<Relationship> rels;
+	public static UndoRedoStack history;
 	public static int clickValue = -1; 
 
 	public static View view;
@@ -28,6 +29,7 @@ public class Controller {
 		nodes = new ArrayList<Node>();
 		rels = new ArrayList<Relationship>();
 		view = new View();
+		history = new UndoRedoStack();
 		serveObjects();
 		
 	}

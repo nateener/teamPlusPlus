@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Stack;
 
 
@@ -32,7 +33,35 @@ public class UndoRedoStack {
 		/*TODO: Create a copy of nodes/rels to push instead of just pushing them.
 		Figure out if there's a less painful way to copy relationships. 
 		Also: Maybe use a static long in Node and Relationship to create unique ids for them to ease equality checking*/
-		return undoStack.push(new State(nodes, rels));
+		
+		Iterator<Node> nodeItr = nodes.iterator();
+		Iterator<Relationship> relItr = rels.iterator();
+		ArrayList<Node> newNodes = new ArrayList<Node>();
+		ArrayList<Relationship> newRels = new ArrayList<Relationship>();
+		
+		while (relItr.hasNext()) {
+			Relationship curRel = relItr.next();
+			Node start = curRel.getStartNode().copy();
+			Node end = curRel.getEndNode().copy();
+			
+			Relationship newRel = curRel.copy(start, end);
+			
+			newRels.add(newRel);
+			newNodes.add(start);
+			newNodes.add(end);
+		}
+		
+		while (nodeItr.hasNext()) {
+			Node copyNode = nodeItr.next().copy();
+			
+			if(newNodes.contains(copyNode)) {
+				break;
+			}
+			
+			newNodes.add(copyNode);
+		}
+		
+		return undoStack.push(new State(newNodes, newRels));
 	}
 	
 	/**
@@ -45,7 +74,35 @@ public class UndoRedoStack {
 	 * 		The State object that was placed on the stack.
 	 */
 	public State redoPush(ArrayList<Node> nodes, ArrayList<Relationship> rels) {
-		return redoStack.push(new State(nodes, rels));
+		
+		Iterator<Node> nodeItr = nodes.iterator();
+		Iterator<Relationship> relItr = rels.iterator();
+		ArrayList<Node> newNodes = new ArrayList<Node>();
+		ArrayList<Relationship> newRels = new ArrayList<Relationship>();
+		
+		while (relItr.hasNext()) {
+			Relationship curRel = relItr.next();
+			Node start = curRel.getStartNode().copy();
+			Node end = curRel.getEndNode().copy();
+			
+			Relationship newRel = curRel.copy(start, end);
+			
+			newRels.add(newRel);
+			newNodes.add(start);
+			newNodes.add(end);
+		}
+		
+		while (nodeItr.hasNext()) {
+			Node copyNode = nodeItr.next().copy();
+			
+			if(newNodes.contains(copyNode)) {
+				break;
+			}
+			
+			newNodes.add(copyNode);
+		}
+		
+		return redoStack.push(new State(newNodes, newRels));
 	}
 	
 	/**
