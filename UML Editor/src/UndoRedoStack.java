@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.EmptyStackException;
 import java.util.Iterator;
 import java.util.Stack;
 
@@ -108,19 +109,27 @@ public class UndoRedoStack {
 	/**
 	 * Removes an undo state and returns it.
 	 * @return
-	 * 		The state that was removed.
+	 * 		The state that was removed or null if there is nothing to return.
 	 */
 	public State undoPop() {
-		return undoStack.pop();
+		try {
+			return undoStack.pop();
+		} catch (EmptyStackException e) {
+			return null;
+		}
 	}
 	
 	/**
 	 * Removes an redo state and returns it.
 	 * @return
-	 * 		The state that was removed.
+	 * 		The state that was removed or null if there is nothing to return.
 	 */
 	public State redoPop() {
-		return redoStack.pop();
+		try {
+			return redoStack.pop();
+		} catch (EmptyStackException e) {
+			return null;
+		}
 	}
 	
 	/**

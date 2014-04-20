@@ -1,5 +1,4 @@
 
-import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -7,8 +6,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
-
-import javax.swing.JPopupMenu;
 
 /*
  * TODO PLACEHOLDER FOR THE CONTROLLER CLASS.
@@ -96,31 +93,49 @@ public class Controller {
 			return; // Class
 		case 1:
 			NodeController.createNode(x, y);
+			history.undoPush(nodes, rels);
+			history.redoClear();
 			return; // Class
 		case 2:
 			NodeController.deleteNode(x, y);
 			RelationshipController.deleteRelationship(x, y);
+			history.undoPush(nodes, rels);
+			history.redoClear();
 			return; // Delete
 		case 3:
 			RelationshipController.prepRel(x, y, "Aggregation");
+			history.undoPush(nodes, rels);
+			history.redoClear();
 			return; // Aggregation
 		case 4:
 			RelationshipController.prepRel(x, y, "Composition");
+			history.undoPush(nodes, rels);
+			history.redoClear();
 			return; // Composition
 		case 5:
 			RelationshipController.prepRel(x, y, "Generalization");
+			history.undoPush(nodes, rels);
+			history.redoClear();
 			return; // Generalization
 		case 6:
 			RelationshipController.prepRel(x, y, "Association");
+			history.undoPush(nodes, rels);
+			history.redoClear();
 			return; // Association
 		case 7:
 			RelationshipController.prepRel(x, y, "Depend");
+			history.undoPush(nodes, rels);
+			history.redoClear();
 			return; // Depend
 		case 8:
 			RelationshipController.prepRel(x, y, "Implements");
+			history.undoPush(nodes, rels);
+			history.redoClear();
 			return; // Implements	
 		case 9:
 			RelationshipController.prepRel(x, y, "Basic");
+			history.undoPush(nodes, rels);
+			history.redoClear();
 			return; // Basic		
 		default:
 			return;
@@ -138,10 +153,36 @@ public class Controller {
 		
 			if(NodeController.isNodeFull(x, y)){
 				Node node = NodeController.grabNode(x, y);
-				ContextMenu popup = new ContextMenu(node);
+				ContextMenu popup = new ContextMenu(node); //TODO: Make undo/redo work with context menu
 				popup.show(view.drawPanel, x, y);
 			}
 		
+	}
+	
+	public static void undo() {
+		UndoRedoStack.State newState = history.undoPop();
+		
+		if(newState == null)
+			return;
+		
+		history.redoPush(nodes, rels);
+		nodes = newState.getNodes();
+		rels = newState.getRelations();
+		
+		serveObjects();
+	}
+	
+	public static void redo() {
+		UndoRedoStack.State newState = history.redoPop();
+		
+		if(newState == null)
+			return;
+		
+		history.undoPush(nodes, rels);
+		nodes = newState.getNodes();
+		rels = newState.getRelations();
+		
+		serveObjects();
 	}
 	
 	/**
@@ -289,6 +330,7 @@ public class Controller {
 	 * @param file
 	 * Contains both arrayLists serialized into a string
 	 */
+	@SuppressWarnings("unchecked")
 	public static void load(String file) {
 		
 		nodes.clear();
