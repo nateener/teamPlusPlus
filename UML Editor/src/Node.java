@@ -256,6 +256,10 @@ public Node copy() {
 	retVal.setName(this.getName());
 	retVal.setAttributes((ArrayList<String>) this.getAttributes().clone());
 	retVal.setMethods((ArrayList<String>) this.getMethods().clone());
+	
+	retVal.width = this.width;
+	retVal.height = this.height;
+	
 	return retVal;
 }
 }
