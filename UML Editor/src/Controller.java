@@ -140,7 +140,7 @@ public class Controller {
 		
 			if(NodeController.isNodeFull(x, y)){
 				Node node = NodeController.grabNode(x, y);
-				ContextMenu popup = new ContextMenu(node); //TODO: Make undo/redo work with context menu
+				ContextMenu popup = new ContextMenu(node);
 				popup.show(view.drawPanel, x, y);
 			}
 		
