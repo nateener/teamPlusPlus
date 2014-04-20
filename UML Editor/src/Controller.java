@@ -1,5 +1,4 @@
 
-import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -8,8 +7,6 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import javax.swing.JPopupMenu;
-
 /*
  * TODO PLACEHOLDER FOR THE CONTROLLER CLASS.
  */
@@ -17,6 +14,7 @@ public class Controller {
 
 	public static ArrayList<Node> nodes;
 	public static ArrayList<Relationship> rels;
+	public static UndoRedoStack history;
 	public static int clickValue = -1; 
 
 	public static View view;
@@ -31,6 +29,7 @@ public class Controller {
 		nodes = new ArrayList<Node>();
 		rels = new ArrayList<Relationship>();
 		view = new View();
+		history = new UndoRedoStack();
 		serveObjects();
 		
 	}
@@ -89,6 +88,11 @@ public class Controller {
 	 */
 	public static void mouseClick(int x, int y) {
 		
+		if(clickValue > 0) {
+			history.undoPush(nodes, rels);
+			history.redoClear();
+		}
+		
 		switch (clickValue) {
 		case 0:
 			return; // Class
@@ -132,7 +136,6 @@ public class Controller {
 	 * @param x x-position of the mouse
 	 * @param y y-position of the mouse
 	 */
-	@SuppressWarnings("deprecation")
 	public static void mouseClickRight(int x, int y) {
 		
 			if(NodeController.isNodeFull(x, y)){
@@ -141,6 +144,33 @@ public class Controller {
 				popup.show(view.drawPanel, x, y);
 			}
 		
+	}
+	
+	public static void undo() {
+		UndoRedoStack.State newState = history.undoPop();
+		
+		if(newState == null) {
+			return;
+		}
+		
+		history.redoPush(nodes, rels);
+		nodes = newState.getNodes();
+		rels = newState.getRelations();
+		
+		serveObjects();
+	}
+	
+	public static void redo() {
+		UndoRedoStack.State newState = history.redoPop();
+		
+		if(newState == null)
+			return;
+		
+		history.undoPush(nodes, rels);
+		nodes = newState.getNodes();
+		rels = newState.getRelations();
+		
+		serveObjects();
 	}
 	
 	/**
@@ -288,6 +318,7 @@ public class Controller {
 	 * @param file
 	 * Contains both arrayLists serialized into a string
 	 */
+	@SuppressWarnings("unchecked")
 	public static void load(String file) {
 		
 		nodes.clear();
@@ -327,6 +358,8 @@ public class Controller {
 		
 		nodes.clear();
 		rels.clear();
+		history.undoClear();
+		history.redoClear();
 		curFile = "";
 		clearClickMode();
 		

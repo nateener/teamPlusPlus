@@ -9,8 +9,8 @@ public class Node implements Serializable {
 	 */
 	// I put in this id to shut up the warning, don't actually know if we Need it
 	private static final long serialVersionUID = 1L;
-	private static long nextId = 0;
-	private long nodeId;
+	//private static long nextId = 0;
+	//private long nodeId;
 	private int origX; //These keep track of where the node was actually set to be for copying purposes.
 	private int origY;
 	private int xCoor;
@@ -41,7 +41,7 @@ public Node(int x, int y) {
 	attributes = new ArrayList<String>();
 	methods = new ArrayList<String>();
 	
-	nodeId = nextId++;
+	//nodeId = nextId++;
 
 	findDimensions();
  }
@@ -218,21 +218,48 @@ public void printNodeInfo() {
  * @return
  * 		True if the nodes are equal
  */
-public boolean equals(Node node) {
+/*public boolean equals(Node node) {
 	if(node == null)
 		return false;
 	return this.nodeId == node.nodeId;
+}*/
+@Override
+public boolean equals(Object obj) {
+	
+	if(obj == null || obj.getClass() != this.getClass())
+		return false;
+	
+	Node otherNode = (Node) obj;
+	
+	if(!this.name.equals(otherNode.name))
+		return false;
+	
+	if(!this.methods.equals(otherNode.methods))
+		return false;
+	
+	if(!this.attributes.equals(otherNode.attributes))
+		return false;
+	
+	if(this.origX != otherNode.origX && this.origY != otherNode.origY)
+		return false;
+	
+	return true;
 }
 
 /**
  * Creates a copy of the Node.
  * @return A copy of the Node.
  */
+@SuppressWarnings("unchecked")
 public Node copy() {
 	Node retVal = new Node(origX, origY);
 	retVal.setName(this.getName());
-	retVal.setAttributes(this.getAttributes());
-	retVal.setMethods(this.getMethods());
+	retVal.setAttributes((ArrayList<String>) this.getAttributes().clone());
+	retVal.setMethods((ArrayList<String>) this.getMethods().clone());
+	
+	retVal.width = this.width;
+	retVal.height = this.height;
+	
 	return retVal;
 }
 }

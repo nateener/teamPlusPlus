@@ -157,6 +157,8 @@ public class View extends JFrame implements ActionListener {
 	private JButton assButton;
 	private JButton dependButton;
 	private JButton impButton;
+	private JButton undoButton;
+	private JButton redoButton;
 	private JButton basicButton;
 	
 	private void buildToolBar() {
@@ -216,6 +218,14 @@ public class View extends JFrame implements ActionListener {
 		deleteButton.addActionListener(this);
 		toolBar.add(deleteButton);
 		
+		undoButton = new JButton("Undo");
+		undoButton.addActionListener(this);
+		toolBar.add(undoButton);
+		
+		redoButton = new JButton("Redo");
+		redoButton.addActionListener(this);
+		toolBar.add(redoButton);
+		
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -241,6 +251,10 @@ public class View extends JFrame implements ActionListener {
 			Controller.impButton();
 		} else if (src.equals(basicButton)) {
 			Controller.basicButton();
+		} else if (src.equals(undoButton)) {
+			Controller.undo();
+		} else if (src.equals(redoButton)) {
+			Controller.redo();
 		} else if (src.equals(itemExit)) {
 			Controller.exit();
 		} else if (src.equals(itemSaveAs)) {
