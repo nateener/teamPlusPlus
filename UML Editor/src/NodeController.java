@@ -68,6 +68,9 @@ public class NodeController {
 	 */
 	public static void editNode(Node node) {
 		
+		Controller.history.undoPush(Controller.nodes, Controller.rels);
+		Controller.history.redoClear();
+		
 		Controller.view.showCurInfo(node);
 		
 		int newNameLength = node.getName().length();

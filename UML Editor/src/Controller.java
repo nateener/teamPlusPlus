@@ -88,54 +88,41 @@ public class Controller {
 	 */
 	public static void mouseClick(int x, int y) {
 		
+		if(clickValue > 0) {
+			history.undoPush(nodes, rels);
+			history.redoClear();
+		}
+		
 		switch (clickValue) {
 		case 0:
 			return; // Class
 		case 1:
 			NodeController.createNode(x, y);
-			history.undoPush(nodes, rels);
-			history.redoClear();
 			return; // Class
 		case 2:
 			NodeController.deleteNode(x, y);
 			RelationshipController.deleteRelationship(x, y);
-			history.undoPush(nodes, rels);
-			history.redoClear();
 			return; // Delete
 		case 3:
 			RelationshipController.prepRel(x, y, "Aggregation");
-			history.undoPush(nodes, rels);
-			history.redoClear();
 			return; // Aggregation
 		case 4:
 			RelationshipController.prepRel(x, y, "Composition");
-			history.undoPush(nodes, rels);
-			history.redoClear();
 			return; // Composition
 		case 5:
 			RelationshipController.prepRel(x, y, "Generalization");
-			history.undoPush(nodes, rels);
-			history.redoClear();
 			return; // Generalization
 		case 6:
 			RelationshipController.prepRel(x, y, "Association");
-			history.undoPush(nodes, rels);
-			history.redoClear();
 			return; // Association
 		case 7:
 			RelationshipController.prepRel(x, y, "Depend");
-			history.undoPush(nodes, rels);
-			history.redoClear();
 			return; // Depend
 		case 8:
 			RelationshipController.prepRel(x, y, "Implements");
-			history.undoPush(nodes, rels);
-			history.redoClear();
 			return; // Implements	
 		case 9:
 			RelationshipController.prepRel(x, y, "Basic");
-			history.undoPush(nodes, rels);
-			history.redoClear();
 			return; // Basic		
 		default:
 			return;
@@ -162,8 +149,9 @@ public class Controller {
 	public static void undo() {
 		UndoRedoStack.State newState = history.undoPop();
 		
-		if(newState == null)
+		if(newState == null) {
 			return;
+		}
 		
 		history.redoPush(nodes, rels);
 		nodes = newState.getNodes();
@@ -370,6 +358,8 @@ public class Controller {
 		
 		nodes.clear();
 		rels.clear();
+		history.undoClear();
+		history.redoClear();
 		curFile = "";
 		clearClickMode();
 		
