@@ -334,6 +334,8 @@ public class View extends JFrame implements ActionListener {
 		drawPanel.setNodeInfo(nodeInfo);
 		drawPanel.setRelInfo(relInfo);
 		drawPanel.halfRel = halfRel;
+		undoButton.setEnabled(Controller.hasUndo());
+		redoButton.setEnabled(Controller.hasRedo());
 		drawPanel.repaint();
 		
 	}

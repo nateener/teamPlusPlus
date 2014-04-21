@@ -254,7 +254,15 @@ public class Controller {
 		clearClickMode();
 		clickValue = 9;
 		
-	} 
+	}
+	
+	public static boolean hasUndo() {
+		return history.hasUndoStates();
+	}
+	
+	public static boolean hasRedo() {
+		return history.hasRedoStates();
+	}
 	
 	/**
 	 * Prompts user and exits program

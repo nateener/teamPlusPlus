@@ -163,6 +163,24 @@ public class UndoRedoStack {
 	}
 	
 	/**
+	 * Tests if any undo states have been saved.
+	 * @return
+	 * 		True if there are undo states saved.
+	 */
+	public boolean hasUndoStates() {
+		return !undoStack.empty();
+	}
+	
+	/**
+	 * Tests if any redo states have been saved.
+	 * @return
+	 * 		True if there are redo states saved.
+	 */
+	public boolean hasRedoStates() {
+		return !redoStack.empty();
+	}
+	
+	/**
 	 * Represents a given state of the UML diagram
 	 * @author Josh
 	 */
