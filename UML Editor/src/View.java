@@ -8,29 +8,19 @@
  */
 
 /*
- * TODO Add action calls for menu items and tool bar buttons.
- * TODO Add mouse listener to draw panel.
  * TODO Add icons for tool bar buttons.
  */
 
 /* Imports */
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.io.IOException;
-import java.sql.Savepoint;
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -40,13 +30,11 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -220,6 +208,7 @@ public class View extends JFrame implements ActionListener {
 		
 		undoButton = new JButton("Undo");
 		undoButton.addActionListener(this);
+		undoButton.setMnemonic(KeyEvent.VK_Z);
 		toolBar.add(undoButton);
 		
 		redoButton = new JButton("Redo");
