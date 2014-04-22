@@ -18,9 +18,11 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -152,6 +154,7 @@ public class View extends JFrame implements ActionListener {
 	private void buildToolBar() {
 
 		JToolBar toolBar;
+		BufferedImage img;
 		
 		toolBar = new JToolBar(JToolBar.VERTICAL);
 		toolBar.setFloatable(false);
@@ -162,7 +165,7 @@ public class View extends JFrame implements ActionListener {
 		selectorButton = new JButton("Selector");
 		selectorButton.addActionListener(this);
 		try {
-		    Image img = ImageIO.read(getClass().getResource("awesome_test.png"));
+		    img = ImageIO.read(getClass().getResource("select.png"));
 		    selectorButton.setIcon(new ImageIcon(img));
 		  } catch (IOException ex) {
 		  }
@@ -170,11 +173,21 @@ public class View extends JFrame implements ActionListener {
 		
 		classButton = new JButton("Class");
 		classButton.addActionListener(this);
+		try {
+		    img = ImageIO.read(getClass().getResource("class.png"));
+		    classButton.setIcon(new ImageIcon(img));
+		  } catch (IOException ex) {
+		  }
 		toolBar.add(classButton);
 		
 		toolBar.addSeparator();
 		aggButton = new JButton("Aggregation");
 		aggButton.addActionListener(this);
+		try {
+		    img = ImageIO.read(getClass().getResource("agg.png"));
+		    aggButton.setIcon(new ImageIcon(img));
+		  } catch (IOException ex) {
+		  }
 		toolBar.add(aggButton);
 		
 		compButton = new JButton("Composition");
