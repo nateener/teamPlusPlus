@@ -1,4 +1,5 @@
 
+import java.awt.Color;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -6,6 +7,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import javax.swing.JButton;
 
 /*
  * TODO PLACEHOLDER FOR THE CONTROLLER CLASS.
@@ -19,6 +22,7 @@ public class Controller {
 
 	public static View view;
 	public static Node tempNode; // For use in creating relationships
+	private static JButton lastClickedButton;
 	private static String curFile = "";
 	
 	
@@ -180,79 +184,103 @@ public class Controller {
 											// specific stuff when changing								
 											// clickmodes
 		tempNode = null;
+		if(lastClickedButton != null){
+			// Set to default background color
+			lastClickedButton.setBackground(new Color(240,240,240));
+		}
 		serveObjects();
 		
 	}
 
-	public static void selectorButton() {
+	public static void selectorButton(JButton button) {
 		
 		// Model
 		clearClickMode();
 		clickValue = 0;
+		lastClickedButton = button;
+		button.setBackground(new Color(255,255,153));
 		
 	}
 	
-	public static void classButton() {
+	public static void classButton(JButton button) {
 		
 		// Model
 		clearClickMode();
 		clickValue = 1;
+		lastClickedButton = button;
+		button.setBackground(new Color(255,255,153));
 		
 	}
 
-	public static void deleteButton() {
+	public static void deleteButton(JButton button) {
 		
 		clearClickMode();
 		clickValue = 2;
+		lastClickedButton = button;
+		button.setBackground(new Color(255,255,153));
 		
 	}
 
-	public static void aggButton() {
-		
+	public static void aggButton(JButton button) {
 		clearClickMode();
 		clickValue = 3;
+		lastClickedButton = button;
+		button.setBackground(new Color(255,255,153));
+		
 		
 	}
 
-	public static void compButton() {
+	public static void compButton(JButton button) {
 		
 		clearClickMode();
 		clickValue = 4;
+		lastClickedButton = button;
+		button.setBackground(new Color(255,255,153));
 		
 	}
 	
-	public static void genButton() {
+	public static void genButton(JButton button) {
 		
 		clearClickMode();
 		clickValue = 5;
+		lastClickedButton = button;
+		button.setBackground(new Color(255,255,153));
 		
 	}
 
-	public static void assButton() {
+	public static void assButton(JButton button) {
 		
 		clearClickMode();
 		clickValue = 6;
+		lastClickedButton = button;
+		button.setBackground(new Color(255,255,153));
 		
 	}
 	
-	public static void dependButton() {
+	public static void dependButton(JButton button) {
 		
 		clearClickMode();
 		clickValue = 7;
+		lastClickedButton = button;
+		button.setBackground(new Color(255,255,153));
 		
 	}
 	
-	public static void impButton() {
+	public static void impButton(JButton button) {
 		
 		clearClickMode();
 		clickValue = 8;
+		lastClickedButton = button;
+		button.setBackground(new Color(255,255,153));
 		
 	}
 	
-	public static void basicButton() {
+	public static void basicButton(JButton button) {
 		
 		clearClickMode();
 		clickValue = 9;
+		lastClickedButton = button;
+		button.setBackground(new Color(255,255,153));
 		
 	}
 	

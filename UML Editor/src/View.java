@@ -221,25 +221,25 @@ public class View extends JFrame implements ActionListener {
 		
 		Object src = e.getSource();
 		if(src.equals(classButton)){
-			Controller.classButton();
+			Controller.classButton(classButton);
 		} else if (src.equals(selectorButton)) {
-			Controller.selectorButton();	
+			Controller.selectorButton(selectorButton);	
 		} else if (src.equals(deleteButton)) {
-			Controller.deleteButton();
+			Controller.deleteButton(deleteButton);
 		} else if (src.equals(aggButton)) {
-			Controller.aggButton();
+			Controller.aggButton(aggButton);
 		} else if (src.equals(compButton)) {
-			Controller.compButton();
+			Controller.compButton(compButton);
 		} else if (src.equals(genButton)) {
-			Controller.genButton();
+			Controller.genButton(genButton);
 		} else if (src.equals(assButton)) {
-			Controller.assButton();
+			Controller.assButton(assButton);
 		} else if (src.equals(dependButton)) {
-			Controller.dependButton();
+			Controller.dependButton(dependButton);
 		} else if (src.equals(impButton)) {
-			Controller.impButton();
+			Controller.impButton(impButton);
 		} else if (src.equals(basicButton)) {
-			Controller.basicButton();
+			Controller.basicButton(basicButton);
 		} else if (src.equals(undoButton)) {
 			Controller.undo();
 		} else if (src.equals(redoButton)) {
