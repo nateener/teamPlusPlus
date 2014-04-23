@@ -192,40 +192,85 @@ public class View extends JFrame implements ActionListener {
 		
 		compButton = new JButton("Composition");
 		compButton.addActionListener(this);
+		try {
+		    img = ImageIO.read(getClass().getResource("comp.png"));
+		    compButton.setIcon(new ImageIcon(img));
+		  } catch (IOException ex) {
+		  }
 		toolBar.add(compButton);
 		
 		genButton = new JButton("Generalization");
 		genButton.addActionListener(this);
+		try {
+		    img = ImageIO.read(getClass().getResource("gen.png"));
+		    genButton.setIcon(new ImageIcon(img));
+		  } catch (IOException ex) {
+		  }
 		toolBar.add(genButton);
 		
 		assButton = new JButton("Association");
 		assButton.addActionListener(this);
+		try {
+		    img = ImageIO.read(getClass().getResource("assoc.png"));
+		    assButton.setIcon(new ImageIcon(img));
+		  } catch (IOException ex) {
+		  }
 		toolBar.add(assButton);
 		
 		dependButton = new JButton("Depend");
 		dependButton.addActionListener(this);
+		try {
+		    img = ImageIO.read(getClass().getResource("dep.png"));
+		    dependButton.setIcon(new ImageIcon(img));
+		  } catch (IOException ex) {
+		  }
 		toolBar.add(dependButton);
 		
 		impButton = new JButton("Implements");
 		impButton.addActionListener(this);
+		try {
+		    img = ImageIO.read(getClass().getResource("imp.png"));
+		    impButton.setIcon(new ImageIcon(img));
+		  } catch (IOException ex) {
+		  }
 		toolBar.add(impButton);
 		
 		basicButton = new JButton("Basic");
 		basicButton.addActionListener(this);
+		try {
+		    img = ImageIO.read(getClass().getResource("base.png"));
+		    basicButton.setIcon(new ImageIcon(img));
+		  } catch (IOException ex) {
+		  }
 		toolBar.add(basicButton);
 		
 		toolBar.addSeparator();
 		deleteButton = new JButton("Delete");
 		deleteButton.addActionListener(this);
+		try {
+		    img = ImageIO.read(getClass().getResource("del.png"));
+		    deleteButton.setIcon(new ImageIcon(img));
+		  } catch (IOException ex) {
+		  }
 		toolBar.add(deleteButton);
 		
 		undoButton = new JButton("Undo");
 		undoButton.addActionListener(this);
+		try {
+		    img = ImageIO.read(getClass().getResource("undo.png"));
+		    undoButton.setIcon(new ImageIcon(img));
+		  } catch (IOException ex) {
+		  }
 		undoButton.setMnemonic(KeyEvent.VK_Z);
 		toolBar.add(undoButton);
 		
 		redoButton = new JButton("Redo");
 		redoButton.addActionListener(this);
+		try {
+		    img = ImageIO.read(getClass().getResource("redo.png"));
+		    redoButton.setIcon(new ImageIcon(img));
+		  } catch (IOException ex) {
+		  }
 		toolBar.add(redoButton);
 		
 	}
