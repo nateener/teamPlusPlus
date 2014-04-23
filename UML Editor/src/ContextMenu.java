@@ -4,8 +4,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
+@SuppressWarnings("serial")
 class ContextMenu extends JPopupMenu implements ActionListener {
-	
+
 	private Node node;
 	JMenuItem editClass;
 	JMenuItem editRels;
@@ -26,17 +27,17 @@ class ContextMenu extends JPopupMenu implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		Object src = e.getSource();
 		if (src.equals(editClass)) {
 			Controller.history.undoPush(Controller.nodes, Controller.rels);
 			Controller.history.redoClear();
 			NodeController.editNode(node);
-		} else if(src.equals(editRels)) {
+		} else if (src.equals(editRels)) {
 			Controller.history.undoPush(Controller.nodes, Controller.rels);
 			Controller.history.redoClear();
 			RelationshipController.editRelationship(node);
-		} else if(src.equals(delete)) {
+		} else if (src.equals(delete)) {
 			Controller.history.undoPush(Controller.nodes, Controller.rels);
 			Controller.history.redoClear();
 			NodeController.deleteNode(node.getX(), node.getY());

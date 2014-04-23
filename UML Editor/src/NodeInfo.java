@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 
-
 public class NodeInfo {
 	private int xCoor;
 	private int yCoor;
@@ -10,26 +9,27 @@ public class NodeInfo {
 	private ArrayList<String> attributes;
 	private ArrayList<String> methods;
 	private boolean high;
-	
+
 	/**
 	 * NodeInfo constructor
 	 * 
 	 * @param x
-	 * x-coordinate of the node
+	 *            x-coordinate of the node
 	 * @param y
-	 * y-coordinate of the node
+	 *            y-coordinate of the node
 	 * @param w
-	 * width
+	 *            width
 	 * @param h
-	 * height
+	 *            height
 	 * @param n
-	 * name
+	 *            name
 	 * @param a
-	 * attributes
+	 *            attributes
 	 * @param m
-	 * methods
+	 *            methods
 	 */
-	public NodeInfo(int x, int y, int w, int h, String n, ArrayList<String> a, ArrayList<String> m) {
+	public NodeInfo(int x, int y, int w, int h, String n, ArrayList<String> a,
+			ArrayList<String> m) {
 
 		xCoor = x;
 		yCoor = y;
@@ -41,71 +41,71 @@ public class NodeInfo {
 		setHigh(false);
 
 	}
-	
+
 	public int getxCoor() {
-		
+
 		return xCoor;
-		
+
 	}
-	
+
 	public void setxCoor(int xCoor) {
-		
+
 		this.xCoor = xCoor;
-		
+
 	}
-	
+
 	public int getyCoor() {
-		
+
 		return yCoor;
-		
+
 	}
-	
+
 	public void setyCoor(int yCoor) {
-		
+
 		this.yCoor = yCoor;
-		
+
 	}
-	
+
 	public int getWidth() {
-		
+
 		return width;
-		
+
 	}
-	
+
 	public void setWidth(int width) {
-		
+
 		this.width = width;
-		
+
 	}
-	
+
 	public int getHeight() {
-		
+
 		return height;
-		
+
 	}
-	
+
 	public void setHeight(int height) {
-		
+
 		this.height = height;
-		
+
 	}
-	
+
 	public String getName() {
-		
+
 		return name;
-		
+
 	}
 
 	public boolean isHigh() {
-		
+
 		return high;
-		
+
 	}
 
 	public void setHigh(boolean high) {
-		
+
 		this.high = high;
-		
+
 	}
 
 	public ArrayList<String> getAttributes() {

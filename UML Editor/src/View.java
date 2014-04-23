@@ -7,14 +7,9 @@
  * tool bars, and menu bar. 
  */
 
-/*
- * TODO Add icons for tool bar buttons.
- */
-
 /* Imports */
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -42,16 +37,14 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 @SuppressWarnings("serial")
 public class View extends JFrame implements ActionListener {
-	
-	/* Default constructor for the View class.
-	 * Parameters: None
-	 * Return: Void
-	 * Sets up the 'Look And Feel' in the UI Manager.
-	 * Calls the build for the tool bars, menu bars, and draw panels.
-	 * Initializes the display settings.
+
+	/*
+	 * Default constructor for the View class. Parameters: None Return: Void
+	 * Sets up the 'Look And Feel' in the UI Manager. Calls the build for the
+	 * tool bars, menu bars, and draw panels. Initializes the display settings.
 	 */
 	public View() {
-		
+
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (ClassNotFoundException e) {
@@ -67,56 +60,56 @@ public class View extends JFrame implements ActionListener {
 		buildToolBar();
 		buildDrawPanel();
 		this.setTitle("UML Editor v1.0");
-		this.setSize(800,600);
+		this.setSize(800, 600);
 		this.setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		
+
 	}
-	
-	/* Builder function for the menu bar.
-	 * Parameters: None
-	 * Return: Void
+
+	/*
+	 * Builder function for the menu bar. Parameters: None Return: Void
 	 * Generates the menu bar, menus, and menu items.
 	 */
-	
+
 	private JMenuItem itemExit;
 	private JMenuItem itemSave;
 	private JMenuItem itemSaveAs;
 	private JMenuItem itemOpen;
 	private JMenuItem itemNew;
 	private JMenuItem itemExportImage;
-	
-	
+
 	private void buildMenuBar() {
-		
+
 		JMenuBar menuBar;
 		JMenu menu;
-		JMenu subMenu;
-		JMenuItem item;
 		menuBar = new JMenuBar();
 		menu = new JMenu("File");
 		menuBar.add(menu);
 		itemNew = new JMenuItem("New");
 		itemNew.setMnemonic(KeyEvent.VK_N);
-		itemNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
+		itemNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
+				ActionEvent.CTRL_MASK));
 		menu.add(itemNew);
 		itemNew.addActionListener(this);
-		
+
 		itemOpen = new JMenuItem("Open...");
 		itemOpen.setMnemonic(KeyEvent.VK_O);
-		itemOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
+		itemOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
+				ActionEvent.CTRL_MASK));
 		menu.add(itemOpen);
 		itemOpen.addActionListener(this);
-		
+
 		menu.addSeparator();
 		itemSave = new JMenuItem("Save");
 		itemSave.setMnemonic(KeyEvent.VK_S);
-		itemSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
+		itemSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
+				ActionEvent.CTRL_MASK));
 		menu.add(itemSave);
 		itemSave.addActionListener(this);
 		itemSaveAs = new JMenuItem("Save As...");
 		itemSaveAs.setMnemonic(KeyEvent.VK_A);
-		itemSaveAs.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK | ActionEvent.SHIFT_MASK));
+		itemSaveAs.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
+				ActionEvent.CTRL_MASK | ActionEvent.SHIFT_MASK));
 		menu.add(itemSaveAs);
 		itemSaveAs.addActionListener(this);
 		itemExportImage = new JMenuItem("Export as Image");
@@ -128,14 +121,13 @@ public class View extends JFrame implements ActionListener {
 		itemExit.setIcon(new ImageIcon("exit.png"));
 		menu.add(itemExit);
 		itemExit.addActionListener(this);
-		
+
 		this.setJMenuBar(menuBar);
-		
+
 	}
-	
-	/* Builder function for the tool bar.
-	 * Parameters: None
-	 * Return: Void
+
+	/*
+	 * Builder function for the tool bar. Parameters: None Return: Void
 	 * Generates the tool bar and buttons.
 	 */
 	private JButton selectorButton;
@@ -150,138 +142,136 @@ public class View extends JFrame implements ActionListener {
 	private JButton undoButton;
 	private JButton redoButton;
 	private JButton basicButton;
-	
+
 	private void buildToolBar() {
 
 		JToolBar toolBar;
 		BufferedImage img;
-		
+
 		toolBar = new JToolBar(JToolBar.VERTICAL);
 		toolBar.setFloatable(false);
 		add(toolBar, BorderLayout.LINE_START);
-		
-		  
-		
+
 		selectorButton = new JButton("Selector");
 		selectorButton.addActionListener(this);
 		try {
-		    img = ImageIO.read(getClass().getResource("select.png"));
-		    selectorButton.setIcon(new ImageIcon(img));
-		  } catch (IOException ex) {
-		  }
+			img = ImageIO.read(getClass().getResource("select.png"));
+			selectorButton.setIcon(new ImageIcon(img));
+		} catch (IOException ex) {
+		}
 		toolBar.add(selectorButton);
-		
+
 		classButton = new JButton("Class");
 		classButton.addActionListener(this);
 		try {
-		    img = ImageIO.read(getClass().getResource("class.png"));
-		    classButton.setIcon(new ImageIcon(img));
-		  } catch (IOException ex) {
-		  }
+			img = ImageIO.read(getClass().getResource("class.png"));
+			classButton.setIcon(new ImageIcon(img));
+		} catch (IOException ex) {
+		}
 		toolBar.add(classButton);
-		
+
 		toolBar.addSeparator();
 		aggButton = new JButton("Aggregation");
 		aggButton.addActionListener(this);
 		try {
-		    img = ImageIO.read(getClass().getResource("agg.png"));
-		    aggButton.setIcon(new ImageIcon(img));
-		  } catch (IOException ex) {
-		  }
+			img = ImageIO.read(getClass().getResource("agg.png"));
+			aggButton.setIcon(new ImageIcon(img));
+		} catch (IOException ex) {
+		}
 		toolBar.add(aggButton);
-		
+
 		compButton = new JButton("Composition");
 		compButton.addActionListener(this);
 		try {
-		    img = ImageIO.read(getClass().getResource("comp.png"));
-		    compButton.setIcon(new ImageIcon(img));
-		  } catch (IOException ex) {
-		  }
+			img = ImageIO.read(getClass().getResource("comp.png"));
+			compButton.setIcon(new ImageIcon(img));
+		} catch (IOException ex) {
+		}
 		toolBar.add(compButton);
-		
+
 		genButton = new JButton("Generalization");
 		genButton.addActionListener(this);
 		try {
-		    img = ImageIO.read(getClass().getResource("gen.png"));
-		    genButton.setIcon(new ImageIcon(img));
-		  } catch (IOException ex) {
-		  }
+			img = ImageIO.read(getClass().getResource("gen.png"));
+			genButton.setIcon(new ImageIcon(img));
+		} catch (IOException ex) {
+		}
 		toolBar.add(genButton);
-		
+
 		assButton = new JButton("Association");
 		assButton.addActionListener(this);
 		try {
-		    img = ImageIO.read(getClass().getResource("assoc.png"));
-		    assButton.setIcon(new ImageIcon(img));
-		  } catch (IOException ex) {
-		  }
+			img = ImageIO.read(getClass().getResource("assoc.png"));
+			assButton.setIcon(new ImageIcon(img));
+		} catch (IOException ex) {
+		}
 		toolBar.add(assButton);
-		
+
 		dependButton = new JButton("Depend");
 		dependButton.addActionListener(this);
 		try {
-		    img = ImageIO.read(getClass().getResource("dep.png"));
-		    dependButton.setIcon(new ImageIcon(img));
-		  } catch (IOException ex) {
-		  }
+			img = ImageIO.read(getClass().getResource("dep.png"));
+			dependButton.setIcon(new ImageIcon(img));
+		} catch (IOException ex) {
+		}
 		toolBar.add(dependButton);
-		
+
 		impButton = new JButton("Implements");
 		impButton.addActionListener(this);
 		try {
-		    img = ImageIO.read(getClass().getResource("imp.png"));
-		    impButton.setIcon(new ImageIcon(img));
-		  } catch (IOException ex) {
-		  }
+			img = ImageIO.read(getClass().getResource("imp.png"));
+			impButton.setIcon(new ImageIcon(img));
+		} catch (IOException ex) {
+		}
 		toolBar.add(impButton);
-		
+
 		basicButton = new JButton("Basic");
 		basicButton.addActionListener(this);
 		try {
-		    img = ImageIO.read(getClass().getResource("base.png"));
-		    basicButton.setIcon(new ImageIcon(img));
-		  } catch (IOException ex) {
-		  }
+			img = ImageIO.read(getClass().getResource("base.png"));
+			basicButton.setIcon(new ImageIcon(img));
+		} catch (IOException ex) {
+		}
 		toolBar.add(basicButton);
-		
+
 		toolBar.addSeparator();
 		deleteButton = new JButton("Delete");
 		deleteButton.addActionListener(this);
 		try {
-		    img = ImageIO.read(getClass().getResource("del.png"));
-		    deleteButton.setIcon(new ImageIcon(img));
-		  } catch (IOException ex) {
-		  }
+			img = ImageIO.read(getClass().getResource("del.png"));
+			deleteButton.setIcon(new ImageIcon(img));
+		} catch (IOException ex) {
+		}
 		toolBar.add(deleteButton);
-		
+
 		undoButton = new JButton("Undo");
 		undoButton.addActionListener(this);
 		try {
-		    img = ImageIO.read(getClass().getResource("undo.png"));
-		    undoButton.setIcon(new ImageIcon(img));
-		  } catch (IOException ex) {
-		  }
+			img = ImageIO.read(getClass().getResource("undo.png"));
+			undoButton.setIcon(new ImageIcon(img));
+		} catch (IOException ex) {
+		}
 		undoButton.setMnemonic(KeyEvent.VK_Z);
 		toolBar.add(undoButton);
-		
+
 		redoButton = new JButton("Redo");
 		redoButton.addActionListener(this);
 		try {
-		    img = ImageIO.read(getClass().getResource("redo.png"));
-		    redoButton.setIcon(new ImageIcon(img));
-		  } catch (IOException ex) {
-		  }
+			img = ImageIO.read(getClass().getResource("redo.png"));
+			redoButton.setIcon(new ImageIcon(img));
+		} catch (IOException ex) {
+		}
 		toolBar.add(redoButton);
-		
+
 	}
-	
+
 	public void actionPerformed(ActionEvent e) {
-		
+
 		Object src = e.getSource();
-		if(src.equals(classButton)){
+		if (src.equals(classButton)) {
 			Controller.classButton(classButton);
 		} else if (src.equals(selectorButton)) {
-			Controller.selectorButton(selectorButton);	
+			Controller.selectorButton(selectorButton);
 		} else if (src.equals(deleteButton)) {
 			Controller.deleteButton(deleteButton);
 		} else if (src.equals(aggButton)) {
@@ -305,174 +295,152 @@ public class View extends JFrame implements ActionListener {
 		} else if (src.equals(itemExit)) {
 			Controller.exit();
 		} else if (src.equals(itemSaveAs)) {
-			 showFileSaver();
-		} else if (src.equals(itemSave))	{
-	
+			showFileSaver();
+		} else if (src.equals(itemSave)) {
+
 			Controller.save("");
-		
+
 		} else if (src.equals(itemOpen)) {
-			
+
 			showFileOpener();
 		} else if (src.equals(itemExportImage)) {
-			 exportAsImage();
-		} else if (src.equals(itemNew)){
+			exportAsImage();
+		} else if (src.equals(itemNew)) {
 			Controller.newUML();
 		}
 	}
 
-	/* Builder function for the tool bar.
-	 * Parameters: None
-	 * Return: Void
+	/*
+	 * Builder function for the tool bar. Parameters: None Return: Void
 	 * Generates the draw panel.
 	 */
 	DrawPanel drawPanel;
-	
+
 	private void buildDrawPanel() {
-		
+
 		drawPanel = new DrawPanel();
 		JScrollPane scroller = new JScrollPane(drawPanel);
 		drawPanel.setPreferredSize(new Dimension(500, 500));
 		this.add(scroller);
 	}
-	
-	
+
 	// Controller/View Methods
-	
+
 	/**
 	 * Show file saver
 	 */
 	public void showFileSaver() {
-		
+
 		JFileChooser c = new JFileChooser();
-	      // Demonstrate "Save" dialog:
-	      int rVal = c.showSaveDialog(View.this);
-	      if (rVal == JFileChooser.APPROVE_OPTION) {
-	    	  Controller.save( c.getSelectedFile().toString());
-	      }
-	      if (rVal == JFileChooser.CANCEL_OPTION) {
-	    	  	// Do nothing! YAY!
-	      }
-	      
+		// Demonstrate "Save" dialog:
+		int rVal = c.showSaveDialog(View.this);
+		if (rVal == JFileChooser.APPROVE_OPTION) {
+			Controller.save(c.getSelectedFile().toString());
+		}
+		if (rVal == JFileChooser.CANCEL_OPTION) {
+			// Do nothing! YAY!
+		}
+
 	}
-	
+
 	/**
 	 * Show file opener
 	 */
 	public void showFileOpener() {
-		
-		final JFileChooser fc = new JFileChooser();
-		 JFileChooser c = new JFileChooser();
-	      //
-	      int rVal = c.showOpenDialog(View.this);
-	      if (rVal == JFileChooser.APPROVE_OPTION) {
-	    	  
-	        Controller.load( c.getSelectedFile().toString());
-	      }
-	      if (rVal == JFileChooser.CANCEL_OPTION) {
-	    	  // Do nothing! Yay!
-	      }
-	      
+
+		JFileChooser c = new JFileChooser();
+		//
+		int rVal = c.showOpenDialog(View.this);
+		if (rVal == JFileChooser.APPROVE_OPTION) {
+
+			Controller.load(c.getSelectedFile().toString());
+		}
+		if (rVal == JFileChooser.CANCEL_OPTION) {
+			// Do nothing! Yay!
+		}
+
 	}
-	
+
 	public void exportAsImage() {
 		System.out.println("I sure did export the view as an image");
 	}
-	
+
 	/**
 	 * Sets the draw panel information and sends command to draw them
+	 * 
 	 * @param nodeInfo
-	 * Arraylist of all the NodeInfos
+	 *            Arraylist of all the NodeInfos
 	 * @param relInfo
-	 * ArrayList of all the RelInfos
+	 *            ArrayList of all the RelInfos
 	 * @param halfRel
-	 * NodeInfo if there is a relationship in the process of having an end node selected
+	 *            NodeInfo if there is a relationship in the process of having
+	 *            an end node selected
 	 */
-	public void drawObjects(ArrayList<NodeInfo> nodeInfo, ArrayList<RelInfo> relInfo, NodeInfo halfRel ){
-		
+	public void drawObjects(ArrayList<NodeInfo> nodeInfo,
+			ArrayList<RelInfo> relInfo, NodeInfo halfRel) {
+
 		drawPanel.setNodeInfo(nodeInfo);
 		drawPanel.setRelInfo(relInfo);
 		drawPanel.halfRel = halfRel;
 		undoButton.setEnabled(Controller.hasUndo());
 		redoButton.setEnabled(Controller.hasRedo());
 		drawPanel.repaint();
-		
+
 	}
-	
+
 	/**
 	 * Creates and shows window asking for the name, attributes, and methods
-	 * then separates each line into a string that is stored into an arrayList which is then saved to the node
+	 * then separates each line into a string that is stored into an arrayList
+	 * which is then saved to the node
 	 * 
 	 * @param n
-	 * Node to show and edit current information
+	 *            Node to show and edit current information
 	 */
 	public void showCurInfo(Node n) {
-		
+
 		JTextField newName = new JTextField(n.getName());
-		JTextArea newAttributes = new JTextArea(5,1);
-		for (int i = 0; i < n.getAttributes().size(); i++){
+		JTextArea newAttributes = new JTextArea(5, 1);
+		for (int i = 0; i < n.getAttributes().size(); i++) {
 			newAttributes.append(n.getAttributes().get(i) + "\n");
 		}
-		JTextArea newMethods = new JTextArea(5,1);
-		for (int i = 0; i < n.getMethods().size(); i++){
+		JTextArea newMethods = new JTextArea(5, 1);
+		for (int i = 0; i < n.getMethods().size(); i++) {
 			newMethods.append(n.getMethods().get(i) + "\n");
 		}
 		JScrollPane attrScroll = new JScrollPane(newAttributes);
 		JScrollPane methScroll = new JScrollPane(newMethods);
-		
-		Object[] message = {
-		    "Name:", newName,
-		    "Attributes:", attrScroll,
-		    "Methods:", methScroll
-		    
-		};
-		
 
-		
-		int option = JOptionPane.showConfirmDialog(null, message, "Edit Class", JOptionPane.OK_CANCEL_OPTION);
+		Object[] message = { "Name:", newName, "Attributes:", attrScroll,
+				"Methods:", methScroll
+
+		};
+
+		int option = JOptionPane.showConfirmDialog(null, message, "Edit Class",
+				JOptionPane.OK_CANCEL_OPTION);
 		String[] attributesArray = (newAttributes.getText()).split("\\r?\\n");
-		ArrayList<String> attrList = new ArrayList<String>(Arrays.asList(attributesArray));
-		
+		ArrayList<String> attrList = new ArrayList<String>(
+				Arrays.asList(attributesArray));
+
 		String[] methodsArray = (newMethods.getText()).split("\\r?\\n");
-		ArrayList<String> methList = new ArrayList<String>(Arrays.asList(methodsArray));
+		ArrayList<String> methList = new ArrayList<String>(
+				Arrays.asList(methodsArray));
 
 		if (option == JOptionPane.OK_OPTION) {
 			n.setName(newName.getText());
 			n.setAttributes(attrList);
 			n.setMethods(methList);
+		} else {
+			System.out.println("canceled");
 		}
-		else
-		{
-		    System.out.println("canceled");
-		}
-		
-	}
-	
-	public boolean confirmMessage(String title, String message) {
-		
-		//If the function returns 0, it means the user selected "yes"
-		return (JOptionPane.showConfirmDialog(this, message, title, JOptionPane.YES_NO_OPTION) == 0);
-		
-	}
-	
-	
 
-	/*
-	private class DrawPanel extends JPanel {
-	    @Override public void paintComponent(Graphics g) {
-	        g.drawRect(50, 50, 20, 10); // <-- draws a rect on the panel
-	        System.out.println("X");
-	    }
 	}
-	
-	
-	/*
-	@Override public void paintComponents(Graphics g)
-	{
-		super.paintComponents(g);
-		g.drawRect(10, 20, 20, 10);
-		System.out.println("oi");
-	
+
+	public boolean confirmMessage(String title, String message) {
+
+		// If the function returns 0, it means the user selected "yes"
+		return (JOptionPane.showConfirmDialog(this, message, title,
+				JOptionPane.YES_NO_OPTION) == 0);
+
 	}
-	*/
 
 }

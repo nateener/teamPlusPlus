@@ -168,7 +168,7 @@ public class JUnitTest {
 		while (itrMth.hasNext() && itrTmpMth.hasNext()) {
 			assertEquals(itrMth.next(), itrTmpMth.next());
 		}
-		
+
 		// Test setHigh isHigh
 		boolean high = true;
 		info.setHigh(high);
@@ -177,27 +177,26 @@ public class JUnitTest {
 		info.setHigh(high);
 		assertFalse(info.isHigh());
 	}
-	
+
 	@Test
 	public void relationshipTest() {
-		
+
 		int x = 10;
 		int y = 10;
 		String type = "type";
 		Node node1 = new Node(x, y);
-		
-		
+
 		// Test constructor
 		Relationship rel = new Relationship(node1, type);
 		rel.printRelationship();
 		assertNotNull(rel);
-		
+
 		// Test getStartX getStartY
 		x = x + node1.getWidth() / 2;
 		y = y + node1.getHeight();
 		assertEquals(x, rel.getStartX());
 		assertEquals(y, rel.getStartY());
-		
+
 		// Test setEndpoint getEndX getEndY
 		x = 100;
 		y = 100;
@@ -207,65 +206,65 @@ public class JUnitTest {
 		y = y + node2.getHeight();
 		assertEquals(x, rel.getEndX());
 		assertEquals(y, rel.getEndY());
-		
+
 		// Test getStartNode getEndNode
 		assertTrue(rel.getStartNode().equals(node1));
 		assertTrue(rel.getEndNode().equals(node2));
-		
+
 		// Test getRelationshipType
 		assertEquals(type, rel.getRelationshipType());
-		
+
 		// Test involvesNode
 		assertTrue(rel.involvesNode(node1));
-		
+
 		// Test isSelfRel
 		rel.setEndpoint(node1);
 		assertTrue(rel.isSelfRel());
 	}
-	
+
 	@Test
 	public void relInfoTest() {
-		
+
 		int x1 = 10;
 		int y1 = 10;
 		int x2 = 50;
 		int y2 = 50;
 		boolean self = true;
 		String type = "type";
-		
+
 		// Test constructor
 		RelInfo info = new RelInfo(x1, y1, x2, y2, self, type);
 		assertNotNull(info);
-		
+
 		// Test setStartX getStartX
 		x1 = 100;
 		info.setStartX(x1);
 		assertEquals(x1, info.getStartX());
-		
+
 		// Test setStartY getStartY
 		y1 = 100;
 		info.setStartY(y1);
 		assertEquals(y1, info.getStartY());
-		
+
 		// Test setEndX getEndX
 		x2 = 200;
 		info.setEndX(x2);
 		assertEquals(x2, info.getEndX());
-		
+
 		// Test setEndY getEndY
 		y2 = 200;
 		info.setEndY(y2);
 		assertEquals(y2, info.getEndY());
-		
+
 		// Test setRelType getRelType
 		type = "test";
 		info.setRelType(type);
 		assertEquals(type, info.getRelType());
-		
+
 		// Test setSelfRel isSelfRel
 		self = false;
 		info.setSelfRel(self);
 		assertFalse(info.isSelfRel());
 	}
-	
+
 }
