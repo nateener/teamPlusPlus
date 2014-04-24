@@ -63,6 +63,7 @@ public class View extends JFrame implements ActionListener {
 		this.setSize(800, 600);
 		this.setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		Controller.selectorButton(selectorButton);
 
 	}
 

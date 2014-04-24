@@ -46,6 +46,10 @@ public class Controller {
 	 */
 	public static void serveObjects() {
 
+		if(view == null) {
+			return;
+		}
+		
 		// needs to serve everything simultaneously
 		ArrayList<NodeInfo> nodeInfo = new ArrayList<NodeInfo>();
 		ArrayList<RelInfo> relInfo = new ArrayList<RelInfo>();
