@@ -232,9 +232,11 @@ public class JUnitTest {
 		int y2 = 50;
 		boolean self = true;
 		String type = "type";
+		String startDetail = "Start";
+		String endDetail = "End";
 
 		// Test constructor
-		RelInfo info = new RelInfo(x1, y1, x2, y2, self, type);
+		RelInfo info = new RelInfo(x1, y1, x2, y2, self, type, startDetail, endDetail);
 		assertNotNull(info);
 
 		// Test setStartX getStartX

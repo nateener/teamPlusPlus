@@ -37,6 +37,7 @@ class ContextMenu extends JPopupMenu implements ActionListener {
 			Controller.history.undoPush(Controller.nodes, Controller.rels);
 			Controller.history.redoClear();
 			Controller.view.showRelInfo(node);
+			Controller.serveObjects();
 		} else if (src.equals(delete)) {
 			Controller.history.undoPush(Controller.nodes, Controller.rels);
 			Controller.history.redoClear();
