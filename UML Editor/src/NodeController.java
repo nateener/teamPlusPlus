@@ -125,6 +125,8 @@ public class NodeController {
 			}
 
 			Controller.serveObjects();
+		} else {
+			Controller.history.undoPop();
 		}
 	}
 

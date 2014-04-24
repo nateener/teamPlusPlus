@@ -33,7 +33,11 @@ public class RelationshipController {
 		Controller.serveObjects();
 
 	}
-
+	
+	/**
+	 * Does nothing at the moment.
+	 * @param node
+	 */
 	public static void editRelationship(Node node) {
 
 		Controller.serveObjects();

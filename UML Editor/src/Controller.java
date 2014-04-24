@@ -9,9 +9,6 @@ import java.util.Iterator;
 
 import javax.swing.JButton;
 
-/*
- * TODO PLACEHOLDER FOR THE CONTROLLER CLASS.
- */
 public class Controller {
 
 	public static ArrayList<Node> nodes;
@@ -46,6 +43,10 @@ public class Controller {
 	 */
 	public static void serveObjects() {
 
+		if(view == null) {
+			return;
+		}
+		
 		// needs to serve everything simultaneously
 		ArrayList<NodeInfo> nodeInfo = new ArrayList<NodeInfo>();
 		ArrayList<RelInfo> relInfo = new ArrayList<RelInfo>();
@@ -157,7 +158,11 @@ public class Controller {
 		}
 
 	}
-
+	
+	/**
+	 * Sets the state of the UML diagram to the next one in the undo stack, if it exists
+	 * The current state is saved in the redo stack
+	 */
 	public static void undo() {
 		UndoRedoStack.State newState = history.undoPop();
 
@@ -172,6 +177,10 @@ public class Controller {
 		serveObjects();
 	}
 
+	/**
+	 * Sets the state of the UML diagram to the next one in the redo stack, if it exists.
+	 * The current state is saved in the undo stack.
+	 */
 	public static void redo() {
 		UndoRedoStack.State newState = history.redoPop();
 
@@ -201,6 +210,11 @@ public class Controller {
 
 	}
 
+	/**
+	 * Sets the state to select mode
+	 * @param button
+	 * 		The button
+	 */
 	public static void selectorButton(JButton button) {
 
 		// Model
@@ -211,6 +225,11 @@ public class Controller {
 
 	}
 
+	/**
+	 * Sets the state to class mode
+	 * @param button
+	 * 		The button
+	 */
 	public static void classButton(JButton button) {
 
 		// Model
@@ -221,6 +240,11 @@ public class Controller {
 
 	}
 
+	/**
+	 * Sets the state to delete mode
+	 * @param button
+	 * 		The button
+	 */
 	public static void deleteButton(JButton button) {
 
 		clearClickMode();
@@ -230,6 +254,11 @@ public class Controller {
 
 	}
 
+	/**
+	 * Sets the state to aggregation mode
+	 * @param button
+	 * 		The button
+	 */
 	public static void aggButton(JButton button) {
 		clearClickMode();
 		clickValue = 3;
@@ -238,6 +267,11 @@ public class Controller {
 
 	}
 
+	/**
+	 * Sets the state to composition mode
+	 * @param button
+	 * 		The button
+	 */
 	public static void compButton(JButton button) {
 
 		clearClickMode();
@@ -247,6 +281,11 @@ public class Controller {
 
 	}
 
+	/**
+	 * Sets the state to generalization mode
+	 * @param button
+	 * 		The button
+	 */
 	public static void genButton(JButton button) {
 
 		clearClickMode();
@@ -255,7 +294,12 @@ public class Controller {
 		button.setBackground(new Color(255, 255, 153));
 
 	}
-
+	
+	/**
+	 * Sets the state to association mode
+	 * @param button
+	 * 		The button
+	 */
 	public static void assButton(JButton button) {
 
 		clearClickMode();
@@ -265,6 +309,11 @@ public class Controller {
 
 	}
 
+	/**
+	 * Sets the state to dependency mode
+	 * @param button
+	 * 		The button
+	 */
 	public static void dependButton(JButton button) {
 
 		clearClickMode();
@@ -274,6 +323,11 @@ public class Controller {
 
 	}
 
+	/**
+	 * Sets the state to implementation mode
+	 * @param button
+	 * 		The button
+	 */
 	public static void impButton(JButton button) {
 
 		clearClickMode();
@@ -283,6 +337,11 @@ public class Controller {
 
 	}
 
+	/**
+	 * Sets the state to basic mode
+	 * @param button
+	 * 		The button
+	 */
 	public static void basicButton(JButton button) {
 
 		clearClickMode();
@@ -292,10 +351,20 @@ public class Controller {
 
 	}
 
+	/**
+	 * Checks if there are undo states remaining
+	 * @return
+	 * 		True if there are undo states
+	 */
 	public static boolean hasUndo() {
 		return history.hasUndoStates();
 	}
 
+	/**
+	 * Checks if there are redo states remaining
+	 * @return
+	 * 		True if there are redo states
+	 */
 	public static boolean hasRedo() {
 		return history.hasRedoStates();
 	}
@@ -332,6 +401,11 @@ public class Controller {
 				file = curFile;
 			}
 		}
+		
+		if(!file.endsWith(".uml")) {
+			file += ".uml";
+		}
+		
 		curFile = file;
 		try {
 			FileOutputStream fileOut = new FileOutputStream(file);
