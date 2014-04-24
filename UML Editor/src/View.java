@@ -426,11 +426,16 @@ public class View extends JFrame implements ActionListener {
 				Arrays.asList(methodsArray));
 
 		if (option == JOptionPane.OK_OPTION) {
+			if(n.getName().equals(newName.getText()) && n.getAttributes().equals(trimArrayList(attrList)) && n.getMethods().equals(trimArrayList(methList))) {
+				Controller.history.undoPop();
+				return;
+			}
 			n.setName(newName.getText());
 			n.setAttributes(attrList);
 			n.setMethods(methList);
 		} else {
 			System.out.println("canceled");
+			Controller.history.undoPop();
 		}
 
 	}
@@ -441,6 +446,19 @@ public class View extends JFrame implements ActionListener {
 		return (JOptionPane.showConfirmDialog(this, message, title,
 				JOptionPane.YES_NO_OPTION) == 0);
 
+	}
+	
+	private ArrayList<String> trimArrayList(ArrayList<String> in) {
+		@SuppressWarnings("unchecked")
+		ArrayList<String> out = (ArrayList<String>) in.clone();
+		
+		for (int i = 0; i < out.size(); i++) {
+			if (out.get(i).isEmpty()) {
+				out.remove(i);
+			}
+		}
+		
+		return out;
 	}
 
 }

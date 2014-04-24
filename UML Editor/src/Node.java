@@ -42,8 +42,6 @@ public class Node implements Serializable {
 		attributes = new ArrayList<String>();
 		methods = new ArrayList<String>();
 
-		// nodeId = nextId++;
-
 		findDimensions();
 	}
 
