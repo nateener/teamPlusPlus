@@ -26,7 +26,7 @@ public class RelInfo {
 	 *            type of the relationship
 	 */
 	public RelInfo(int startX, int startY, int endX, int endY, boolean self,
-			String type) {
+			String type, String startDetail, String endDetail) {
 
 		this.startX = startX;
 		this.startY = startY;
@@ -34,7 +34,8 @@ public class RelInfo {
 		this.endY = endY;
 		this.setSelfRel(self);
 		this.setRelType(type);
-
+		this.setStartDetail(startDetail);
+		this.setEndDetail(endDetail);
 	}
 
 	/**

@@ -238,8 +238,9 @@ public class Node implements Serializable {
 		System.out.println("Width:" + width);
 		System.out.println("Height:" + height);
 		System.out.println("Position:" + xCoor + "," + yCoor);
-		System.out.println("Dimensions: Left: " + leftX + ", Right: " + rightX + ", Top: " + topY + ", Bottom: "
-				+ bottomY);
+		System.out.println("Original Position:" + origX + "," + origY);
+		System.out.println("Dimensions: Left: " + leftX + ", Right: " + rightX
+				+ ", Top: " + topY + ", Bottom: " + bottomY);
 		System.out.println();
 
 	}
@@ -271,9 +272,9 @@ public class Node implements Serializable {
 		if (!this.attributes.equals(otherNode.attributes))
 			return false;
 
-		if (this.origX != otherNode.origX && this.origY != otherNode.origY)
+		if ((this.origX != otherNode.origX) || (this.origY != otherNode.origY))
 			return false;
-
+		
 		return true;
 	}
 

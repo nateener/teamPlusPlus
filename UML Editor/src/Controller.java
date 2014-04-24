@@ -71,7 +71,7 @@ public class Controller {
 											// places
 			RelInfo curInfo = new RelInfo(curRel.getStartX(),
 					curRel.getStartY(), curRel.getEndX(), curRel.getEndY(),
-					curRel.isSelfRel(), curRel.getRelationshipType());
+					curRel.isSelfRel(), curRel.getRelationshipType(), curRel.getStartDetail(), curRel.getEndDetail());
 
 			relInfo.add(curInfo);
 		}

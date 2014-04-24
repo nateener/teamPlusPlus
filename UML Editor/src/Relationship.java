@@ -192,6 +192,7 @@ public class Relationship implements Serializable {
 		System.out.println("Type:" + relationshipType);
 		System.out.println("Start Position:" + startX + "," + startY);
 		System.out.println("End Position:" + endX + "," + endY);
+		System.out.println("Start Detail:" + startDetail + " End Detail:" + endDetail);
 		System.out.println();
 
 	}
@@ -247,6 +248,10 @@ public class Relationship implements Serializable {
 	 */
 	public void setEndDetail(String endDetail) {
 		this.endDetail = endDetail;
+	}
+	
+	public String toString() {
+		return relationshipType + " from node " + getStartNode().getName() + " to node " + getEndNode().getName();
 	}
 
 }

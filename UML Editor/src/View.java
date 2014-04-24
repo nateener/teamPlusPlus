@@ -21,16 +21,19 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -442,7 +445,6 @@ public class View extends JFrame implements ActionListener {
 	 *            Node to show and edit current information
 	 */
 	public void showCurInfo(Node n) {
-
 		JTextField newName = new JTextField(n.getName());
 		JTextArea newAttributes = new JTextArea(5, 1);
 		for (int i = 0; i < n.getAttributes().size(); i++) {
@@ -484,6 +486,53 @@ public class View extends JFrame implements ActionListener {
 		}
 
 	}
+	
+	/**
+	 * Creates and shows window asking for the name, attributes, and methods
+	 * then separates each line into a string that is stored into an arrayList
+	 * which is then saved to the node
+	 * 
+	 * @param n
+	 *            Node to show and edit current information
+	 */
+	public void showRelInfo(Node n) {
+		
+		JComboBox<Relationship> relComboBox = new JComboBox<Relationship>();
+		
+		Iterator<Relationship> relIter = Controller.rels.iterator();
+		//ArrayList<Relationship> relList = new ArrayList<Relationship>();
+		while (relIter.hasNext()) {
+			Relationship curRel = relIter.next();
+			if (curRel.involvesNode(n)) {
+				//relList.add(curRel);
+				relComboBox.addItem(curRel);
+			}
+		}
+		
+		
+		
+		JTextField startDetail = new JTextField();
+		JTextField endDetail = new JTextField();
+		
+
+		Object[] message = { "Relationships", relComboBox, "Relationship Start Detail:", startDetail,  "Relationship End Detail:", endDetail
+
+		};
+
+		int option = JOptionPane.showConfirmDialog(null, message, "Edit Relationship",
+				JOptionPane.OK_CANCEL_OPTION);
+
+		if (option == JOptionPane.OK_OPTION) {
+			Relationship r = (Relationship)relComboBox.getSelectedItem();
+			r.setStartDetail(startDetail.getText());
+			r.setEndDetail(endDetail.getText());
+			r.printRelationship();
+		} else {
+			System.out.println("canceled");
+		}
+
+	}
+	
 
 	/**
 	 * Pops up a confirmation window and returns true if the user clicks yes

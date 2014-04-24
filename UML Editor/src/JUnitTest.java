@@ -13,6 +13,7 @@ public class JUnitTest {
 		Controller.nodes = new ArrayList<Node>();
 		Controller.rels = new ArrayList<Relationship>();
 		Controller.view = new View();
+		Controller.history = new UndoRedoStack();
 	}
 
 	@Test
@@ -86,7 +87,7 @@ public class JUnitTest {
 		NodeController.createNode(x, y);
 		node = NodeController.grabNode(x, y);
 		assertNotNull(node);
-
+// TODO FIX TEST
 		// Test moveNode
 		// NodeController.moveNode(x, y);
 		// x = x - node.getWidth() / 2;
@@ -231,9 +232,11 @@ public class JUnitTest {
 		int y2 = 50;
 		boolean self = true;
 		String type = "type";
+		String startDetail = "Start";
+		String endDetail = "End";
 
 		// Test constructor
-		RelInfo info = new RelInfo(x1, y1, x2, y2, self, type);
+		RelInfo info = new RelInfo(x1, y1, x2, y2, self, type, startDetail, endDetail);
 		assertNotNull(info);
 
 		// Test setStartX getStartX
@@ -265,6 +268,104 @@ public class JUnitTest {
 		self = false;
 		info.setSelfRel(self);
 		assertFalse(info.isSelfRel());
+	}
+	
+	@Test
+	public void relationshipControllerTest() {
+		
+		// Test createRelationship
+		
+		// Test grabRel
+		
+		// Test isRelFull
+		
+		// Test editRelationship
+		
+		// Test deleteRelationship
+		
+	}
+	
+	@Test
+	public void controllerTest() {
+		
+		// Test mouseClick
+		
+		// Test mouseClickRight
+		
+		// Test undo
+		
+		// Test redo
+		
+		// Test clearClickMode
+		
+		// Test selectorButton
+		
+		// Test classButton
+		
+		// Test deleteButton
+		
+		// Test aggButton
+		
+		// Test compButton
+		
+		// Test genButton
+		
+		// Test assButton
+		
+		// Test dependButton
+		
+		// Test impButton
+		
+		// Test basicButton
+		
+		// Test hasUndo
+		
+		// Test hasRedo
+		
+		// Test save
+		
+		// Test load
+		
+		// Test newUML
+		
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Test
+	public void contextMenuTest() {
+		
+		// Test constructor
+		Node n = new Node(5, 5);
+		ContextMenu menu = new ContextMenu(n);
+		assertNotNull(menu);
+		
+		// Test show
+		menu.show(Controller.view.drawPanel, 5, 5);
+	}
+	
+	@Test
+	public void undoRedoStackTest() {
+		
+		// Test undoPush
+		
+		// Test redoPush
+		
+		// Test undoPop
+		
+		// Test redoPop
+		
+		// Test undoPeek
+		
+		// Test redoPeek
+		
+		// Test undoClear
+		
+		// Test redoClear
+		
+		// Test hasUndoStates
+		
+		// Test hasRedoStates
+		
 	}
 
 }
