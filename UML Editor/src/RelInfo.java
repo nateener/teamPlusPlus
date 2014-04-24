@@ -37,90 +37,170 @@ public class RelInfo {
 
 	}
 
+	/**
+	 * Gets the starting x
+	 * @return
+	 * 		The starting x
+	 */
 	public int getStartX() {
 
 		return startX;
 
 	}
 
+	/**
+	 * Sets the starting x
+	 * @param startX
+	 * 		The new starting x
+	 */
 	public void setStartX(int startX) {
 
 		this.startX = startX;
 
 	}
 
+	/**
+	 * Gets the starting y
+	 * @return
+	 * 		The starting y
+	 */
 	public int getStartY() {
 
 		return startY;
 
 	}
 
+	/**
+	 * Sets the starting y
+	 * @param startY
+	 * 		The new starting y
+	 */
 	public void setStartY(int startY) {
 
 		this.startY = startY;
 
 	}
 
+	/**
+	 * Gets the ending x
+	 * @return
+	 * 		The ending x
+	 */
 	public int getEndX() {
 
 		return endX;
 
 	}
 
+	/**
+	 * Sets the ending x
+	 * @param endX
+	 * 		The new ending x
+	 */
 	public void setEndX(int endX) {
 
 		this.endX = endX;
 
 	}
 
+	/**
+	 * Gets the ending y
+	 * @return
+	 * 		The ending y
+	 */
 	public int getEndY() {
 
 		return endY;
 
 	}
 
+	/**
+	 * Sets the ending y
+	 * @param endY
+	 * 		The new ending y
+	 */
 	public void setEndY(int endY) {
 
 		this.endY = endY;
 
 	}
 
+	/**
+	 * Checks if the relationship is a self relationship
+	 * @return
+	 * 		True if it is a self relationship
+	 */
 	public boolean isSelfRel() {
 
 		return selfRel;
 
 	}
 
+	/**
+	 * Sets if the relationship is a self relationship
+	 * @param selfRel
+	 * 		If the relationship is a self relationship
+	 */
 	public void setSelfRel(boolean selfRel) {
 
 		this.selfRel = selfRel;
 
 	}
 
+	/**
+	 * Gets the relationship type
+	 * @return
+	 * 		The relationship type
+	 */
 	public String getRelType() {
 
 		return relType;
 
 	}
 
+	/**
+	 * Sets the relationship type
+	 * @param relType
+	 * 		The new relationship type
+	 */
 	public void setRelType(String relType) {
 
 		this.relType = relType;
 
 	}
 
+	/**
+	 * Gets the start detail
+	 * @return
+	 * 		The start detail
+	 */
 	public String getStartDetail() {
 		return startDetail;
 	}
 
+	/**
+	 * Sets the start detail
+	 * @param startDetail
+	 * 		The new start detail
+	 */
 	public void setStartDetail(String startDetail) {
 		this.startDetail = startDetail;
 	}
 
+	/**
+	 * Gets the end detail
+	 * @return
+	 * 		The end detail
+	 */
 	public String getEndDetail() {
 		return endDetail;
 	}
 
+	/**
+	 * Sets the end detail
+	 * @param endDetail
+	 * 		The new end detail
+	 */
 	public void setEndDetail(String endDetail) {
 		this.endDetail = endDetail;
 	}

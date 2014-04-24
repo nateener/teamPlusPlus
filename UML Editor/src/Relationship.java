@@ -73,42 +73,77 @@ public class Relationship implements Serializable {
 
 	}
 
+	/**
+	 * Gets the starting node
+	 * @return
+	 * 		The starting node
+	 */
 	public Node getStartNode() {
 
 		return startNode;
 
 	}
 
+	/**
+	 * Gets the ending node
+	 * @return
+	 * 		The ending node
+	 */
 	public Node getEndNode() {
 
 		return endNode;
 
 	}
-
+	
+	/**
+	 * Gets the starting x coordinate
+	 * @return
+	 * 		The starting x coordinate
+	 */
 	public int getStartX() {
 
 		return startX;
 
 	}
 
+	/**
+	 * Gets the starting y coordinate
+	 * @return
+	 * 		The starting y coordinate
+	 */
 	public int getStartY() {
 
 		return startY;
 
 	}
 
+	/**
+	 * Gets the ending x coordinate
+	 * @return
+	 * 		The ending x coordinate
+	 */
 	public int getEndX() {
 
 		return endX;
 
 	}
 
+	/**
+	 * Gets the ending y 
+	 * @return
+	 * 		The ending y coordinate
+	 */
 	public int getEndY() {
 
 		return endY;
 
 	}
 
+	/**
+	 * Gets the relationship type
+	 * @return
+	 * 		The relationship type
+	 */
 	public String getRelationshipType() {
 
 		return relationshipType;
@@ -178,18 +213,38 @@ public class Relationship implements Serializable {
 		return retVal;
 	}
 
+	/**
+	 * Gets the start detail
+	 * @return
+	 * 		The start detail
+	 */
 	public String getStartDetail() {
 		return startDetail;
 	}
 
+	/**
+	 * Sets the start detail
+	 * @param startDetail
+	 * 		The new start detail
+	 */
 	public void setStartDetail(String startDetail) {
 		this.startDetail = startDetail;
 	}
 
+	/**
+	 * Gets the end detail
+	 * @return
+	 * 		The end detail
+	 */
 	public String getEndDetail() {
 		return endDetail;
 	}
 
+	/**
+	 * Sets the end detail
+	 * @param endDetail
+	 * 		
+	 */
 	public void setEndDetail(String endDetail) {
 		this.endDetail = endDetail;
 	}

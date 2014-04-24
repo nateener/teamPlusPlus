@@ -88,6 +88,14 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 
 	}
 
+	/**
+	 * Draws the relationships between nodes
+	 * 
+	 * @param g
+	 * 		The Graphics object
+	 * @param relInfo
+	 * 		The relationship information
+	 */
 	public void drawRelationships(Graphics g, ArrayList<RelInfo> relInfo) {
 		Graphics2D g2d = (Graphics2D) g;
 		BasicStroke stroke = new BasicStroke(1.0f);
@@ -201,8 +209,11 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 
 	}
 
-	// If a relationship is in the process of being selected, show a highlighted
-	// line to the mouse pointer
+	/**
+	 * Draws a line from the first node of a half-finished relationship to the mouse
+	 * @param g
+	 * 		The Graphics object
+	 */
 	public void drawHalfRelationship(Graphics g) {
 		if (halfRel != null) {
 			g.setColor(Color.RED);
@@ -212,7 +223,14 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 		}
 	}
 
-	// Draw nodes and set the size of the window
+	/**
+	 * Draws all the nodes to the screen
+	 * 
+	 * @param g
+	 * 		The Graphics object
+	 * @param nodeInfo
+	 * 		ArrayList containing information about the nodes
+	 */
 	public void drawNodes(Graphics g, ArrayList<NodeInfo> nodeInfo) {
 		Iterator<NodeInfo> nodeItr = nodeInfo.iterator();
 		// Dimension dim = this.getPreferredSize();

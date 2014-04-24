@@ -54,7 +54,7 @@ public class View extends JFrame implements ActionListener {
 	private JButton undoButton;
 	private JButton redoButton;
 	private JButton basicButton;
-	/*
+	/**
 	 * Default constructor for the View class. Parameters: None Return: Void
 	 * Sets up the 'Look And Feel' in the UI Manager. Calls the build for the
 	 * tool bars, menu bars, and draw panels. Initializes the display settings.
@@ -83,11 +83,6 @@ public class View extends JFrame implements ActionListener {
 
 	}
 
-	/*
-	 * Builder function for the menu bar. Parameters: None Return: Void
-	 * Generates the menu bar, menus, and menu items.
-	 */
-
 	private JMenuItem itemExit;
 	private JMenuItem itemSave;
 	private JMenuItem itemSaveAs;
@@ -95,6 +90,10 @@ public class View extends JFrame implements ActionListener {
 	private JMenuItem itemNew;
 	private JMenuItem itemExportImage;
 
+	/**
+	 * Builder function for the menu bar.
+	 * Generates the menu bar, menus, and menu items.
+	 */
 	private void buildMenuBar() {
 
 		JMenuBar menuBar;
@@ -143,12 +142,10 @@ public class View extends JFrame implements ActionListener {
 
 	}
 
-	/*
-	 * Builder function for the tool bar. Parameters: None Return: Void
+	/**
+	 * Builder function for the tool bar.
 	 * Generates the tool bar and buttons.
 	 */
-
-
 	private void buildToolBar() {
 
 		JToolBar toolBar;
@@ -271,6 +268,9 @@ public class View extends JFrame implements ActionListener {
 
 	}
 
+	/**
+	 * Gets called when an action is performed
+	 */
 	public void actionPerformed(ActionEvent e) {
 
 		Object src = e.getSource();
@@ -316,12 +316,12 @@ public class View extends JFrame implements ActionListener {
 		}
 	}
 
-	/*
-	 * Builder function for the tool bar. Parameters: None Return: Void
-	 * Generates the draw panel.
-	 */
 	DrawPanel drawPanel;
 
+	/**
+	 * Builder function for the draw panel. Parameters: None Return: Void
+	 * Generates the draw panel.
+	 */
 	private void buildDrawPanel() {
 
 		drawPanel = new DrawPanel();
@@ -379,6 +379,9 @@ public class View extends JFrame implements ActionListener {
 
 	}
 
+	/**
+	 * Exports the draw area as a .png file
+	 */
 	public void exportAsImage() {
 		JFileChooser c = new JFileChooser();
 		FileFilter filter = new SingleExtensionFilter(".png", ".png image files");
@@ -482,6 +485,15 @@ public class View extends JFrame implements ActionListener {
 
 	}
 
+	/**
+	 * Pops up a confirmation window and returns true if the user clicks yes
+	 * @param title
+	 * 		The title of the window.
+	 * @param message
+	 * 		The message in the body of the window.
+	 * @return
+	 * 		True if the user clicked yes in the window
+	 */
 	public boolean confirmMessage(String title, String message) {
 
 		// If the function returns 0, it means the user selected "yes"
@@ -490,6 +502,13 @@ public class View extends JFrame implements ActionListener {
 
 	}
 	
+	/**
+	 * Returns a copy of the arraylist passed in with empty strings removed from it
+	 * @param in
+	 * 		The list to be trimmed
+	 * @return
+	 * 		The trimmed list
+	 */
 	private ArrayList<String> trimArrayList(ArrayList<String> in) {
 		@SuppressWarnings("unchecked")
 		ArrayList<String> out = (ArrayList<String>) in.clone();
@@ -503,10 +522,22 @@ public class View extends JFrame implements ActionListener {
 		return out;
 	}
 	
+	/**
+	 * Filters for files of the given extension with the given description
+	 * @author Josh
+	 *
+	 */
 	private class SingleExtensionFilter extends FileFilter {
 		private String ext;
 		private String desc;
 		
+		/**
+		 * Creates a filter with the given extension and description
+		 * @param ext
+		 * 		The extension of the files to filter for.
+		 * @param desc
+		 * 		The description of the file filter
+		 */
 		public SingleExtensionFilter(String ext, String desc) {
 			this.ext = ext;
 			this.desc = desc;

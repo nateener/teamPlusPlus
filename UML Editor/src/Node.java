@@ -6,13 +6,8 @@ public class Node implements Serializable {
 	/**
 	 * 
 	 */
-	// I put in this id to shut up the warning, don't actually know if we Need
-	// it
 	private static final long serialVersionUID = 1L;
-	// private static long nextId = 0;
-	// private long nodeId;
-	private int origX; // These keep track of where the node was actually set to
-						// be for copying purposes.
+	private int origX; // These keep track of where the node was actually set to be for copying purposes.
 	private int origY;
 	private int xCoor;
 	private int yCoor;
@@ -65,31 +60,56 @@ public class Node implements Serializable {
 		// xCoor = x;
 		// yCoor = y;
 	}
-
+	
+	/**
+	 * Gets the node's x coordinate
+	 * @return
+	 * 	The x coordinate
+	 */
 	public int getX() {
 
 		return xCoor;
 
 	}
 
+	/**
+	 * Gets the node's y coordinate
+	 * @return
+	 * 	The y coordinate
+	 */
 	public int getY() {
 
 		return yCoor;
 
 	}
 
+	/**
+	 * Gets the node's width
+	 * @return
+	 * 	The width
+	 */
 	public int getWidth() {
 
 		return width;
 
 	}
 
+	/**
+	 * Gets the node's height
+	 * @return
+	 * 	The height
+	 */
 	public int getHeight() {
 
 		return height;
 
 	}
 
+	/**
+	 * Gets the node's name
+	 * @return
+	 * 	The node's name
+	 */
 	public String getName() {
 
 		return name;
@@ -129,8 +149,7 @@ public class Node implements Serializable {
 	}
 
 	/**
-	 * First remove any empty strings from the arraylist, trim it, then save it
-	 * to the node
+	 * First remove any empty strings from the arraylist, trim it, then save it to the node
 	 * 
 	 * @param attributes
 	 *            ArrayList of strings, each being an attribute of the node
@@ -146,6 +165,11 @@ public class Node implements Serializable {
 
 	}
 
+	/**
+	 * Get the methods of a node.
+	 * 
+	 * @return The methods stored on a node
+	 */
 	public ArrayList<String> getMethods() {
 
 		return methods;
@@ -153,8 +177,7 @@ public class Node implements Serializable {
 	}
 
 	/**
-	 * First remove any empty strings from the arraylist, trim it, then save it
-	 * to the node
+	 * First remove any empty strings from the arraylist, trim it, then save it to the node
 	 * 
 	 * @param methods
 	 *            ArrayList of strings, each being a method of the node
@@ -170,6 +193,12 @@ public class Node implements Serializable {
 
 	}
 
+	/**
+	 * Sets the node's name
+	 * 
+	 * @param name
+	 *            The new name
+	 */
 	public void setName(String name) {
 
 		this.name = name;
@@ -177,8 +206,7 @@ public class Node implements Serializable {
 	}
 
 	/**
-	 * Finds the center coordinates of the top, bottom, left, and right sides of
-	 * the node
+	 * Finds the center coordinates of the top, bottom, left, and right sides of the node
 	 */
 	public void findDimensions() {
 
@@ -210,8 +238,8 @@ public class Node implements Serializable {
 		System.out.println("Width:" + width);
 		System.out.println("Height:" + height);
 		System.out.println("Position:" + xCoor + "," + yCoor);
-		System.out.println("Dimensions: Left: " + leftX + ", Right: " + rightX
-				+ ", Top: " + topY + ", Bottom: " + bottomY);
+		System.out.println("Dimensions: Left: " + leftX + ", Right: " + rightX + ", Top: " + topY + ", Bottom: "
+				+ bottomY);
 		System.out.println();
 
 	}
@@ -224,8 +252,7 @@ public class Node implements Serializable {
 	 * @return True if the nodes are equal
 	 */
 	/*
-	 * public boolean equals(Node node) { if(node == null) return false; return
-	 * this.nodeId == node.nodeId; }
+	 * public boolean equals(Node node) { if(node == null) return false; return this.nodeId == node.nodeId; }
 	 */
 	@Override
 	public boolean equals(Object obj) {
