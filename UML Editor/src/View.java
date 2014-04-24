@@ -9,11 +9,15 @@
 
 /* Imports */
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,10 +38,22 @@ import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.filechooser.FileFilter;
 
 @SuppressWarnings("serial")
 public class View extends JFrame implements ActionListener {
-
+	private JButton selectorButton;
+	private JButton classButton;
+	private JButton deleteButton;
+	private JButton aggButton;
+	private JButton compButton;
+	private JButton genButton;
+	private JButton assButton;
+	private JButton dependButton;
+	private JButton impButton;
+	private JButton undoButton;
+	private JButton redoButton;
+	private JButton basicButton;
 	/*
 	 * Default constructor for the View class. Parameters: None Return: Void
 	 * Sets up the 'Look And Feel' in the UI Manager. Calls the build for the
@@ -131,18 +147,7 @@ public class View extends JFrame implements ActionListener {
 	 * Builder function for the tool bar. Parameters: None Return: Void
 	 * Generates the tool bar and buttons.
 	 */
-	private JButton selectorButton;
-	private JButton classButton;
-	private JButton deleteButton;
-	private JButton aggButton;
-	private JButton compButton;
-	private JButton genButton;
-	private JButton assButton;
-	private JButton dependButton;
-	private JButton impButton;
-	private JButton undoButton;
-	private JButton redoButton;
-	private JButton basicButton;
+
 
 	private void buildToolBar() {
 
@@ -333,6 +338,12 @@ public class View extends JFrame implements ActionListener {
 	public void showFileSaver() {
 
 		JFileChooser c = new JFileChooser();
+		
+		FileFilter filter = new SingleExtensionFilter(".uml", "UML diagram files");
+		
+		c.addChoosableFileFilter(filter);
+		
+		c.setFileFilter(filter);
 		// Demonstrate "Save" dialog:
 		int rVal = c.showSaveDialog(View.this);
 		if (rVal == JFileChooser.APPROVE_OPTION) {
@@ -350,7 +361,13 @@ public class View extends JFrame implements ActionListener {
 	public void showFileOpener() {
 
 		JFileChooser c = new JFileChooser();
-		//
+		
+		FileFilter filter = new SingleExtensionFilter(".uml", "UML diagram files");
+		
+		c.addChoosableFileFilter(filter);
+		
+		c.setFileFilter(filter);
+		
 		int rVal = c.showOpenDialog(View.this);
 		if (rVal == JFileChooser.APPROVE_OPTION) {
 
@@ -363,7 +380,31 @@ public class View extends JFrame implements ActionListener {
 	}
 
 	public void exportAsImage() {
-		System.out.println("I sure did export the view as an image");
+		JFileChooser c = new JFileChooser();
+		FileFilter filter = new SingleExtensionFilter(".png", ".png image files");
+		c.setFileFilter(filter);
+		c.addChoosableFileFilter(filter);
+		
+		int rVal = c.showSaveDialog(View.this);
+		
+		if (rVal == JFileChooser.APPROVE_OPTION) {
+			BufferedImage bi = new BufferedImage(drawPanel.getSize().width, drawPanel.getSize().height, BufferedImage.TYPE_INT_ARGB); 
+			Graphics g = bi.createGraphics();
+			drawPanel.paint(g);  //this == JComponent
+			g.dispose();
+			File imageFile = c.getSelectedFile();
+			if (!(imageFile.toString().endsWith(".png")) ){
+				String newFileName = imageFile.getPath();
+				newFileName += ".png";
+				imageFile = new File(newFileName);
+			}
+			try{ImageIO.write(bi,"png",imageFile);}catch (Exception e) {}
+		}
+		if (rVal == JFileChooser.CANCEL_OPTION) {
+			// Do nothing! YAY!
+		}
+		
+
 	}
 
 	/**
@@ -460,6 +501,26 @@ public class View extends JFrame implements ActionListener {
 		}
 		
 		return out;
+	}
+	
+	private class SingleExtensionFilter extends FileFilter {
+		private String ext;
+		private String desc;
+		
+		public SingleExtensionFilter(String ext, String desc) {
+			this.ext = ext;
+			this.desc = desc;
+		}
+
+		@Override
+		public boolean accept(File f) {
+			return f.getName().endsWith(ext) || f.isDirectory();
+		}
+
+		@Override
+		public String getDescription() {
+			return desc;
+		}
 	}
 
 }

@@ -336,6 +336,11 @@ public class Controller {
 				file = curFile;
 			}
 		}
+		
+		if(!file.endsWith(".uml")) {
+			file += ".uml";
+		}
+		
 		curFile = file;
 		try {
 			FileOutputStream fileOut = new FileOutputStream(file);
