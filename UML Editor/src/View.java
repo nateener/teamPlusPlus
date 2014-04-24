@@ -9,11 +9,15 @@
 
 /* Imports */
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,7 +41,18 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 @SuppressWarnings("serial")
 public class View extends JFrame implements ActionListener {
-
+	private JButton selectorButton;
+	private JButton classButton;
+	private JButton deleteButton;
+	private JButton aggButton;
+	private JButton compButton;
+	private JButton genButton;
+	private JButton assButton;
+	private JButton dependButton;
+	private JButton impButton;
+	private JButton undoButton;
+	private JButton redoButton;
+	private JButton basicButton;
 	/*
 	 * Default constructor for the View class. Parameters: None Return: Void
 	 * Sets up the 'Look And Feel' in the UI Manager. Calls the build for the
@@ -130,18 +145,7 @@ public class View extends JFrame implements ActionListener {
 	 * Builder function for the tool bar. Parameters: None Return: Void
 	 * Generates the tool bar and buttons.
 	 */
-	private JButton selectorButton;
-	private JButton classButton;
-	private JButton deleteButton;
-	private JButton aggButton;
-	private JButton compButton;
-	private JButton genButton;
-	private JButton assButton;
-	private JButton dependButton;
-	private JButton impButton;
-	private JButton undoButton;
-	private JButton redoButton;
-	private JButton basicButton;
+
 
 	private void buildToolBar() {
 
@@ -362,7 +366,28 @@ public class View extends JFrame implements ActionListener {
 	}
 
 	public void exportAsImage() {
-		System.out.println("I sure did export the view as an image");
+		JFileChooser c = new JFileChooser();
+		// Demonstrate "Save" dialog:
+		int rVal = c.showSaveDialog(View.this);
+		
+		if (rVal == JFileChooser.APPROVE_OPTION) {
+			BufferedImage bi = new BufferedImage(drawPanel.getSize().width, drawPanel.getSize().height, BufferedImage.TYPE_INT_ARGB); 
+			Graphics g = bi.createGraphics();
+			drawPanel.paint(g);  //this == JComponent
+			g.dispose();
+			File imageFile = c.getSelectedFile();
+			if (!(imageFile.toString().endsWith(".png")) ){
+				String newFileName = imageFile.getPath();
+				newFileName += ".png";
+				imageFile = new File(newFileName);
+			}
+			try{ImageIO.write(bi,"png",imageFile);}catch (Exception e) {}
+		}
+		if (rVal == JFileChooser.CANCEL_OPTION) {
+			// Do nothing! YAY!
+		}
+		
+
 	}
 
 	/**
