@@ -249,13 +249,6 @@ public class Node implements Serializable {
 
 		if ((this.origX != otherNode.origX) || (this.origY != otherNode.origY))
 			return false;
-
-		System.out.println("We're the same");
-		this.printNodeInfo();
-		System.out.println("Other node");
-		otherNode.printNodeInfo();
-		System.out.println((this.origX != otherNode.origX));
-		System.out.println((this.origY != otherNode.origY));
 		
 		return true;
 	}

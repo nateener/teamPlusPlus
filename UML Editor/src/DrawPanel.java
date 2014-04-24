@@ -118,9 +118,14 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 				}
 			} else {
 				
+				// TODO SUPER HARD PRINT THE RELATIONSHIP DETAILS IN THE PROPER PLACE
 				if(curInfo.getStartDetail() != null){
-					System.out.println("I'm running");
+					System.out.println("I'm start running");
 					g.drawString(curInfo.getStartDetail(), curInfo.getStartX() + 5, curInfo.getStartY() + 5);
+				}
+				if(curInfo.getEndDetail() != null){
+					System.out.println("I'm end running");
+					g.drawString(curInfo.getEndDetail(), curInfo.getEndX() + 5, curInfo.getEndY() + 5);
 				}
 
 				int midpoint = curInfo.getStartY()
