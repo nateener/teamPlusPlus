@@ -1,10 +1,14 @@
+/**
+ * File: Relationship.java
+ * Project: UML Editor
+ * Iteration: 3
+ * Description: A data structure for storing relationships and the nodes involved with them.
+ */
+
 import java.io.Serializable;
 
 public class Relationship implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private String relationshipType;
 	private String startDetail;
@@ -76,8 +80,8 @@ public class Relationship implements Serializable {
 
 	/**
 	 * Gets the starting node
-	 * @return
-	 * 		The starting node
+	 * 
+	 * @return The starting node
 	 */
 	public Node getStartNode() {
 
@@ -87,19 +91,19 @@ public class Relationship implements Serializable {
 
 	/**
 	 * Gets the ending node
-	 * @return
-	 * 		The ending node
+	 * 
+	 * @return The ending node
 	 */
 	public Node getEndNode() {
 
 		return endNode;
 
 	}
-	
+
 	/**
 	 * Gets the starting x coordinate
-	 * @return
-	 * 		The starting x coordinate
+	 * 
+	 * @return The starting x coordinate
 	 */
 	public int getStartX() {
 
@@ -109,8 +113,8 @@ public class Relationship implements Serializable {
 
 	/**
 	 * Gets the starting y coordinate
-	 * @return
-	 * 		The starting y coordinate
+	 * 
+	 * @return The starting y coordinate
 	 */
 	public int getStartY() {
 
@@ -120,8 +124,8 @@ public class Relationship implements Serializable {
 
 	/**
 	 * Gets the ending x coordinate
-	 * @return
-	 * 		The ending x coordinate
+	 * 
+	 * @return The ending x coordinate
 	 */
 	public int getEndX() {
 
@@ -130,9 +134,9 @@ public class Relationship implements Serializable {
 	}
 
 	/**
-	 * Gets the ending y 
-	 * @return
-	 * 		The ending y coordinate
+	 * Gets the ending y
+	 * 
+	 * @return The ending y coordinate
 	 */
 	public int getEndY() {
 
@@ -142,8 +146,8 @@ public class Relationship implements Serializable {
 
 	/**
 	 * Gets the relationship type
-	 * @return
-	 * 		The relationship type
+	 * 
+	 * @return The relationship type
 	 */
 	public String getRelationshipType() {
 
@@ -159,9 +163,9 @@ public class Relationship implements Serializable {
 		return startNode.equals(endNode);
 
 	}
-	
-	public void setOrientation(String orienting){
-		
+
+	public void setOrientation(String orienting) {
+
 		orientation = orienting;
 
 	}
@@ -173,23 +177,21 @@ public class Relationship implements Serializable {
 	private void setStartPosition() {
 
 		if (startNode != null) {
-			
-		if(getOrientation() == "right"){
-			startX = startNode.getX();
-			startY = startNode.getY() + startNode.getHeight() / 2;
-		} else if( getOrientation() == "left"){
-			startX = startNode.getX() + startNode.getWidth();
-			startY = startNode.getY() + startNode.getHeight() / 2;
-		} else if (getOrientation() == "top"){
-			startX = startNode.getX() + startNode.getWidth() / 2;
-			startY = startNode.getY();
-		} else { // bottom
-			startX = startNode.getX() + startNode.getWidth() / 2;
-			startY = startNode.getY() + startNode.getHeight();
-		}
-			
-			
-			
+
+			if (getOrientation() == "right") {
+				startX = startNode.getX();
+				startY = startNode.getY() + startNode.getHeight() / 2;
+			} else if (getOrientation() == "left") {
+				startX = startNode.getX() + startNode.getWidth();
+				startY = startNode.getY() + startNode.getHeight() / 2;
+			} else if (getOrientation() == "top") {
+				startX = startNode.getX() + startNode.getWidth() / 2;
+				startY = startNode.getY();
+			} else { // bottom
+				startX = startNode.getX() + startNode.getWidth() / 2;
+				startY = startNode.getY() + startNode.getHeight();
+			}
+
 		}
 
 	}
@@ -198,67 +200,71 @@ public class Relationship implements Serializable {
 	 * Sets the end coordinates of the relationship based on it's ending node
 	 */
 	private void setEndPosition() {
-		 
+
 		if (endNode != null) {
-			if (isSelfRel()){
+			if (isSelfRel()) {
 				endX = endNode.getX() + 20;
 				endY = endNode.getY();
 				setOrientation("bottom");
-			}else if(endNode.getX() + endNode.getWidth()  + 30 < startNode.getX()){
+			} else if (endNode.getX() + endNode.getWidth() + 30 < startNode
+					.getX()) {
 				// Right
 				endX = endNode.getX() + endNode.getWidth();
-				// This ensures the endpoint does not leave the bounds of the box. 
-				if((endNode.getY() + endNode.getHeight() / 2) + 
-						(startY - (endNode.getY() + endNode.getHeight() / 2)) / 10 > 
-						endNode.getY()+endNode.getHeight()){
+				// This ensures the endpoint does not leave the bounds of the
+				// box.
+				if ((endNode.getY() + endNode.getHeight() / 2)
+						+ (startY - (endNode.getY() + endNode.getHeight() / 2))
+						/ 10 > endNode.getY() + endNode.getHeight()) {
 					endY = endNode.getY() + endNode.getHeight();
-				} else if((endNode.getY() + endNode.getHeight() / 2) + 
-						(startY - (endNode.getY() + endNode.getHeight() / 2)) / 10 < 
-						endNode.getY()){
+				} else if ((endNode.getY() + endNode.getHeight() / 2)
+						+ (startY - (endNode.getY() + endNode.getHeight() / 2))
+						/ 10 < endNode.getY()) {
 					endY = endNode.getY();
 				} else {
-					endY = (endNode.getY() + endNode.getHeight() / 2) + 
-							(startY - (endNode.getY() + endNode.getHeight() / 2)) / 10;
+					endY = (endNode.getY() + endNode.getHeight() / 2)
+							+ (startY - (endNode.getY() + endNode.getHeight() / 2))
+							/ 10;
 				}
 				setOrientation("right");
-			} 
-			else if (endNode.getX() - 30 > startNode.getX() + startNode.getWidth()){
+			} else if (endNode.getX() - 30 > startNode.getX()
+					+ startNode.getWidth()) {
 				// Left
 				endX = endNode.getX();
-				
-				// This ensures the endpoint does not leave the bounds of the box. 
-				if((endNode.getY() + endNode.getHeight() / 2) + 
-						(startY - (endNode.getY() + endNode.getHeight() / 2)) / 10 > 
-						endNode.getY()+endNode.getHeight()){
+
+				// This ensures the endpoint does not leave the bounds of the
+				// box.
+				if ((endNode.getY() + endNode.getHeight() / 2)
+						+ (startY - (endNode.getY() + endNode.getHeight() / 2))
+						/ 10 > endNode.getY() + endNode.getHeight()) {
 					endY = endNode.getY() + endNode.getHeight();
-				} else if((endNode.getY() + endNode.getHeight() / 2) + 
-						(startY - (endNode.getY() + endNode.getHeight() / 2)) / 10 < 
-						endNode.getY()){
+				} else if ((endNode.getY() + endNode.getHeight() / 2)
+						+ (startY - (endNode.getY() + endNode.getHeight() / 2))
+						/ 10 < endNode.getY()) {
 					endY = endNode.getY();
 				} else {
-				endY = (endNode.getY() + endNode.getHeight() / 2) + 
-						(startY - (endNode.getY() + endNode.getHeight() / 2)) / 10;
+					endY = (endNode.getY() + endNode.getHeight() / 2)
+							+ (startY - (endNode.getY() + endNode.getHeight() / 2))
+							/ 10;
 				}
 				setOrientation("left");
-			} 
-			else if (endNode.getY() > startNode.getY()+startNode.getHeight()) {
+			} else if (endNode.getY() > startNode.getY()
+					+ startNode.getHeight()) {
 				// Bottom
 				endY = endNode.getY();
-				endX = (endNode.getX() + endNode.getWidth() / 2) +
-						(startX - (endNode.getX() + endNode.getWidth() / 2)) / 3;
-				
+				endX = (endNode.getX() + endNode.getWidth() / 2)
+						+ (startX - (endNode.getX() + endNode.getWidth() / 2))
+						/ 3;
+
 				setOrientation("bottom");
-			}
-			else {
+			} else {
 				// Top
 				endY = endNode.getY() + endNode.getHeight();
-				endX = (endNode.getX() + endNode.getWidth() / 2) +
-						(startX - (endNode.getX() + endNode.getWidth() / 2)) / 3;
+				endX = (endNode.getX() + endNode.getWidth() / 2)
+						+ (startX - (endNode.getX() + endNode.getWidth() / 2))
+						/ 3;
 				setOrientation("top");
-				
+
 			}
-			//endX = endNode.getX() + endNode.getWidth() / 2;
-			//endY = endNode.getY() + endNode.getHeight();
 		}
 
 	}
@@ -271,7 +277,8 @@ public class Relationship implements Serializable {
 		System.out.println("Type:" + relationshipType);
 		System.out.println("Start Position:" + startX + "," + startY);
 		System.out.println("End Position:" + endX + "," + endY);
-		System.out.println("Start Detail:" + startDetail + " End Detail:" + endDetail);
+		System.out.println("Start Detail:" + startDetail + " End Detail:"
+				+ endDetail);
 		System.out.println();
 
 	}
@@ -288,15 +295,13 @@ public class Relationship implements Serializable {
 	public Relationship copy(Node startNode, Node endNode) {
 		Relationship retVal = new Relationship(startNode, this.relationshipType);
 		retVal.setEndpoint(endNode);
-		// TODO: See if there's a way to make this work without having to pass
-		// in copies of the end nodes
 		return retVal;
 	}
 
 	/**
 	 * Gets the start detail
-	 * @return
-	 * 		The start detail
+	 * 
+	 * @return The start detail
 	 */
 	public String getStartDetail() {
 		return startDetail;
@@ -304,8 +309,9 @@ public class Relationship implements Serializable {
 
 	/**
 	 * Sets the start detail
+	 * 
 	 * @param startDetail
-	 * 		The new start detail
+	 *            The new start detail
 	 */
 	public void setStartDetail(String startDetail) {
 		this.startDetail = startDetail;
@@ -313,28 +319,30 @@ public class Relationship implements Serializable {
 
 	/**
 	 * Gets the end detail
-	 * @return
-	 * 		The end detail
+	 * 
+	 * @return The end detail
 	 */
 	public String getEndDetail() {
 		return endDetail;
 	}
 
-	public String getOrientation(){
+	public String getOrientation() {
 		return orientation;
 	}
-	
+
 	/**
 	 * Sets the end detail
+	 * 
 	 * @param endDetail
-	 * 		
+	 * 
 	 */
 	public void setEndDetail(String endDetail) {
 		this.endDetail = endDetail;
 	}
-	
+
 	public String toString() {
-		return relationshipType + " from node " + getStartNode().getName() + " to node " + getEndNode().getName();
+		return relationshipType + " from node " + getStartNode().getName()
+				+ " to node " + getEndNode().getName();
 	}
 
 }

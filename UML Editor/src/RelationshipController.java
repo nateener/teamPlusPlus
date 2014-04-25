@@ -1,3 +1,10 @@
+/**
+ * File: RelationshipController.java
+ * Project: UML Editor
+ * Iteration: 3
+ * Description: A statically invoked class to serve as an interface for the Controller to interact with the relationships.
+ */
+
 import java.util.Iterator;
 
 public class RelationshipController {
@@ -21,11 +28,13 @@ public class RelationshipController {
 
 		while (itr.hasNext()) {
 			Relationship curRel = itr.next();
-			
-			if (newRel.isSelfRel() && (curRel.isSelfRel() && curRel.involvesNode(start))) {
+
+			if (newRel.isSelfRel()
+					&& (curRel.isSelfRel() && curRel.involvesNode(start))) {
 				Controller.rels.remove(curRel);
 				break;
-			} else if (!newRel.isSelfRel() && (curRel.involvesNode(start) && curRel.involvesNode(end))) {
+			} else if (!newRel.isSelfRel()
+					&& (curRel.involvesNode(start) && curRel.involvesNode(end))) {
 				Controller.rels.remove(curRel);
 				break;
 			}
@@ -36,7 +45,7 @@ public class RelationshipController {
 		Controller.serveObjects();
 
 	}
-	
+
 	/**
 	 * Check if given coordinates contain a relationship, prompt to delete and
 	 * if yes delete

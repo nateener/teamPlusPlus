@@ -1,14 +1,15 @@
+/**
+ * File: UndoRedoStack.java
+ * Project: UML Editor
+ * Iteration: 3
+ * Description: Manages stacks of previous states to allow for undo and redo functionality
+ */
+
 import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.Iterator;
 import java.util.Stack;
 
-/**
- * Manages stacks of previous states to allow for undo and redo functionality
- * 
- * @author Josh
- * 
- */
 public class UndoRedoStack {
 	private Stack<State> undoStack;
 	private Stack<State> redoStack;

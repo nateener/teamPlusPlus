@@ -1,3 +1,10 @@
+/**
+ * File: RelInfo.java
+ * Project: UML Editor
+ * Iteration: 3
+ * Description: A data structure for passing relationship information to the View formated for rendering graphically.
+ */
+
 public class RelInfo {
 	private int startX;
 	private int startY;
@@ -9,8 +16,6 @@ public class RelInfo {
 	private String startDetail;
 	private String endDetail;
 	private String orientation;
-
-	
 
 	/**
 	 * RelInfo constructor
@@ -29,7 +34,8 @@ public class RelInfo {
 	 *            type of the relationship
 	 */
 	public RelInfo(int startX, int startY, int endX, int endY, boolean self,
-			String type, String startDetail, String endDetail, String orientation) {
+			String type, String startDetail, String endDetail,
+			String orientation) {
 
 		this.startX = startX;
 		this.startY = startY;
@@ -44,8 +50,8 @@ public class RelInfo {
 
 	/**
 	 * Gets the starting x
-	 * @return
-	 * 		The starting x
+	 * 
+	 * @return The starting x
 	 */
 	public int getStartX() {
 
@@ -55,8 +61,9 @@ public class RelInfo {
 
 	/**
 	 * Sets the starting x
+	 * 
 	 * @param startX
-	 * 		The new starting x
+	 *            The new starting x
 	 */
 	public void setStartX(int startX) {
 
@@ -66,8 +73,8 @@ public class RelInfo {
 
 	/**
 	 * Gets the starting y
-	 * @return
-	 * 		The starting y
+	 * 
+	 * @return The starting y
 	 */
 	public int getStartY() {
 
@@ -77,8 +84,9 @@ public class RelInfo {
 
 	/**
 	 * Sets the starting y
+	 * 
 	 * @param startY
-	 * 		The new starting y
+	 *            The new starting y
 	 */
 	public void setStartY(int startY) {
 
@@ -88,8 +96,8 @@ public class RelInfo {
 
 	/**
 	 * Gets the ending x
-	 * @return
-	 * 		The ending x
+	 * 
+	 * @return The ending x
 	 */
 	public int getEndX() {
 
@@ -99,8 +107,9 @@ public class RelInfo {
 
 	/**
 	 * Sets the ending x
+	 * 
 	 * @param endX
-	 * 		The new ending x
+	 *            The new ending x
 	 */
 	public void setEndX(int endX) {
 
@@ -110,8 +119,8 @@ public class RelInfo {
 
 	/**
 	 * Gets the ending y
-	 * @return
-	 * 		The ending y
+	 * 
+	 * @return The ending y
 	 */
 	public int getEndY() {
 
@@ -121,8 +130,9 @@ public class RelInfo {
 
 	/**
 	 * Sets the ending y
+	 * 
 	 * @param endY
-	 * 		The new ending y
+	 *            The new ending y
 	 */
 	public void setEndY(int endY) {
 
@@ -132,8 +142,8 @@ public class RelInfo {
 
 	/**
 	 * Checks if the relationship is a self relationship
-	 * @return
-	 * 		True if it is a self relationship
+	 * 
+	 * @return True if it is a self relationship
 	 */
 	public boolean isSelfRel() {
 
@@ -143,8 +153,9 @@ public class RelInfo {
 
 	/**
 	 * Sets if the relationship is a self relationship
+	 * 
 	 * @param selfRel
-	 * 		If the relationship is a self relationship
+	 *            If the relationship is a self relationship
 	 */
 	public void setSelfRel(boolean selfRel) {
 
@@ -154,8 +165,8 @@ public class RelInfo {
 
 	/**
 	 * Gets the relationship type
-	 * @return
-	 * 		The relationship type
+	 * 
+	 * @return The relationship type
 	 */
 	public String getRelType() {
 
@@ -165,8 +176,9 @@ public class RelInfo {
 
 	/**
 	 * Sets the relationship type
+	 * 
 	 * @param relType
-	 * 		The new relationship type
+	 *            The new relationship type
 	 */
 	public void setRelType(String relType) {
 
@@ -176,8 +188,8 @@ public class RelInfo {
 
 	/**
 	 * Gets the start detail
-	 * @return
-	 * 		The start detail
+	 * 
+	 * @return The start detail
 	 */
 	public String getStartDetail() {
 		return startDetail;
@@ -185,8 +197,9 @@ public class RelInfo {
 
 	/**
 	 * Sets the start detail
+	 * 
 	 * @param startDetail
-	 * 		The new start detail
+	 *            The new start detail
 	 */
 	public void setStartDetail(String startDetail) {
 		this.startDetail = startDetail;
@@ -194,8 +207,8 @@ public class RelInfo {
 
 	/**
 	 * Gets the end detail
-	 * @return
-	 * 		The end detail
+	 * 
+	 * @return The end detail
 	 */
 	public String getEndDetail() {
 		return endDetail;
@@ -203,17 +216,18 @@ public class RelInfo {
 
 	/**
 	 * Sets the end detail
+	 * 
 	 * @param endDetail
-	 * 		The new end detail
+	 *            The new end detail
 	 */
 	public void setEndDetail(String endDetail) {
 		this.endDetail = endDetail;
 	}
-	
+
 	/**
 	 * Gets the orientation
-	 * @return
-	 * 		The orientation
+	 * 
+	 * @return The orientation
 	 */
 	public String getOrientation() {
 		return orientation;

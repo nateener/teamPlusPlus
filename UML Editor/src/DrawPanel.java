@@ -1,3 +1,11 @@
+/**
+ * File: DrawPanel.java
+ * Project: UML Editor
+ * Iteration: 3
+ * Description: The DrawPanel class extends JPanel. It serves as a canvas in which we graphically represents all
+ * of the relevant data in the application. It also handles an extensive amount of mouse events via the mouselisteners.
+ */
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -107,38 +115,39 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 		while (relItr.hasNext()) {
 			RelInfo curInfo = relItr.next();
 
-			// Drawing the relationship details (i.e. 1...*)			
-				if(curInfo.getStartDetail() != null){
-					if(curInfo.getOrientation() == "left"){
-						g.drawString(curInfo.getStartDetail(), curInfo.getStartX() + 15, curInfo.getStartY() + 15);
-					} else if (curInfo.getOrientation() == "right"){
-						g.drawString(curInfo.getStartDetail(), curInfo.getStartX() - 15, curInfo.getStartY() + 15);
-					} else if (curInfo.getOrientation() == "top"){
-						g.drawString(curInfo.getStartDetail(), curInfo.getStartX() + 5, curInfo.getStartY() - 20);
-					} else  { // bottom
-						g.drawString(curInfo.getStartDetail(), curInfo.getStartX() + 5, curInfo.getStartY() + 20);
-					}
+			// Drawing the relationship details (i.e. 1...*)
+			if (curInfo.getStartDetail() != null) {
+				if (curInfo.getOrientation() == "left") {
+					g.drawString(curInfo.getStartDetail(),
+							curInfo.getStartX() + 15, curInfo.getStartY() + 15);
+				} else if (curInfo.getOrientation() == "right") {
+					g.drawString(curInfo.getStartDetail(),
+							curInfo.getStartX() - 15, curInfo.getStartY() + 15);
+				} else if (curInfo.getOrientation() == "top") {
+					g.drawString(curInfo.getStartDetail(),
+							curInfo.getStartX() + 5, curInfo.getStartY() - 20);
+				} else { // bottom
+					g.drawString(curInfo.getStartDetail(),
+							curInfo.getStartX() + 5, curInfo.getStartY() + 20);
 				}
-				if(curInfo.getEndDetail() != null){
-					if(curInfo.getOrientation() == "left"){
-						g.drawString(curInfo.getEndDetail(), curInfo.getEndX() - 15, curInfo.getEndY() + 15);
-					} else if (curInfo.getOrientation() == "right"){
-						g.drawString(curInfo.getEndDetail(), curInfo.getEndX() + 15, curInfo.getEndY() + 15);
-					} else if (curInfo.getOrientation() == "top"){
-						g.drawString(curInfo.getEndDetail(), curInfo.getEndX() + 5, curInfo.getEndY() + 20);
-					} else  { // bottom
-						g.drawString(curInfo.getEndDetail(), curInfo.getEndX() + 5, curInfo.getEndY() - 20);
-						
-					}
-					
-				
 			}
-				/*
 			if (curInfo.getEndDetail() != null) {
-				g.drawString(curInfo.getEndDetail(), curInfo.getEndX() + 5,
-						curInfo.getEndY() + 5);
+				if (curInfo.getOrientation() == "left") {
+					g.drawString(curInfo.getEndDetail(),
+							curInfo.getEndX() - 15, curInfo.getEndY() + 15);
+				} else if (curInfo.getOrientation() == "right") {
+					g.drawString(curInfo.getEndDetail(),
+							curInfo.getEndX() + 15, curInfo.getEndY() + 15);
+				} else if (curInfo.getOrientation() == "top") {
+					g.drawString(curInfo.getEndDetail(), curInfo.getEndX() + 5,
+							curInfo.getEndY() + 20);
+				} else { // bottom
+					g.drawString(curInfo.getEndDetail(), curInfo.getEndX() + 5,
+							curInfo.getEndY() - 20);
+
+				}
+
 			}
-				 */
 			if (curInfo.isSelfRel()) {
 				if (curInfo.getRelType().equals("Implements")
 						|| curInfo.getRelType().equals("Depend")) {
@@ -157,252 +166,245 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 				}
 			}
 
-				int Ymidpoint = curInfo.getStartY()
-						+ ((curInfo.getEndY() - curInfo.getStartY()) / 2);
-				int Xmidpoint = curInfo.getStartX()
-						+ ((curInfo.getEndX() - curInfo.getStartX()) / 2);
+			int Ymidpoint = curInfo.getStartY()
+					+ ((curInfo.getEndY() - curInfo.getStartY()) / 2);
+			int Xmidpoint = curInfo.getStartX()
+					+ ((curInfo.getEndX() - curInfo.getStartX()) / 2);
 
-				if (curInfo.getRelType().equals("Implements")
-						|| curInfo.getRelType().equals("Depend")) {
-					// Draw dotted lines
-					Stroke drawingStroke = new BasicStroke(2,
-							BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0,
-							new float[] { 9 }, 0);
-					Line2D line1, line2, line3;
-					if (curInfo.getOrientation() == "top"
-							|| curInfo.getOrientation() == "bottom") {
-						line1 = new Line2D.Double(curInfo.getStartX(),
-								curInfo.getStartY(), curInfo.getStartX(),
-								Ymidpoint);
-						line2 = new Line2D.Double(curInfo.getEndX(),
-								curInfo.getEndY(), curInfo.getEndX(), Ymidpoint);
-						line3 = new Line2D.Double(curInfo.getStartX(),
-								Ymidpoint, curInfo.getEndX(), Ymidpoint);
+			if (curInfo.getRelType().equals("Implements")
+					|| curInfo.getRelType().equals("Depend")) {
+				// Draw dotted lines
+				Stroke drawingStroke = new BasicStroke(2, BasicStroke.CAP_BUTT,
+						BasicStroke.JOIN_BEVEL, 0, new float[] { 9 }, 0);
+				Line2D line1, line2, line3;
+				if (curInfo.getOrientation() == "top"
+						|| curInfo.getOrientation() == "bottom") {
+					line1 = new Line2D.Double(curInfo.getStartX(),
+							curInfo.getStartY(), curInfo.getStartX(), Ymidpoint);
+					line2 = new Line2D.Double(curInfo.getEndX(),
+							curInfo.getEndY(), curInfo.getEndX(), Ymidpoint);
+					line3 = new Line2D.Double(curInfo.getStartX(), Ymidpoint,
+							curInfo.getEndX(), Ymidpoint);
 
-					} else {
-						// Draw regular lines
-						line1 = new Line2D.Double(curInfo.getStartX(),
-								curInfo.getStartY(), Xmidpoint,
-								curInfo.getStartY());
-						line2 = new Line2D.Double(Xmidpoint, curInfo.getEndY(),
-								Xmidpoint, curInfo.getStartY());
-						line3 = new Line2D.Double(Xmidpoint, curInfo.getEndY(),
-								curInfo.getEndX(), curInfo.getEndY());
-					}
-					g2d.setStroke(drawingStroke);
-					g2d.draw(line1);
-					g2d.draw(line2);
-					g2d.draw(line3);
-					g2d.setStroke(stroke);
 				} else {
-					// Draw regular line
-					Line2D line1, line2, line3;
-					if (curInfo.getOrientation() == "top"
-							|| curInfo.getOrientation() == "bottom") {
-						line1 = new Line2D.Double(curInfo.getStartX(),
-								curInfo.getStartY(), curInfo.getStartX(),
-								Ymidpoint);
-						line2 = new Line2D.Double(curInfo.getEndX(),
-								curInfo.getEndY(), curInfo.getEndX(), Ymidpoint);
-						line3 = new Line2D.Double(curInfo.getStartX(),
-								Ymidpoint, curInfo.getEndX(), Ymidpoint);
+					// Draw regular lines
+					line1 = new Line2D.Double(curInfo.getStartX(),
+							curInfo.getStartY(), Xmidpoint, curInfo.getStartY());
+					line2 = new Line2D.Double(Xmidpoint, curInfo.getEndY(),
+							Xmidpoint, curInfo.getStartY());
+					line3 = new Line2D.Double(Xmidpoint, curInfo.getEndY(),
+							curInfo.getEndX(), curInfo.getEndY());
+				}
+				g2d.setStroke(drawingStroke);
+				g2d.draw(line1);
+				g2d.draw(line2);
+				g2d.draw(line3);
+				g2d.setStroke(stroke);
+			} else {
+				// Draw regular line
+				Line2D line1, line2, line3;
+				if (curInfo.getOrientation() == "top"
+						|| curInfo.getOrientation() == "bottom") {
+					line1 = new Line2D.Double(curInfo.getStartX(),
+							curInfo.getStartY(), curInfo.getStartX(), Ymidpoint);
+					line2 = new Line2D.Double(curInfo.getEndX(),
+							curInfo.getEndY(), curInfo.getEndX(), Ymidpoint);
+					line3 = new Line2D.Double(curInfo.getStartX(), Ymidpoint,
+							curInfo.getEndX(), Ymidpoint);
 
-					} else {
+				} else {
 
-						line1 = new Line2D.Double(curInfo.getStartX(),
-								curInfo.getStartY(), Xmidpoint,
-								curInfo.getStartY());
-						line2 = new Line2D.Double(Xmidpoint, curInfo.getEndY(),
-								Xmidpoint, curInfo.getStartY());
-						line3 = new Line2D.Double(Xmidpoint, curInfo.getEndY(),
-								curInfo.getEndX(), curInfo.getEndY());
-					}
-					g2d.draw(line1);
-					g2d.draw(line2);
-					g2d.draw(line3);
+					line1 = new Line2D.Double(curInfo.getStartX(),
+							curInfo.getStartY(), Xmidpoint, curInfo.getStartY());
+					line2 = new Line2D.Double(Xmidpoint, curInfo.getEndY(),
+							Xmidpoint, curInfo.getStartY());
+					line3 = new Line2D.Double(Xmidpoint, curInfo.getEndY(),
+							curInfo.getEndX(), curInfo.getEndY());
+				}
+				g2d.draw(line1);
+				g2d.draw(line2);
+				g2d.draw(line3);
+
+			}
+			//
+			// Cap with diamond
+			//
+			if (curInfo.getRelType().equals("Aggregation")
+					|| curInfo.getRelType().equals("Composition")) {
+				int Xtop = 0, Xbottom = 0, Xleft = 0, Xright = 0, Ytop = 0, Ybottom = 0, Yleft = 0, Yright = 0;
+
+				if (curInfo.getOrientation() == "left") {
+					Xtop = curInfo.getEndX();
+					Xbottom = curInfo.getEndX() - 10;
+					Xleft = curInfo.getEndX() - 5;
+					Xright = curInfo.getEndX() - 5;
+
+					Ytop = curInfo.getEndY();
+					Ybottom = curInfo.getEndY();
+					Yleft = curInfo.getEndY() + 5;
+					Yright = curInfo.getEndY() - 5;
+
+				} else if (curInfo.getOrientation() == "right") {
+					Xtop = curInfo.getEndX();
+					Xbottom = curInfo.getEndX() + 10;
+					Xleft = curInfo.getEndX() + 5;
+					Xright = curInfo.getEndX() + 5;
+
+					Ytop = curInfo.getEndY();
+					Ybottom = curInfo.getEndY();
+					Yleft = curInfo.getEndY() + 5;
+					Yright = curInfo.getEndY() - 5;
+
+				} else if (curInfo.getOrientation() == "bottom") {
+
+					Xtop = curInfo.getEndX();
+					Xbottom = curInfo.getEndX();
+					Xleft = curInfo.getEndX() - 5;
+					Xright = curInfo.getEndX() + 5;
+
+					Ytop = curInfo.getEndY() - 10;
+					Ybottom = curInfo.getEndY();
+					Yleft = curInfo.getEndY() - 5;
+					Yright = curInfo.getEndY() - 5;
+
+				} else {
+
+					Xtop = curInfo.getEndX();
+					Xbottom = curInfo.getEndX();
+					Xleft = curInfo.getEndX() - 5;
+					Xright = curInfo.getEndX() + 5;
+
+					Ytop = curInfo.getEndY();
+					Ybottom = curInfo.getEndY() + 10;
+					Yleft = curInfo.getEndY() + 5;
+					Yright = curInfo.getEndY() + 5;
 
 				}
-				//
-				// Cap with diamond
-				//
-				if (curInfo.getRelType().equals("Aggregation")
-						|| curInfo.getRelType().equals("Composition")) {
-					int Xtop = 0, Xbottom = 0, Xleft = 0, Xright = 0, Ytop = 0, Ybottom = 0, Yleft = 0, Yright = 0;
+				int xPoly[] = { Xtop, Xright, Xbottom, Xleft };
+				int yPoly[] = { Ytop, Yright, Ybottom, Yleft };
 
-					if (curInfo.getOrientation() == "left") {
-						Xtop = curInfo.getEndX();
-						Xbottom = curInfo.getEndX() - 10;
-						Xleft = curInfo.getEndX() - 5;
-						Xright = curInfo.getEndX() - 5;
-
-						Ytop = curInfo.getEndY();
-						Ybottom = curInfo.getEndY();
-						Yleft = curInfo.getEndY() + 5;
-						Yright = curInfo.getEndY() - 5;
-
-					} else if (curInfo.getOrientation() == "right") {
-						Xtop = curInfo.getEndX();
-						Xbottom = curInfo.getEndX() + 10;
-						Xleft = curInfo.getEndX() + 5;
-						Xright = curInfo.getEndX() + 5;
-
-						Ytop = curInfo.getEndY();
-						Ybottom = curInfo.getEndY();
-						Yleft = curInfo.getEndY() + 5;
-						Yright = curInfo.getEndY() - 5;
-
-					} else if (curInfo.getOrientation() == "bottom") {
-
-						Xtop = curInfo.getEndX();
-						Xbottom = curInfo.getEndX();
-						Xleft = curInfo.getEndX() - 5;
-						Xright = curInfo.getEndX() + 5;
-
-						Ytop = curInfo.getEndY() - 10;
-						Ybottom = curInfo.getEndY();
-						Yleft = curInfo.getEndY() - 5;
-						Yright = curInfo.getEndY() - 5;
-
-					} else {
-
-						Xtop = curInfo.getEndX();
-						Xbottom = curInfo.getEndX();
-						Xleft = curInfo.getEndX() - 5;
-						Xright = curInfo.getEndX() + 5;
-
-						Ytop = curInfo.getEndY();
-						Ybottom = curInfo.getEndY() + 10;
-						Yleft = curInfo.getEndY() + 5;
-						Yright = curInfo.getEndY() + 5;
-
-					}
-					int xPoly[] = { Xtop, Xright, Xbottom, Xleft };
-					int yPoly[] = { Ytop, Yright, Ybottom, Yleft };
-
-					// Draw white diamond for Aggregation
-					if (curInfo.getRelType().equals("Aggregation")) {
-						g.setColor(Color.WHITE);
-						g.fillPolygon(xPoly, yPoly, 4);
-						g.setColor(Color.BLACK);
-						g.drawPolygon(xPoly, yPoly, 4);
-					} else {
-						// Draw black diamond for Composition
-						g.setColor(Color.BLACK);
-						g.fillPolygon(xPoly, yPoly, 4);
-					}
-				}
-				// Cap with white triangle
-				if (curInfo.getRelType().equals("Generalization")
-						|| curInfo.getRelType().equals("Implements")) {
+				// Draw white diamond for Aggregation
+				if (curInfo.getRelType().equals("Aggregation")) {
 					g.setColor(Color.WHITE);
-
-					int Xtop = 0, Xleft = 0, Xright = 0, Ytop = 0, Yleft = 0, Yright = 0;
-
-					if (curInfo.getOrientation() == "left") {
-						Xtop = curInfo.getEndX();
-						Xleft = curInfo.getEndX() - 5;
-						Xright = curInfo.getEndX() - 5;
-
-						Ytop = curInfo.getEndY();
-						Yleft = curInfo.getEndY() + 5;
-						Yright = curInfo.getEndY() - 5;
-
-					} else if (curInfo.getOrientation() == "right") {
-						Xtop = curInfo.getEndX();
-						Xleft = curInfo.getEndX() + 5;
-						Xright = curInfo.getEndX() + 5;
-
-						Ytop = curInfo.getEndY();
-						Yleft = curInfo.getEndY() + 5;
-						Yright = curInfo.getEndY() - 5;
-
-					} else if (curInfo.getOrientation() == "bottom") {
-
-						Xtop = curInfo.getEndX();
-						Xleft = curInfo.getEndX() - 5;
-						Xright = curInfo.getEndX() + 5;
-
-						Ytop = curInfo.getEndY();
-						Yleft = curInfo.getEndY() - 5;
-						Yright = curInfo.getEndY() - 5;
-
-					} else {
-						// top
-						Xtop = curInfo.getEndX();
-						Xleft = curInfo.getEndX() - 5;
-						Xright = curInfo.getEndX() + 5;
-
-						Ytop = curInfo.getEndY();
-						Yleft = curInfo.getEndY() + 5;
-						Yright = curInfo.getEndY() + 5;
-
-					}
-
-					int xPoly[] = { Xtop, Xright, Xleft };
-					int yPoly[] = { Ytop, Yright, Yleft };
-					// Draw triangles on ENDPOINTS!
-					g.fillPolygon(xPoly, yPoly, 3);
+					g.fillPolygon(xPoly, yPoly, 4);
 					g.setColor(Color.BLACK);
-					g.drawPolygon(xPoly, yPoly, 3);
+					g.drawPolygon(xPoly, yPoly, 4);
+				} else {
+					// Draw black diamond for Composition
+					g.setColor(Color.BLACK);
+					g.fillPolygon(xPoly, yPoly, 4);
 				}
-				// Cap with black arrow
-				if (curInfo.getRelType().equals("Association")
-						|| curInfo.getRelType().equals("Depend")) {
-					g.setColor(Color.BLACK);
+			}
+			// Cap with white triangle
+			if (curInfo.getRelType().equals("Generalization")
+					|| curInfo.getRelType().equals("Implements")) {
+				g.setColor(Color.WHITE);
 
-					int Xtop = 0, Xleft = 0, Xright = 0, Ytop = 0, Yleft = 0, Yright = 0;
+				int Xtop = 0, Xleft = 0, Xright = 0, Ytop = 0, Yleft = 0, Yright = 0;
 
-					if (curInfo.getOrientation() == "left") {
-						Xtop = curInfo.getEndX();
-						Xleft = curInfo.getEndX() - 5;
-						Xright = curInfo.getEndX() - 5;
+				if (curInfo.getOrientation() == "left") {
+					Xtop = curInfo.getEndX();
+					Xleft = curInfo.getEndX() - 5;
+					Xright = curInfo.getEndX() - 5;
 
-						Ytop = curInfo.getEndY();
-						Yleft = curInfo.getEndY() + 5;
-						Yright = curInfo.getEndY() - 5;
+					Ytop = curInfo.getEndY();
+					Yleft = curInfo.getEndY() + 5;
+					Yright = curInfo.getEndY() - 5;
 
-					} else if (curInfo.getOrientation() == "right") {
-						Xtop = curInfo.getEndX();
-						Xleft = curInfo.getEndX() + 5;
-						Xright = curInfo.getEndX() + 5;
+				} else if (curInfo.getOrientation() == "right") {
+					Xtop = curInfo.getEndX();
+					Xleft = curInfo.getEndX() + 5;
+					Xright = curInfo.getEndX() + 5;
 
-						Ytop = curInfo.getEndY();
-						Yleft = curInfo.getEndY() + 5;
-						Yright = curInfo.getEndY() - 5;
+					Ytop = curInfo.getEndY();
+					Yleft = curInfo.getEndY() + 5;
+					Yright = curInfo.getEndY() - 5;
 
-					} else if (curInfo.getOrientation() == "bottom") {
+				} else if (curInfo.getOrientation() == "bottom") {
 
-						Xtop = curInfo.getEndX();
-						Xleft = curInfo.getEndX() - 5;
-						Xright = curInfo.getEndX() + 5;
+					Xtop = curInfo.getEndX();
+					Xleft = curInfo.getEndX() - 5;
+					Xright = curInfo.getEndX() + 5;
 
-						Ytop = curInfo.getEndY();
-						Yleft = curInfo.getEndY() - 5;
-						Yright = curInfo.getEndY() - 5;
+					Ytop = curInfo.getEndY();
+					Yleft = curInfo.getEndY() - 5;
+					Yright = curInfo.getEndY() - 5;
 
-					} else {
-						// top
-						Xtop = curInfo.getEndX();
-						Xleft = curInfo.getEndX() - 5;
-						Xright = curInfo.getEndX() + 5;
+				} else {
+					// top
+					Xtop = curInfo.getEndX();
+					Xleft = curInfo.getEndX() - 5;
+					Xright = curInfo.getEndX() + 5;
 
-						Ytop = curInfo.getEndY();
-						Yleft = curInfo.getEndY() + 5;
-						Yright = curInfo.getEndY() + 5;
+					Ytop = curInfo.getEndY();
+					Yleft = curInfo.getEndY() + 5;
+					Yright = curInfo.getEndY() + 5;
 
-					}
-					BasicStroke stroke2 = new BasicStroke(3.0f);
-					g2d.setStroke(stroke2);
-					g.drawLine(Xtop, Ytop, Xleft, Yleft);
-					g.drawLine(Xtop, Ytop, Xright, Yright);
-					g2d.setStroke(stroke);
 				}
 
+				int xPoly[] = { Xtop, Xright, Xleft };
+				int yPoly[] = { Ytop, Yright, Yleft };
+				// Draw triangles on ENDPOINTS!
+				g.fillPolygon(xPoly, yPoly, 3);
+				g.setColor(Color.BLACK);
+				g.drawPolygon(xPoly, yPoly, 3);
+			}
+			// Cap with black arrow
+			if (curInfo.getRelType().equals("Association")
+					|| curInfo.getRelType().equals("Depend")) {
+				g.setColor(Color.BLACK);
+
+				int Xtop = 0, Xleft = 0, Xright = 0, Ytop = 0, Yleft = 0, Yright = 0;
+
+				if (curInfo.getOrientation() == "left") {
+					Xtop = curInfo.getEndX();
+					Xleft = curInfo.getEndX() - 5;
+					Xright = curInfo.getEndX() - 5;
+
+					Ytop = curInfo.getEndY();
+					Yleft = curInfo.getEndY() + 5;
+					Yright = curInfo.getEndY() - 5;
+
+				} else if (curInfo.getOrientation() == "right") {
+					Xtop = curInfo.getEndX();
+					Xleft = curInfo.getEndX() + 5;
+					Xright = curInfo.getEndX() + 5;
+
+					Ytop = curInfo.getEndY();
+					Yleft = curInfo.getEndY() + 5;
+					Yright = curInfo.getEndY() - 5;
+
+				} else if (curInfo.getOrientation() == "bottom") {
+
+					Xtop = curInfo.getEndX();
+					Xleft = curInfo.getEndX() - 5;
+					Xright = curInfo.getEndX() + 5;
+
+					Ytop = curInfo.getEndY();
+					Yleft = curInfo.getEndY() - 5;
+					Yright = curInfo.getEndY() - 5;
+
+				} else {
+					// top
+					Xtop = curInfo.getEndX();
+					Xleft = curInfo.getEndX() - 5;
+					Xright = curInfo.getEndX() + 5;
+
+					Ytop = curInfo.getEndY();
+					Yleft = curInfo.getEndY() + 5;
+					Yright = curInfo.getEndY() + 5;
+
+				}
+				BasicStroke stroke2 = new BasicStroke(3.0f);
+				g2d.setStroke(stroke2);
+				g.drawLine(Xtop, Ytop, Xleft, Yleft);
+				g.drawLine(Xtop, Ytop, Xright, Yright);
+				g2d.setStroke(stroke);
 			}
 
 		}
 
-
+	}
 
 	/**
 	 * Draws a line from the first node of a half-finished relationship to the

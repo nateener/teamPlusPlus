@@ -1,13 +1,18 @@
+/**
+ * File: Node.java
+ * Project: UML Editor
+ * Iteration: 3
+ * Description: The most basic data structure for handling classes in the model.
+ */
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Node implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	private int origX; // These keep track of where the node was actually set to be for copying purposes.
+	private int origX; // These keep track of where the node was actually set to
+						// be for copying purposes.
 	private int origY;
 	private int xCoor;
 	private int yCoor;
@@ -56,15 +61,12 @@ public class Node implements Serializable {
 
 		origX = x;
 		origY = y;
-
-		// xCoor = x;
-		// yCoor = y;
 	}
-	
+
 	/**
 	 * Gets the node's x coordinate
-	 * @return
-	 * 	The x coordinate
+	 * 
+	 * @return The x coordinate
 	 */
 	public int getX() {
 
@@ -74,8 +76,8 @@ public class Node implements Serializable {
 
 	/**
 	 * Gets the node's y coordinate
-	 * @return
-	 * 	The y coordinate
+	 * 
+	 * @return The y coordinate
 	 */
 	public int getY() {
 
@@ -85,8 +87,8 @@ public class Node implements Serializable {
 
 	/**
 	 * Gets the node's width
-	 * @return
-	 * 	The width
+	 * 
+	 * @return The width
 	 */
 	public int getWidth() {
 
@@ -96,8 +98,8 @@ public class Node implements Serializable {
 
 	/**
 	 * Gets the node's height
-	 * @return
-	 * 	The height
+	 * 
+	 * @return The height
 	 */
 	public int getHeight() {
 
@@ -107,8 +109,8 @@ public class Node implements Serializable {
 
 	/**
 	 * Gets the node's name
-	 * @return
-	 * 	The node's name
+	 * 
+	 * @return The node's name
 	 */
 	public String getName() {
 
@@ -149,7 +151,8 @@ public class Node implements Serializable {
 	}
 
 	/**
-	 * First remove any empty strings from the arraylist, trim it, then save it to the node
+	 * First remove any empty strings from the arraylist, trim it, then save it
+	 * to the node
 	 * 
 	 * @param attributes
 	 *            ArrayList of strings, each being an attribute of the node
@@ -177,7 +180,8 @@ public class Node implements Serializable {
 	}
 
 	/**
-	 * First remove any empty strings from the arraylist, trim it, then save it to the node
+	 * First remove any empty strings from the arraylist, trim it, then save it
+	 * to the node
 	 * 
 	 * @param methods
 	 *            ArrayList of strings, each being a method of the node
@@ -206,7 +210,8 @@ public class Node implements Serializable {
 	}
 
 	/**
-	 * Finds the center coordinates of the top, bottom, left, and right sides of the node
+	 * Finds the center coordinates of the top, bottom, left, and right sides of
+	 * the node
 	 */
 	public void findDimensions() {
 
@@ -271,7 +276,7 @@ public class Node implements Serializable {
 
 		if ((this.origX != otherNode.origX) || (this.origY != otherNode.origY))
 			return false;
-		
+
 		return true;
 	}
 

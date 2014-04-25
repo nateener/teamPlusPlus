@@ -1,3 +1,10 @@
+/**
+ * File: NodeController.java
+ * Project: UML Editor
+ * Iteration: 3
+ * Description: A statically invoked class to serve as an interface for the Controller to interact with the nodes.
+ */
+
 import java.util.ArrayList;
 import java.util.Iterator;
 

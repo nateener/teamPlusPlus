@@ -1,3 +1,11 @@
+/**
+ * File: ContextMenu.java
+ * Project: UML Editor
+ * Iteration: 3
+ * Description: The ContextMenu class is an extension of the JPopMenu class in the Swing API. 
+ * It will generate all relevant menu items and attaches an actionlistener to each of them. Must be invoked with the .show() method.
+ */
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

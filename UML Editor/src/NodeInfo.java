@@ -1,3 +1,10 @@
+/**
+ * File: NodeInfo.java
+ * Project: UML Editor
+ * Iteration: 3
+ * Description: A data structure for passing node information to the View formated for rendering graphically.
+ */
+
 import java.util.ArrayList;
 
 public class NodeInfo {
@@ -44,8 +51,8 @@ public class NodeInfo {
 
 	/**
 	 * Gets the x coordinate
-	 * @return
-	 * 		The x coordinate
+	 * 
+	 * @return The x coordinate
 	 */
 	public int getxCoor() {
 
@@ -55,8 +62,9 @@ public class NodeInfo {
 
 	/**
 	 * Sets the x coordinate
+	 * 
 	 * @param xCoor
-	 * 		The new x coordinate
+	 *            The new x coordinate
 	 */
 	public void setxCoor(int xCoor) {
 
@@ -66,8 +74,8 @@ public class NodeInfo {
 
 	/**
 	 * Gets the y coordinate
-	 * @return
-	 * 		The y coordinate
+	 * 
+	 * @return The y coordinate
 	 */
 	public int getyCoor() {
 
@@ -77,8 +85,9 @@ public class NodeInfo {
 
 	/**
 	 * Sets the x coordinate
+	 * 
 	 * @param yCoor
-	 * 		The new x coordinate
+	 *            The new x coordinate
 	 */
 	public void setyCoor(int yCoor) {
 
@@ -88,8 +97,8 @@ public class NodeInfo {
 
 	/**
 	 * Gets the width
-	 * @return
-	 * 		The width
+	 * 
+	 * @return The width
 	 */
 	public int getWidth() {
 
@@ -99,8 +108,9 @@ public class NodeInfo {
 
 	/**
 	 * Sets the width
+	 * 
 	 * @param width
-	 * 		The new width
+	 *            The new width
 	 */
 	public void setWidth(int width) {
 
@@ -110,8 +120,8 @@ public class NodeInfo {
 
 	/**
 	 * Gets the height
-	 * @return
-	 * 		The height
+	 * 
+	 * @return The height
 	 */
 	public int getHeight() {
 
@@ -121,8 +131,9 @@ public class NodeInfo {
 
 	/**
 	 * Sets the height
+	 * 
 	 * @param height
-	 * 		The new height
+	 *            The new height
 	 */
 	public void setHeight(int height) {
 
@@ -132,8 +143,8 @@ public class NodeInfo {
 
 	/**
 	 * Gets the name
-	 * @return
-	 * 		The name
+	 * 
+	 * @return The name
 	 */
 	public String getName() {
 
@@ -143,8 +154,8 @@ public class NodeInfo {
 
 	/**
 	 * Returns if the node is highlighted
-	 * @return
-	 * 		True if the node is highlighted
+	 * 
+	 * @return True if the node is highlighted
 	 */
 	public boolean isHigh() {
 
@@ -154,8 +165,9 @@ public class NodeInfo {
 
 	/**
 	 * Sets if the node should be highlighted
+	 * 
 	 * @param high
-	 * 		If the node should be highlighted
+	 *            If the node should be highlighted
 	 */
 	public void setHigh(boolean high) {
 
@@ -165,8 +177,8 @@ public class NodeInfo {
 
 	/**
 	 * Gets the attributes of the node
-	 * @return
-	 * 		The attributes
+	 * 
+	 * @return The attributes
 	 */
 	public ArrayList<String> getAttributes() {
 		return attributes;
@@ -174,8 +186,9 @@ public class NodeInfo {
 
 	/**
 	 * Sets the attributes of the node
+	 * 
 	 * @param attributes
-	 * 		The new attributes
+	 *            The new attributes
 	 */
 	public void setAttributes(ArrayList<String> attributes) {
 		this.attributes = attributes;
@@ -183,8 +196,8 @@ public class NodeInfo {
 
 	/**
 	 * Gets the methods of the node
-	 * @return
-	 * 		The methods
+	 * 
+	 * @return The methods
 	 */
 	public ArrayList<String> getMethods() {
 		return methods;
@@ -192,8 +205,9 @@ public class NodeInfo {
 
 	/**
 	 * Sets the methods of the node
+	 * 
 	 * @param methods
-	 * 		The new methods
+	 *            The new methods
 	 */
 	public void setMethods(ArrayList<String> methods) {
 		this.methods = methods;

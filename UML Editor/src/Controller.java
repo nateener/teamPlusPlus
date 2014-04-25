@@ -1,3 +1,11 @@
+/**
+ * File: Controller.java
+ * Project: UML Editor
+ * Iteration: 3
+ * Description: The Controller class is the central driver of the entire application. It is where main() is called,
+ * which will in turn generate the View and all relevant models.
+ */
+
 import java.awt.Color;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -43,10 +51,10 @@ public class Controller {
 	 */
 	public static void serveObjects() {
 
-		if(view == null) {
+		if (view == null) {
 			return;
 		}
-		
+
 		// needs to serve everything simultaneously
 		ArrayList<NodeInfo> nodeInfo = new ArrayList<NodeInfo>();
 		ArrayList<RelInfo> relInfo = new ArrayList<RelInfo>();
@@ -71,7 +79,8 @@ public class Controller {
 											// places
 			RelInfo curInfo = new RelInfo(curRel.getStartX(),
 					curRel.getStartY(), curRel.getEndX(), curRel.getEndY(),
-					curRel.isSelfRel(), curRel.getRelationshipType(), curRel.getStartDetail(), curRel.getEndDetail(),
+					curRel.isSelfRel(), curRel.getRelationshipType(),
+					curRel.getStartDetail(), curRel.getEndDetail(),
 					curRel.getOrientation());
 
 			relInfo.add(curInfo);
@@ -159,10 +168,10 @@ public class Controller {
 		}
 
 	}
-	
+
 	/**
-	 * Sets the state of the UML diagram to the next one in the undo stack, if it exists
-	 * The current state is saved in the redo stack
+	 * Sets the state of the UML diagram to the next one in the undo stack, if
+	 * it exists The current state is saved in the redo stack
 	 */
 	public static void undo() {
 		UndoRedoStack.State newState = history.undoPop();
@@ -179,8 +188,8 @@ public class Controller {
 	}
 
 	/**
-	 * Sets the state of the UML diagram to the next one in the redo stack, if it exists.
-	 * The current state is saved in the undo stack.
+	 * Sets the state of the UML diagram to the next one in the redo stack, if
+	 * it exists. The current state is saved in the undo stack.
 	 */
 	public static void redo() {
 		UndoRedoStack.State newState = history.redoPop();
@@ -213,8 +222,9 @@ public class Controller {
 
 	/**
 	 * Sets the state to select mode
+	 * 
 	 * @param button
-	 * 		The button
+	 *            The button
 	 */
 	public static void selectorButton(JButton button) {
 
@@ -228,8 +238,9 @@ public class Controller {
 
 	/**
 	 * Sets the state to class mode
+	 * 
 	 * @param button
-	 * 		The button
+	 *            The button
 	 */
 	public static void classButton(JButton button) {
 
@@ -243,8 +254,9 @@ public class Controller {
 
 	/**
 	 * Sets the state to delete mode
+	 * 
 	 * @param button
-	 * 		The button
+	 *            The button
 	 */
 	public static void deleteButton(JButton button) {
 
@@ -257,8 +269,9 @@ public class Controller {
 
 	/**
 	 * Sets the state to aggregation mode
+	 * 
 	 * @param button
-	 * 		The button
+	 *            The button
 	 */
 	public static void aggButton(JButton button) {
 		clearClickMode();
@@ -270,8 +283,9 @@ public class Controller {
 
 	/**
 	 * Sets the state to composition mode
+	 * 
 	 * @param button
-	 * 		The button
+	 *            The button
 	 */
 	public static void compButton(JButton button) {
 
@@ -284,8 +298,9 @@ public class Controller {
 
 	/**
 	 * Sets the state to generalization mode
+	 * 
 	 * @param button
-	 * 		The button
+	 *            The button
 	 */
 	public static void genButton(JButton button) {
 
@@ -295,11 +310,12 @@ public class Controller {
 		button.setBackground(new Color(255, 255, 153));
 
 	}
-	
+
 	/**
 	 * Sets the state to association mode
+	 * 
 	 * @param button
-	 * 		The button
+	 *            The button
 	 */
 	public static void assButton(JButton button) {
 
@@ -312,8 +328,9 @@ public class Controller {
 
 	/**
 	 * Sets the state to dependency mode
+	 * 
 	 * @param button
-	 * 		The button
+	 *            The button
 	 */
 	public static void dependButton(JButton button) {
 
@@ -326,8 +343,9 @@ public class Controller {
 
 	/**
 	 * Sets the state to implementation mode
+	 * 
 	 * @param button
-	 * 		The button
+	 *            The button
 	 */
 	public static void impButton(JButton button) {
 
@@ -340,8 +358,9 @@ public class Controller {
 
 	/**
 	 * Sets the state to basic mode
+	 * 
 	 * @param button
-	 * 		The button
+	 *            The button
 	 */
 	public static void basicButton(JButton button) {
 
@@ -354,8 +373,8 @@ public class Controller {
 
 	/**
 	 * Checks if there are undo states remaining
-	 * @return
-	 * 		True if there are undo states
+	 * 
+	 * @return True if there are undo states
 	 */
 	public static boolean hasUndo() {
 		return history.hasUndoStates();
@@ -363,8 +382,8 @@ public class Controller {
 
 	/**
 	 * Checks if there are redo states remaining
-	 * @return
-	 * 		True if there are redo states
+	 * 
+	 * @return True if there are redo states
 	 */
 	public static boolean hasRedo() {
 		return history.hasRedoStates();
@@ -402,11 +421,11 @@ public class Controller {
 				file = curFile;
 			}
 		}
-		
-		if(!file.endsWith(".uml")) {
+
+		if (!file.endsWith(".uml")) {
 			file += ".uml";
 		}
-		
+
 		curFile = file;
 		try {
 			FileOutputStream fileOut = new FileOutputStream(file);

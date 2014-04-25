@@ -1,13 +1,12 @@
-/*
+/**
  * File: View.java
  * Project: UML Editor
- * Iteration: 1
+ * Iteration: 3
  * Description: The View class is an extension of the JFrame class in the Swing API, as per the Java Model-View-Control
  * conventions for design. It is designed to be as inclusive as possible; managing the view port, window, frames, panels
  * tool bars, and menu bar. 
  */
 
-/* Imports */
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -53,6 +52,7 @@ public class View extends JFrame implements ActionListener {
 	private JButton undoButton;
 	private JButton redoButton;
 	private JButton basicButton;
+
 	/**
 	 * Default constructor for the View class. Parameters: None Return: Void
 	 * Sets up the 'Look And Feel' in the UI Manager. Calls the build for the
@@ -90,8 +90,8 @@ public class View extends JFrame implements ActionListener {
 	private JMenuItem itemExportImage;
 
 	/**
-	 * Builder function for the menu bar.
-	 * Generates the menu bar, menus, and menu items.
+	 * Builder function for the menu bar. Generates the menu bar, menus, and
+	 * menu items.
 	 */
 	private void buildMenuBar() {
 
@@ -144,8 +144,7 @@ public class View extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * Builder function for the tool bar.
-	 * Generates the tool bar and buttons.
+	 * Builder function for the tool bar. Generates the tool bar and buttons.
 	 */
 	private void buildToolBar() {
 
@@ -339,11 +338,12 @@ public class View extends JFrame implements ActionListener {
 	public void showFileSaver() {
 
 		JFileChooser c = new JFileChooser();
-		
-		FileFilter filter = new SingleExtensionFilter(".uml", "UML diagram files");
-		
+
+		FileFilter filter = new SingleExtensionFilter(".uml",
+				"UML diagram files");
+
 		c.addChoosableFileFilter(filter);
-		
+
 		c.setFileFilter(filter);
 		// Demonstrate "Save" dialog:
 		int rVal = c.showSaveDialog(View.this);
@@ -362,13 +362,14 @@ public class View extends JFrame implements ActionListener {
 	public void showFileOpener() {
 
 		JFileChooser c = new JFileChooser();
-		
-		FileFilter filter = new SingleExtensionFilter(".uml", "UML diagram files");
-		
+
+		FileFilter filter = new SingleExtensionFilter(".uml",
+				"UML diagram files");
+
 		c.addChoosableFileFilter(filter);
-		
+
 		c.setFileFilter(filter);
-		
+
 		int rVal = c.showOpenDialog(View.this);
 		if (rVal == JFileChooser.APPROVE_OPTION) {
 
@@ -385,29 +386,33 @@ public class View extends JFrame implements ActionListener {
 	 */
 	public void exportAsImage() {
 		JFileChooser c = new JFileChooser();
-		FileFilter filter = new SingleExtensionFilter(".png", ".png image files");
+		FileFilter filter = new SingleExtensionFilter(".png",
+				".png image files");
 		c.setFileFilter(filter);
 		c.addChoosableFileFilter(filter);
-		
+
 		int rVal = c.showSaveDialog(View.this);
-		
+
 		if (rVal == JFileChooser.APPROVE_OPTION) {
-			BufferedImage bi = new BufferedImage(drawPanel.getSize().width, drawPanel.getSize().height, BufferedImage.TYPE_INT_ARGB); 
+			BufferedImage bi = new BufferedImage(drawPanel.getSize().width,
+					drawPanel.getSize().height, BufferedImage.TYPE_INT_ARGB);
 			Graphics g = bi.createGraphics();
-			drawPanel.paint(g);  //this == JComponent
+			drawPanel.paint(g); // this == JComponent
 			g.dispose();
 			File imageFile = c.getSelectedFile();
-			if (!(imageFile.toString().endsWith(".png")) ){
+			if (!(imageFile.toString().endsWith(".png"))) {
 				String newFileName = imageFile.getPath();
 				newFileName += ".png";
 				imageFile = new File(newFileName);
 			}
-			try{ImageIO.write(bi,"png",imageFile);}catch (Exception e) {}
+			try {
+				ImageIO.write(bi, "png", imageFile);
+			} catch (Exception e) {
+			}
 		}
 		if (rVal == JFileChooser.CANCEL_OPTION) {
 			// Do nothing! YAY!
 		}
-		
 
 	}
 
@@ -471,7 +476,9 @@ public class View extends JFrame implements ActionListener {
 				Arrays.asList(methodsArray));
 
 		if (option == JOptionPane.OK_OPTION) {
-			if(n.getName().equals(newName.getText()) && n.getAttributes().equals(trimArrayList(attrList)) && n.getMethods().equals(trimArrayList(methList))) {
+			if (n.getName().equals(newName.getText())
+					&& n.getAttributes().equals(trimArrayList(attrList))
+					&& n.getMethods().equals(trimArrayList(methList))) {
 				Controller.history.undoPop();
 				return;
 			}
@@ -484,7 +491,7 @@ public class View extends JFrame implements ActionListener {
 		}
 
 	}
-	
+
 	/**
 	 * Creates and shows window asking for the name, attributes, and methods
 	 * then separates each line into a string that is stored into an arrayList
@@ -494,34 +501,31 @@ public class View extends JFrame implements ActionListener {
 	 *            Node to show and edit current information
 	 */
 	public void showRelInfo(Node n) {
-		
+
 		JComboBox<Relationship> relComboBox = new JComboBox<Relationship>();
-		
+
 		Iterator<Relationship> relIter = Controller.rels.iterator();
-		//ArrayList<Relationship> relList = new ArrayList<Relationship>();
 		while (relIter.hasNext()) {
 			Relationship curRel = relIter.next();
 			if (curRel.involvesNode(n)) {
-				//relList.add(curRel);
 				relComboBox.addItem(curRel);
 			}
 		}
-		
-		
-		
+
 		JTextField startDetail = new JTextField();
 		JTextField endDetail = new JTextField();
-		
 
-		Object[] message = { "Relationships", relComboBox, "Relationship Start Detail:", startDetail,  "Relationship End Detail:", endDetail
+		Object[] message = { "Relationships", relComboBox,
+				"Relationship Start Detail:", startDetail,
+				"Relationship End Detail:", endDetail
 
 		};
 
-		int option = JOptionPane.showConfirmDialog(null, message, "Edit Relationship",
-				JOptionPane.OK_CANCEL_OPTION);
+		int option = JOptionPane.showConfirmDialog(null, message,
+				"Edit Relationship", JOptionPane.OK_CANCEL_OPTION);
 
 		if (option == JOptionPane.OK_OPTION) {
-			Relationship r = (Relationship)relComboBox.getSelectedItem();
+			Relationship r = (Relationship) relComboBox.getSelectedItem();
 			r.setStartDetail(startDetail.getText());
 			r.setEndDetail(endDetail.getText());
 			r.printRelationship();
@@ -530,16 +534,15 @@ public class View extends JFrame implements ActionListener {
 		}
 
 	}
-	
 
 	/**
 	 * Pops up a confirmation window and returns true if the user clicks yes
+	 * 
 	 * @param title
-	 * 		The title of the window.
+	 *            The title of the window.
 	 * @param message
-	 * 		The message in the body of the window.
-	 * @return
-	 * 		True if the user clicked yes in the window
+	 *            The message in the body of the window.
+	 * @return True if the user clicked yes in the window
 	 */
 	public boolean confirmMessage(String title, String message) {
 
@@ -548,42 +551,45 @@ public class View extends JFrame implements ActionListener {
 				JOptionPane.YES_NO_OPTION) == 0);
 
 	}
-	
+
 	/**
-	 * Returns a copy of the arraylist passed in with empty strings removed from it
+	 * Returns a copy of the arraylist passed in with empty strings removed from
+	 * it
+	 * 
 	 * @param in
-	 * 		The list to be trimmed
-	 * @return
-	 * 		The trimmed list
+	 *            The list to be trimmed
+	 * @return The trimmed list
 	 */
 	private ArrayList<String> trimArrayList(ArrayList<String> in) {
 		@SuppressWarnings("unchecked")
 		ArrayList<String> out = (ArrayList<String>) in.clone();
-		
+
 		for (int i = 0; i < out.size(); i++) {
 			if (out.get(i).isEmpty()) {
 				out.remove(i);
 			}
 		}
-		
+
 		return out;
 	}
-	
+
 	/**
 	 * Filters for files of the given extension with the given description
+	 * 
 	 * @author Josh
-	 *
+	 * 
 	 */
 	private class SingleExtensionFilter extends FileFilter {
 		private String ext;
 		private String desc;
-		
+
 		/**
 		 * Creates a filter with the given extension and description
+		 * 
 		 * @param ext
-		 * 		The extension of the files to filter for.
+		 *            The extension of the files to filter for.
 		 * @param desc
-		 * 		The description of the file filter
+		 *            The description of the file filter
 		 */
 		public SingleExtensionFilter(String ext, String desc) {
 			this.ext = ext;

@@ -1,7 +1,17 @@
+/**
+ * File: JUnitTest.java
+ * Project: UML Editor
+ * Iteration: 3
+ * Description: Must be run in a JUnit debugger via your IDE! Standard unit testing driver.
+ */
+
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.EmptyStackException;
 import java.util.Iterator;
+
+import javax.swing.JButton;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -87,13 +97,6 @@ public class JUnitTest {
 		NodeController.createNode(x, y);
 		node = NodeController.grabNode(x, y);
 		assertNotNull(node);
-// TODO FIX TEST
-		// Test moveNode
-		// NodeController.moveNode(x, y);
-		// x = x - node.getWidth() / 2;
-		// y = y - node.getHeight() / 2;
-		// node = NodeController.grabNode(x, y);
-		// assertNotNull(node);
 
 		// Test isNodeFull
 		assertTrue(NodeController.isNodeFull(x, y));
@@ -198,17 +201,11 @@ public class JUnitTest {
 		assertEquals(x, rel.getStartX());
 		assertEquals(y, rel.getStartY());
 
-		// Test setEndpoint getEndX getEndY
+		// Test getStartNode getEndNode
 		x = 100;
 		y = 100;
 		Node node2 = new Node(x, y);
 		rel.setEndpoint(node2);
-		x = x + node2.getWidth() / 2;
-		y = y + node2.getHeight();
-		assertEquals(x, rel.getEndX());
-		assertEquals(y, rel.getEndY());
-
-		// Test getStartNode getEndNode
 		assertTrue(rel.getStartNode().equals(node1));
 		assertTrue(rel.getEndNode().equals(node2));
 
@@ -234,10 +231,10 @@ public class JUnitTest {
 		String type = "type";
 		String startDetail = "Start";
 		String endDetail = "End";
-		String orientation = "bottom";
-		
+
 		// Test constructor
-		RelInfo info = new RelInfo(x1, y1, x2, y2, self, type, startDetail, endDetail, orientation);
+		RelInfo info = new RelInfo(x1, y1, x2, y2, self, type, startDetail,
+				endDetail, "test");
 		assertNotNull(info);
 
 		// Test setStartX getStartX
@@ -270,103 +267,156 @@ public class JUnitTest {
 		info.setSelfRel(self);
 		assertFalse(info.isSelfRel());
 	}
-	
-	@Test
-	public void relationshipControllerTest() {
-		
-		// Test createRelationship
-		
-		// Test grabRel
-		
-		// Test isRelFull
-		
-		// Test editRelationship
-		
-		// Test deleteRelationship
-		
-	}
-	
+
 	@Test
 	public void controllerTest() {
-		
-		// Test mouseClick
-		
-		// Test mouseClickRight
-		
-		// Test undo
-		
-		// Test redo
-		
-		// Test clearClickMode
-		
+
 		// Test selectorButton
-		
+		Controller.selectorButton(new JButton());
+		assertTrue(Controller.clickValue == 0);
+
 		// Test classButton
-		
+		Controller.classButton(new JButton());
+		assertTrue(Controller.clickValue == 1);
+
 		// Test deleteButton
-		
+		Controller.deleteButton(new JButton());
+		assertTrue(Controller.clickValue == 2);
+
 		// Test aggButton
-		
+		Controller.aggButton(new JButton());
+		assertTrue(Controller.clickValue == 3);
+
 		// Test compButton
-		
+		Controller.compButton(new JButton());
+		assertTrue(Controller.clickValue == 4);
+
 		// Test genButton
-		
+		Controller.genButton(new JButton());
+		assertTrue(Controller.clickValue == 5);
+
 		// Test assButton
-		
+		Controller.assButton(new JButton());
+		assertTrue(Controller.clickValue == 6);
+
 		// Test dependButton
-		
+		Controller.dependButton(new JButton());
+		assertTrue(Controller.clickValue == 7);
+
 		// Test impButton
-		
+		Controller.impButton(new JButton());
+		assertTrue(Controller.clickValue == 8);
+
 		// Test basicButton
-		
+		Controller.basicButton(new JButton());
+		assertTrue(Controller.clickValue == 9);
+
 		// Test hasUndo
-		
-		// Test hasRedo
-		
-		// Test save
-		
-		// Test load
-		
-		// Test newUML
-		
+		assertFalse(Controller.history.hasUndoStates());
+
 	}
-	
-	@SuppressWarnings("deprecation")
+
 	@Test
 	public void contextMenuTest() {
-		
+
 		// Test constructor
 		Node n = new Node(5, 5);
 		ContextMenu menu = new ContextMenu(n);
 		assertNotNull(menu);
-		
+
 		// Test show
 		menu.show(Controller.view.drawPanel, 5, 5);
 	}
-	
+
 	@Test
 	public void undoRedoStackTest() {
-		
+
+		UndoRedoStack.State s;
+		ArrayList<Node> testNodes = new ArrayList<Node>();
+		ArrayList<Relationship> testRels = new ArrayList<Relationship>();
+		Node n1 = new Node(10, 10);
+		Node n2 = new Node(500, 500);
+		Relationship r1 = new Relationship(n1, "test");
+		r1.setEndpoint(n2);
+
+		// Test constructor
+		UndoRedoStack stack = new UndoRedoStack();
+		assertNotNull(stack);
+
 		// Test undoPush
-		
+		s = stack.undoPush(testNodes, testRels);
+		assertTrue(s.getNodes().equals(testNodes));
+		assertTrue(s.getRelations().equals(testRels));
+
 		// Test redoPush
-		
+		s = stack.redoPush(testNodes, testRels);
+		assertTrue(s.getNodes().equals(testNodes));
+		assertTrue(s.getRelations().equals(testRels));
+
 		// Test undoPop
-		
+		s = stack.undoPop();
+		assertTrue(s.getNodes().equals(testNodes));
+		assertTrue(s.getRelations().equals(testRels));
+		assertNull(stack.undoPop());
+
 		// Test redoPop
-		
+		s = stack.redoPop();
+		assertTrue(s.getNodes().equals(testNodes));
+		assertTrue(s.getRelations().equals(testRels));
+		assertNull(stack.redoPop());
+
 		// Test undoPeek
-		
+		boolean b = false;
+		try {
+			stack.undoPeek();
+		} catch (EmptyStackException e) {
+			b = true;
+		}
+		assertTrue(b);
+
 		// Test redoPeek
-		
+		b = false;
+		try {
+			stack.undoPeek();
+		} catch (EmptyStackException e) {
+			b = true;
+		}
+		assertTrue(b);
+
 		// Test undoClear
-		
+		stack.undoPush(testNodes, testRels);
+		stack.undoClear();
+		b = false;
+		try {
+			stack.redoPeek();
+		} catch (EmptyStackException e) {
+			b = true;
+		}
+		assertTrue(b);
+
 		// Test redoClear
-		
+		stack.redoPush(testNodes, testRels);
+		stack.redoClear();
+		b = false;
+		try {
+			stack.undoPeek();
+		} catch (EmptyStackException e) {
+			b = true;
+		}
+		assertTrue(b);
+
 		// Test hasUndoStates
-		
+		stack.undoPush(testNodes, testRels);
+		assertTrue(stack.hasUndoStates());
+		stack.undoClear();
+		assertFalse(stack.hasUndoStates());
+
 		// Test hasRedoStates
-		
+		stack.redoPush(testNodes, testRels);
+		assertTrue(stack.hasRedoStates());
+		stack.redoClear();
+		assertFalse(stack.hasRedoStates());
+
 	}
 
 }
