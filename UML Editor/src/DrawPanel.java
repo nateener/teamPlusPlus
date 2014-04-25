@@ -110,34 +110,35 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 			// Drawing the relationship details (i.e. 1...*)			
 				if(curInfo.getStartDetail() != null){
 					if(curInfo.getOrientation() == "left"){
-						g.drawString(curInfo.getStartDetail(), curInfo.getStartX() - 15, curInfo.getStartY() + 15);
+						g.drawString(curInfo.getStartDetail(), curInfo.getStartX() + 15, curInfo.getStartY() + 15);
 					} else if (curInfo.getOrientation() == "right"){
 						g.drawString(curInfo.getStartDetail(), curInfo.getStartX() - 15, curInfo.getStartY() + 15);
 					} else if (curInfo.getOrientation() == "top"){
-						g.drawString(curInfo.getEndDetail(), curInfo.getStartX() + 5, curInfo.getEndY() + 10);
+						g.drawString(curInfo.getStartDetail(), curInfo.getStartX() + 5, curInfo.getStartY() - 20);
 					} else  { // bottom
-						g.drawString(curInfo.getEndDetail(), curInfo.getStartX() + 5, curInfo.getEndY() - 10);
+						g.drawString(curInfo.getStartDetail(), curInfo.getStartX() + 5, curInfo.getStartY() + 20);
 					}
 				}
 				if(curInfo.getEndDetail() != null){
 					if(curInfo.getOrientation() == "left"){
-						g.drawString(curInfo.getEndDetail(), curInfo.getEndX() + 5, curInfo.getEndY() + 5);
+						g.drawString(curInfo.getEndDetail(), curInfo.getEndX() - 15, curInfo.getEndY() + 15);
 					} else if (curInfo.getOrientation() == "right"){
-						g.drawString(curInfo.getEndDetail(), curInfo.getEndX() - 30, curInfo.getEndY() + 10);
+						g.drawString(curInfo.getEndDetail(), curInfo.getEndX() + 15, curInfo.getEndY() + 15);
 					} else if (curInfo.getOrientation() == "top"){
-						g.drawString(curInfo.getEndDetail(), curInfo.getEndX() + 5, curInfo.getEndY() + 10);
+						g.drawString(curInfo.getEndDetail(), curInfo.getEndX() + 5, curInfo.getEndY() + 20);
 					} else  { // bottom
-						g.drawString(curInfo.getEndDetail(), curInfo.getEndX() + 5, curInfo.getEndY() - 10);
+						g.drawString(curInfo.getEndDetail(), curInfo.getEndX() + 5, curInfo.getEndY() - 20);
 						
 					}
 					
 				
 			}
+				/*
 			if (curInfo.getEndDetail() != null) {
 				g.drawString(curInfo.getEndDetail(), curInfo.getEndX() + 5,
 						curInfo.getEndY() + 5);
 			}
-
+				 */
 			if (curInfo.isSelfRel()) {
 				if (curInfo.getRelType().equals("Implements")
 						|| curInfo.getRelType().equals("Depend")) {
