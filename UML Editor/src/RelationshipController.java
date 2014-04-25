@@ -21,8 +21,11 @@ public class RelationshipController {
 
 		while (itr.hasNext()) {
 			Relationship curRel = itr.next();
-
-			if (curRel.involvesNode(start) && curRel.involvesNode(end)) {
+			
+			if (newRel.isSelfRel() && (curRel.isSelfRel() && curRel.involvesNode(start))) {
+				Controller.rels.remove(curRel);
+				break;
+			} else if (!newRel.isSelfRel() && (curRel.involvesNode(start) && curRel.involvesNode(end))) {
 				Controller.rels.remove(curRel);
 				break;
 			}
@@ -34,16 +37,6 @@ public class RelationshipController {
 
 	}
 	
-	/**
-	 * Does nothing at the moment.
-	 * @param node
-	 */
-	public static void editRelationship(Node node) {
-
-		Controller.serveObjects();
-
-	}
-
 	/**
 	 * Check if given coordinates contain a relationship, prompt to delete and
 	 * if yes delete

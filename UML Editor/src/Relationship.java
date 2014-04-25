@@ -163,7 +163,7 @@ public class Relationship implements Serializable {
 	public void setOrientation(String orienting){
 		
 		orientation = orienting;
-		
+
 	}
 
 	/**
@@ -200,8 +200,11 @@ public class Relationship implements Serializable {
 	private void setEndPosition() {
 		 
 		if (endNode != null) {
-			
-			if(endNode.getX() + endNode.getWidth()  + 30 < startNode.getX()){
+			if (isSelfRel()){
+				endX = endNode.getX() + 20;
+				endY = endNode.getY();
+				setOrientation("bottom");
+			}else if(endNode.getX() + endNode.getWidth()  + 30 < startNode.getX()){
 				// Right
 				endX = endNode.getX() + endNode.getWidth();
 				// This ensures the endpoint does not leave the bounds of the box. 
@@ -254,7 +257,6 @@ public class Relationship implements Serializable {
 				setOrientation("top");
 				
 			}
-			
 			//endX = endNode.getX() + endNode.getWidth() / 2;
 			//endY = endNode.getY() + endNode.getHeight();
 		}

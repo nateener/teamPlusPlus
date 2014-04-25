@@ -9,10 +9,8 @@
 
 /* Imports */
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -22,7 +20,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -33,7 +30,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -132,7 +128,9 @@ public class View extends JFrame implements ActionListener {
 		menu.add(itemSaveAs);
 		itemSaveAs.addActionListener(this);
 		itemExportImage = new JMenuItem("Export as Image");
-		itemExportImage.setMnemonic(KeyEvent.VK_A);
+		itemExportImage.setMnemonic(KeyEvent.VK_P);
+		itemExportImage.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P,
+				ActionEvent.CTRL_MASK));
 		menu.add(itemExportImage);
 		itemExportImage.addActionListener(this);
 		menu.addSeparator();

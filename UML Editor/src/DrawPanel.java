@@ -92,9 +92,9 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 	 * Draws the relationships between nodes
 	 * 
 	 * @param g
-	 * 		The Graphics object
+	 *            The Graphics object
 	 * @param relInfo
-	 * 		The relationship information
+	 *            The relationship information
 	 */
 	public void drawRelationships(Graphics g, ArrayList<RelInfo> relInfo) {
 		Graphics2D g2d = (Graphics2D) g;
@@ -106,9 +106,8 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 		g.setColor(Color.BLACK);
 		while (relItr.hasNext()) {
 			RelInfo curInfo = relItr.next();
-			
-			// Drawing the relationship details (i.e. 1...*)
-			
+
+			// Drawing the relationship details (i.e. 1...*)			
 				if(curInfo.getStartDetail() != null){
 					if(curInfo.getOrientation() == "left"){
 						g.drawString(curInfo.getStartDetail(), curInfo.getStartX() - 15, curInfo.getStartY() + 15);
@@ -132,10 +131,13 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 						
 					}
 					
-				}
-			
-			
-			
+				
+			}
+			if (curInfo.getEndDetail() != null) {
+				g.drawString(curInfo.getEndDetail(), curInfo.getEndX() + 5,
+						curInfo.getEndY() + 5);
+			}
+
 			if (curInfo.isSelfRel()) {
 				if (curInfo.getRelType().equals("Implements")
 						|| curInfo.getRelType().equals("Depend")) {
@@ -152,36 +154,39 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 					g.drawRect(curInfo.getStartX() - 20,
 							curInfo.getStartY() - 20, 40, 40);
 				}
-			} else {
-				
-				
+			}
+
 				int Ymidpoint = curInfo.getStartY()
 						+ ((curInfo.getEndY() - curInfo.getStartY()) / 2);
-				int Xmidpoint = curInfo.getStartX() + ((curInfo.getEndX() - curInfo.getStartX()) / 2);
+				int Xmidpoint = curInfo.getStartX()
+						+ ((curInfo.getEndX() - curInfo.getStartX()) / 2);
 
 				if (curInfo.getRelType().equals("Implements")
 						|| curInfo.getRelType().equals("Depend")) {
-					// Draw dotted line
+					// Draw dotted lines
 					Stroke drawingStroke = new BasicStroke(2,
 							BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0,
 							new float[] { 9 }, 0);
 					Line2D line1, line2, line3;
-					if(curInfo.getOrientation() == "top" || curInfo.getOrientation() == "bottom"){
+					if (curInfo.getOrientation() == "top"
+							|| curInfo.getOrientation() == "bottom") {
 						line1 = new Line2D.Double(curInfo.getStartX(),
-							curInfo.getStartY(), curInfo.getStartX(), Ymidpoint);
+								curInfo.getStartY(), curInfo.getStartX(),
+								Ymidpoint);
 						line2 = new Line2D.Double(curInfo.getEndX(),
-							curInfo.getEndY(), curInfo.getEndX(), Ymidpoint);
+								curInfo.getEndY(), curInfo.getEndX(), Ymidpoint);
 						line3 = new Line2D.Double(curInfo.getStartX(),
-							Ymidpoint, curInfo.getEndX(), Ymidpoint);
-						
+								Ymidpoint, curInfo.getEndX(), Ymidpoint);
+
 					} else {
-						
-						line1 = new Line2D.Double(curInfo.getStartX(), 
-								curInfo.getStartY(), Xmidpoint, curInfo.getStartY());
-						line2 = new Line2D.Double(Xmidpoint, 
-								curInfo.getEndY(), Xmidpoint, curInfo.getStartY());
-						line3 = new Line2D.Double(Xmidpoint, 
-								curInfo.getEndY(), curInfo.getEndX(), curInfo.getEndY());
+						// Draw regular lines
+						line1 = new Line2D.Double(curInfo.getStartX(),
+								curInfo.getStartY(), Xmidpoint,
+								curInfo.getStartY());
+						line2 = new Line2D.Double(Xmidpoint, curInfo.getEndY(),
+								Xmidpoint, curInfo.getStartY());
+						line3 = new Line2D.Double(Xmidpoint, curInfo.getEndY(),
+								curInfo.getEndX(), curInfo.getEndY());
 					}
 					g2d.setStroke(drawingStroke);
 					g2d.draw(line1);
@@ -191,209 +196,149 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 				} else {
 					// Draw regular line
 					Line2D line1, line2, line3;
-					if(curInfo.getOrientation() == "top" || curInfo.getOrientation() == "bottom"){
+					if (curInfo.getOrientation() == "top"
+							|| curInfo.getOrientation() == "bottom") {
 						line1 = new Line2D.Double(curInfo.getStartX(),
-							curInfo.getStartY(), curInfo.getStartX(), Ymidpoint);
+								curInfo.getStartY(), curInfo.getStartX(),
+								Ymidpoint);
 						line2 = new Line2D.Double(curInfo.getEndX(),
-							curInfo.getEndY(), curInfo.getEndX(), Ymidpoint);
+								curInfo.getEndY(), curInfo.getEndX(), Ymidpoint);
 						line3 = new Line2D.Double(curInfo.getStartX(),
-							Ymidpoint, curInfo.getEndX(), Ymidpoint);
-						
+								Ymidpoint, curInfo.getEndX(), Ymidpoint);
+
 					} else {
-						
-						line1 = new Line2D.Double(curInfo.getStartX(), 
-								curInfo.getStartY(), Xmidpoint, curInfo.getStartY());
-						line2 = new Line2D.Double(Xmidpoint, 
-								curInfo.getEndY(), Xmidpoint, curInfo.getStartY());
-						line3 = new Line2D.Double(Xmidpoint, 
-								curInfo.getEndY(), curInfo.getEndX(), curInfo.getEndY());
+
+						line1 = new Line2D.Double(curInfo.getStartX(),
+								curInfo.getStartY(), Xmidpoint,
+								curInfo.getStartY());
+						line2 = new Line2D.Double(Xmidpoint, curInfo.getEndY(),
+								Xmidpoint, curInfo.getStartY());
+						line3 = new Line2D.Double(Xmidpoint, curInfo.getEndY(),
+								curInfo.getEndX(), curInfo.getEndY());
 					}
 					g2d.draw(line1);
 					g2d.draw(line2);
 					g2d.draw(line3);
-					
+
 				}
 				//
-				// Cap with white diamond
+				// Cap with diamond
 				//
-				if (curInfo.getRelType().equals("Aggregation")) {
+				if (curInfo.getRelType().equals("Aggregation")
+						|| curInfo.getRelType().equals("Composition")) {
 					int Xtop = 0, Xbottom = 0, Xleft = 0, Xright = 0, Ytop = 0, Ybottom = 0, Yleft = 0, Yright = 0;
-					
-					g.setColor(Color.WHITE);
-					
-					if(curInfo.getOrientation() == "left"){
+
+					if (curInfo.getOrientation() == "left") {
 						Xtop = curInfo.getEndX();
 						Xbottom = curInfo.getEndX() - 10;
 						Xleft = curInfo.getEndX() - 5;
 						Xright = curInfo.getEndX() - 5;
-						
+
 						Ytop = curInfo.getEndY();
 						Ybottom = curInfo.getEndY();
 						Yleft = curInfo.getEndY() + 5;
 						Yright = curInfo.getEndY() - 5;
-						
-					} else if (curInfo.getOrientation() == "right")
-					{
+
+					} else if (curInfo.getOrientation() == "right") {
 						Xtop = curInfo.getEndX();
 						Xbottom = curInfo.getEndX() + 10;
 						Xleft = curInfo.getEndX() + 5;
 						Xright = curInfo.getEndX() + 5;
-						
+
 						Ytop = curInfo.getEndY();
 						Ybottom = curInfo.getEndY();
 						Yleft = curInfo.getEndY() + 5;
 						Yright = curInfo.getEndY() - 5;
-						
-					} else if (curInfo.getOrientation() == "bottom"){
-						
+
+					} else if (curInfo.getOrientation() == "bottom") {
+
 						Xtop = curInfo.getEndX();
 						Xbottom = curInfo.getEndX();
 						Xleft = curInfo.getEndX() - 5;
 						Xright = curInfo.getEndX() + 5;
-						
+
 						Ytop = curInfo.getEndY() - 10;
-						Ybottom = curInfo.getEndY() ;
+						Ybottom = curInfo.getEndY();
 						Yleft = curInfo.getEndY() - 5;
 						Yright = curInfo.getEndY() - 5;
-						System.out.print("Into");
-						
-					} else { 
-						
+
+					} else {
+
 						Xtop = curInfo.getEndX();
 						Xbottom = curInfo.getEndX();
 						Xleft = curInfo.getEndX() - 5;
 						Xright = curInfo.getEndX() + 5;
-						
-						Ytop = curInfo.getEndY() ;
-						Ybottom = curInfo.getEndY() + 10 ;
+
+						Ytop = curInfo.getEndY();
+						Ybottom = curInfo.getEndY() + 10;
 						Yleft = curInfo.getEndY() + 5;
 						Yright = curInfo.getEndY() + 5;
-						
+
 					}
-						int xPoly[] = { Xtop, Xright,
-							Xbottom, Xleft };
-						int yPoly[] = { Ytop, Yright, Ybottom, Yleft };
-					
-					// Draw triangles on ENDPOINTS!
-					g.fillPolygon(xPoly, yPoly, 4);
-					g.setColor(Color.BLACK);
-					g.drawPolygon(xPoly, yPoly, 4);
-				}
-				// Cap with black diamond
-				if (curInfo.getRelType().equals("Composition")) {
-					g.setColor(Color.BLACK);
-					int Xtop = 0, Xbottom = 0, Xleft = 0, Xright = 0, Ytop = 0, Ybottom = 0, Yleft = 0, Yright = 0;
-					
-					
-					if(curInfo.getOrientation() == "left"){
-						Xtop = curInfo.getEndX();
-						Xbottom = curInfo.getEndX() - 10;
-						Xleft = curInfo.getEndX() - 5;
-						Xright = curInfo.getEndX() - 5;
-						
-						Ytop = curInfo.getEndY();
-						Ybottom = curInfo.getEndY();
-						Yleft = curInfo.getEndY() + 5;
-						Yright = curInfo.getEndY() - 5;
-						
-					} else if (curInfo.getOrientation() == "right")
-					{
-						Xtop = curInfo.getEndX();
-						Xbottom = curInfo.getEndX() + 10;
-						Xleft = curInfo.getEndX() + 5;
-						Xright = curInfo.getEndX() + 5;
-						
-						Ytop = curInfo.getEndY();
-						Ybottom = curInfo.getEndY();
-						Yleft = curInfo.getEndY() + 5;
-						Yright = curInfo.getEndY() - 5;
-						
-					} else if (curInfo.getOrientation() == "bottom"){
-						
-						Xtop = curInfo.getEndX();
-						Xbottom = curInfo.getEndX();
-						Xleft = curInfo.getEndX() - 5;
-						Xright = curInfo.getEndX() + 5;
-						
-						Ytop = curInfo.getEndY() - 10;
-						Ybottom = curInfo.getEndY() ;
-						Yleft = curInfo.getEndY() - 5;
-						Yright = curInfo.getEndY() - 5;
-						
-					} else { 
-						
-						Xtop = curInfo.getEndX();
-						Xbottom = curInfo.getEndX();
-						Xleft = curInfo.getEndX() - 5;
-						Xright = curInfo.getEndX() + 5;
-						
-						Ytop = curInfo.getEndY() ;
-						Ybottom = curInfo.getEndY() + 10 ;
-						Yleft = curInfo.getEndY() + 5;
-						Yright = curInfo.getEndY() + 5;
-						
+					int xPoly[] = { Xtop, Xright, Xbottom, Xleft };
+					int yPoly[] = { Ytop, Yright, Ybottom, Yleft };
+
+					// Draw white diamond for Aggregation
+					if (curInfo.getRelType().equals("Aggregation")) {
+						g.setColor(Color.WHITE);
+						g.fillPolygon(xPoly, yPoly, 4);
+						g.setColor(Color.BLACK);
+						g.drawPolygon(xPoly, yPoly, 4);
+					} else {
+						// Draw black diamond for Composition
+						g.setColor(Color.BLACK);
+						g.fillPolygon(xPoly, yPoly, 4);
 					}
-					
-					
-					int xPoly[] = { Xtop, Xright,
-							Xbottom, Xleft };
-					int yPoly[] = { Ytop, Yright, Ybottom, Yleft};
-					
-					// Draw triangles on ENDPOINTS!
-					g.fillPolygon(xPoly, yPoly, 4);
 				}
 				// Cap with white triangle
 				if (curInfo.getRelType().equals("Generalization")
 						|| curInfo.getRelType().equals("Implements")) {
 					g.setColor(Color.WHITE);
-					
+
 					int Xtop = 0, Xleft = 0, Xright = 0, Ytop = 0, Yleft = 0, Yright = 0;
-					
-					
-					if(curInfo.getOrientation() == "left"){
+
+					if (curInfo.getOrientation() == "left") {
 						Xtop = curInfo.getEndX();
 						Xleft = curInfo.getEndX() - 5;
 						Xright = curInfo.getEndX() - 5;
-						
+
 						Ytop = curInfo.getEndY();
 						Yleft = curInfo.getEndY() + 5;
 						Yright = curInfo.getEndY() - 5;
-						
-					} else if (curInfo.getOrientation() == "right")
-					{
+
+					} else if (curInfo.getOrientation() == "right") {
 						Xtop = curInfo.getEndX();
 						Xleft = curInfo.getEndX() + 5;
 						Xright = curInfo.getEndX() + 5;
-						
+
 						Ytop = curInfo.getEndY();
 						Yleft = curInfo.getEndY() + 5;
 						Yright = curInfo.getEndY() - 5;
-						
-					} else if (curInfo.getOrientation() == "bottom"){
-						
+
+					} else if (curInfo.getOrientation() == "bottom") {
+
 						Xtop = curInfo.getEndX();
 						Xleft = curInfo.getEndX() - 5;
 						Xright = curInfo.getEndX() + 5;
-						
+
 						Ytop = curInfo.getEndY();
 						Yleft = curInfo.getEndY() - 5;
 						Yright = curInfo.getEndY() - 5;
-						
-					} else { 
+
+					} else {
 						// top
 						Xtop = curInfo.getEndX();
 						Xleft = curInfo.getEndX() - 5;
 						Xright = curInfo.getEndX() + 5;
-						
+
 						Ytop = curInfo.getEndY();
 						Yleft = curInfo.getEndY() + 5;
 						Yright = curInfo.getEndY() + 5;
-						
+
 					}
-					
-					
-					int xPoly[] = { Xtop, Xright, Xleft};
-					int yPoly[] = { Ytop, Yright, Yleft};
+
+					int xPoly[] = { Xtop, Xright, Xleft };
+					int yPoly[] = { Ytop, Yright, Yleft };
 					// Draw triangles on ENDPOINTS!
 					g.fillPolygon(xPoly, yPoly, 3);
 					g.setColor(Color.BLACK);
@@ -403,56 +348,52 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 				if (curInfo.getRelType().equals("Association")
 						|| curInfo.getRelType().equals("Depend")) {
 					g.setColor(Color.BLACK);
-					
-int Xtop = 0, Xleft = 0, Xright = 0, Ytop = 0, Yleft = 0, Yright = 0;
-					
-					
-					if(curInfo.getOrientation() == "left"){
+
+					int Xtop = 0, Xleft = 0, Xright = 0, Ytop = 0, Yleft = 0, Yright = 0;
+
+					if (curInfo.getOrientation() == "left") {
 						Xtop = curInfo.getEndX();
 						Xleft = curInfo.getEndX() - 5;
 						Xright = curInfo.getEndX() - 5;
-						
+
 						Ytop = curInfo.getEndY();
 						Yleft = curInfo.getEndY() + 5;
 						Yright = curInfo.getEndY() - 5;
-						
-					} else if (curInfo.getOrientation() == "right")
-					{
+
+					} else if (curInfo.getOrientation() == "right") {
 						Xtop = curInfo.getEndX();
 						Xleft = curInfo.getEndX() + 5;
 						Xright = curInfo.getEndX() + 5;
-						
+
 						Ytop = curInfo.getEndY();
 						Yleft = curInfo.getEndY() + 5;
 						Yright = curInfo.getEndY() - 5;
-						
-					} else if (curInfo.getOrientation() == "bottom"){
-						
+
+					} else if (curInfo.getOrientation() == "bottom") {
+
 						Xtop = curInfo.getEndX();
 						Xleft = curInfo.getEndX() - 5;
 						Xright = curInfo.getEndX() + 5;
-						
+
 						Ytop = curInfo.getEndY();
 						Yleft = curInfo.getEndY() - 5;
 						Yright = curInfo.getEndY() - 5;
-						
-					} else { 
+
+					} else {
 						// top
 						Xtop = curInfo.getEndX();
 						Xleft = curInfo.getEndX() - 5;
 						Xright = curInfo.getEndX() + 5;
-						
+
 						Ytop = curInfo.getEndY();
 						Yleft = curInfo.getEndY() + 5;
 						Yright = curInfo.getEndY() + 5;
-						
+
 					}
 					BasicStroke stroke2 = new BasicStroke(3.0f);
 					g2d.setStroke(stroke2);
-					g.drawLine(Xtop, Ytop,
-							Xleft, Yleft);
-					g.drawLine(Xtop, Ytop,
-							Xright, Yright);
+					g.drawLine(Xtop, Ytop, Xleft, Yleft);
+					g.drawLine(Xtop, Ytop, Xright, Yright);
 					g2d.setStroke(stroke);
 				}
 
@@ -460,12 +401,14 @@ int Xtop = 0, Xleft = 0, Xright = 0, Ytop = 0, Yleft = 0, Yright = 0;
 
 		}
 
-	}
+
 
 	/**
-	 * Draws a line from the first node of a half-finished relationship to the mouse
+	 * Draws a line from the first node of a half-finished relationship to the
+	 * mouse
+	 * 
 	 * @param g
-	 * 		The Graphics object
+	 *            The Graphics object
 	 */
 	public void drawHalfRelationship(Graphics g) {
 		if (halfRel != null) {
@@ -480,9 +423,9 @@ int Xtop = 0, Xleft = 0, Xright = 0, Ytop = 0, Yleft = 0, Yright = 0;
 	 * Draws all the nodes to the screen
 	 * 
 	 * @param g
-	 * 		The Graphics object
+	 *            The Graphics object
 	 * @param nodeInfo
-	 * 		ArrayList containing information about the nodes
+	 *            ArrayList containing information about the nodes
 	 */
 	public void drawNodes(Graphics g, ArrayList<NodeInfo> nodeInfo) {
 		Iterator<NodeInfo> nodeItr = nodeInfo.iterator();
