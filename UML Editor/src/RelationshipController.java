@@ -21,8 +21,11 @@ public class RelationshipController {
 
 		while (itr.hasNext()) {
 			Relationship curRel = itr.next();
-
-			if (curRel.involvesNode(start) && curRel.involvesNode(end)) {
+			
+			if (newRel.isSelfRel() && (curRel.isSelfRel() && curRel.involvesNode(start))) {
+				Controller.rels.remove(curRel);
+				break;
+			} else if (!newRel.isSelfRel() && (curRel.involvesNode(start) && curRel.involvesNode(end))) {
 				Controller.rels.remove(curRel);
 				break;
 			}

@@ -246,14 +246,11 @@ public class Node implements Serializable {
 	}
 
 	/**
-	 * Decides if nodes are equal based on their internal ids.
+	 * Decides if nodes are equal.
 	 * 
 	 * @param node
 	 *            Node to be compared.
 	 * @return True if the nodes are equal
-	 */
-	/*
-	 * public boolean equals(Node node) { if(node == null) return false; return this.nodeId == node.nodeId; }
 	 */
 	@Override
 	public boolean equals(Object obj) {
