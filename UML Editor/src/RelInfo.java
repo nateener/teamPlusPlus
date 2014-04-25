@@ -8,6 +8,9 @@ public class RelInfo {
 	private String relType;
 	private String startDetail;
 	private String endDetail;
+	private String orientation;
+
+	
 
 	/**
 	 * RelInfo constructor
@@ -26,7 +29,7 @@ public class RelInfo {
 	 *            type of the relationship
 	 */
 	public RelInfo(int startX, int startY, int endX, int endY, boolean self,
-			String type, String startDetail, String endDetail) {
+			String type, String startDetail, String endDetail, String orientation) {
 
 		this.startX = startX;
 		this.startY = startY;
@@ -36,6 +39,7 @@ public class RelInfo {
 		this.setRelType(type);
 		this.setStartDetail(startDetail);
 		this.setEndDetail(endDetail);
+		this.orientation = orientation;
 	}
 
 	/**
@@ -204,6 +208,15 @@ public class RelInfo {
 	 */
 	public void setEndDetail(String endDetail) {
 		this.endDetail = endDetail;
+	}
+	
+	/**
+	 * Gets the orientation
+	 * @return
+	 * 		The orientation
+	 */
+	public String getOrientation() {
+		return orientation;
 	}
 
 }

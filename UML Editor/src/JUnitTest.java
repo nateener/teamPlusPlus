@@ -234,9 +234,10 @@ public class JUnitTest {
 		String type = "type";
 		String startDetail = "Start";
 		String endDetail = "End";
-
+		String orientation = "bottom";
+		
 		// Test constructor
-		RelInfo info = new RelInfo(x1, y1, x2, y2, self, type, startDetail, endDetail);
+		RelInfo info = new RelInfo(x1, y1, x2, y2, self, type, startDetail, endDetail, orientation);
 		assertNotNull(info);
 
 		// Test setStartX getStartX

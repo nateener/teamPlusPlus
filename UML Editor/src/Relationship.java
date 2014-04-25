@@ -15,6 +15,7 @@ public class Relationship implements Serializable {
 	private int startY;
 	private int endX;
 	private int endY;
+	private String orientation;
 
 	/**
 	 * Relationship constructor
@@ -158,6 +159,12 @@ public class Relationship implements Serializable {
 		return startNode.equals(endNode);
 
 	}
+	
+	public void setOrientation(String orienting){
+		
+		orientation = orienting;
+		
+	}
 
 	/**
 	 * Sets the start coordinates of the relationship based on it's starting
@@ -167,7 +174,7 @@ public class Relationship implements Serializable {
 
 		if (startNode != null) {
 			startX = startNode.getX() + startNode.getWidth() / 2;
-			startY = startNode.getY() + startNode.getHeight();
+			startY = startNode.getY() + startNode.getHeight() / 2;
 		}
 
 	}
@@ -176,10 +183,65 @@ public class Relationship implements Serializable {
 	 * Sets the end coordinates of the relationship based on it's ending node
 	 */
 	private void setEndPosition() {
-
+		 
 		if (endNode != null) {
-			endX = endNode.getX() + endNode.getWidth() / 2;
-			endY = endNode.getY() + endNode.getHeight();
+			
+			if(endNode.getX() + endNode.getWidth()  + 30 < startNode.getX()){
+				// Right
+				endX = endNode.getX() + endNode.getWidth();
+				// This ensures the endpoint does not leave the bounds of the box. 
+				if((endNode.getY() + endNode.getHeight() / 2) + 
+						(startY - (endNode.getY() + endNode.getHeight() / 2)) / 10 > 
+						endNode.getY()+endNode.getHeight()){
+					endY = endNode.getY() + endNode.getHeight();
+				} else if((endNode.getY() + endNode.getHeight() / 2) + 
+						(startY - (endNode.getY() + endNode.getHeight() / 2)) / 10 < 
+						endNode.getY()){
+					endY = endNode.getY();
+				} else {
+					endY = (endNode.getY() + endNode.getHeight() / 2) + 
+							(startY - (endNode.getY() + endNode.getHeight() / 2)) / 10;
+				}
+				setOrientation("right");
+			} 
+			else if (endNode.getX() - 30 > startNode.getX() + startNode.getWidth()){
+				// Left
+				endX = endNode.getX();
+				
+				// This ensures the endpoint does not leave the bounds of the box. 
+				if((endNode.getY() + endNode.getHeight() / 2) + 
+						(startY - (endNode.getY() + endNode.getHeight() / 2)) / 10 > 
+						endNode.getY()+endNode.getHeight()){
+					endY = endNode.getY() + endNode.getHeight();
+				} else if((endNode.getY() + endNode.getHeight() / 2) + 
+						(startY - (endNode.getY() + endNode.getHeight() / 2)) / 10 < 
+						endNode.getY()){
+					endY = endNode.getY();
+				} else {
+				endY = (endNode.getY() + endNode.getHeight() / 2) + 
+						(startY - (endNode.getY() + endNode.getHeight() / 2)) / 10;
+				}
+				setOrientation("left");
+			} 
+			else if (endNode.getY() > startNode.getY()+startNode.getHeight()) {
+				// Bottom
+				endY = endNode.getY();
+				endX = (endNode.getX() + endNode.getWidth() / 2) +
+						(startX - (endNode.getX() + endNode.getWidth() / 2)) / 3;
+				
+				setOrientation("bottom");
+			}
+			else {
+				// Top
+				endY = endNode.getY() + endNode.getHeight();
+				endX = (endNode.getX() + endNode.getWidth() / 2) +
+						(startX - (endNode.getX() + endNode.getWidth() / 2)) / 3;
+				setOrientation("top");
+				
+			}
+			
+			//endX = endNode.getX() + endNode.getWidth() / 2;
+			//endY = endNode.getY() + endNode.getHeight();
 		}
 
 	}
@@ -241,6 +303,10 @@ public class Relationship implements Serializable {
 		return endDetail;
 	}
 
+	public String getOrientation(){
+		return orientation;
+	}
+	
 	/**
 	 * Sets the end detail
 	 * @param endDetail
