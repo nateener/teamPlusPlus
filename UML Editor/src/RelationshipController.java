@@ -35,16 +35,6 @@ public class RelationshipController {
 	}
 	
 	/**
-	 * Does nothing at the moment.
-	 * @param node
-	 */
-	public static void editRelationship(Node node) {
-
-		Controller.serveObjects();
-
-	}
-
-	/**
 	 * Check if given coordinates contain a relationship, prompt to delete and
 	 * if yes delete
 	 * 
