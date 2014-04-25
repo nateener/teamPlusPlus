@@ -111,12 +111,27 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 			
 				if(curInfo.getStartDetail() != null){
 					if(curInfo.getOrientation() == "left"){
-						g.drawString(curInfo.getStartDetail(), curInfo.getStartX(), curInfo.getStartY() - 50);
-						System.out.print("left");
+						g.drawString(curInfo.getStartDetail(), curInfo.getStartX() - 15, curInfo.getStartY() + 15);
+					} else if (curInfo.getOrientation() == "right"){
+						g.drawString(curInfo.getStartDetail(), curInfo.getStartX() - 15, curInfo.getStartY() + 15);
+					} else if (curInfo.getOrientation() == "top"){
+						g.drawString(curInfo.getEndDetail(), curInfo.getStartX() + 5, curInfo.getEndY() + 10);
+					} else  { // bottom
+						g.drawString(curInfo.getEndDetail(), curInfo.getStartX() + 5, curInfo.getEndY() - 10);
 					}
 				}
 				if(curInfo.getEndDetail() != null){
-					g.drawString(curInfo.getEndDetail(), curInfo.getEndX() + 5, curInfo.getEndY() + 5);
+					if(curInfo.getOrientation() == "left"){
+						g.drawString(curInfo.getEndDetail(), curInfo.getEndX() + 5, curInfo.getEndY() + 5);
+					} else if (curInfo.getOrientation() == "right"){
+						g.drawString(curInfo.getEndDetail(), curInfo.getEndX() - 30, curInfo.getEndY() + 10);
+					} else if (curInfo.getOrientation() == "top"){
+						g.drawString(curInfo.getEndDetail(), curInfo.getEndX() + 5, curInfo.getEndY() + 10);
+					} else  { // bottom
+						g.drawString(curInfo.getEndDetail(), curInfo.getEndX() + 5, curInfo.getEndY() - 10);
+						
+					}
+					
 				}
 			
 			
@@ -138,12 +153,6 @@ class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
 							curInfo.getStartY() - 20, 40, 40);
 				}
 			} else {
-				
-				// TODO SUPER HARD PRINT THE RELATIONSHIP DETAILS IN THE PROPER PLACE
-
-				
-				
-				
 				
 				
 				int Ymidpoint = curInfo.getStartY()
