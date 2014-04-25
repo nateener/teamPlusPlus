@@ -173,8 +173,23 @@ public class Relationship implements Serializable {
 	private void setStartPosition() {
 
 		if (startNode != null) {
-			startX = startNode.getX() + startNode.getWidth() / 2;
+			
+		if(getOrientation() == "right"){
+			startX = startNode.getX();
 			startY = startNode.getY() + startNode.getHeight() / 2;
+		} else if( getOrientation() == "left"){
+			startX = startNode.getX() + startNode.getWidth();
+			startY = startNode.getY() + startNode.getHeight() / 2;
+		} else if (getOrientation() == "top"){
+			startX = startNode.getX() + startNode.getWidth() / 2;
+			startY = startNode.getY();
+		} else { // bottom
+			startX = startNode.getX() + startNode.getWidth() / 2;
+			startY = startNode.getY() + startNode.getHeight();
+		}
+			
+			
+			
 		}
 
 	}
