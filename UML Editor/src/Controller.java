@@ -108,7 +108,7 @@ public class Controller {
 	 */
 	public static void mouseClick(int x, int y) {
 
-		if (clickValue > 0) {
+		if ((clickValue <= 2 && clickValue > 0) || (clickValue > 2 && tempNode != null)) {
 			history.undoPush(nodes, rels);
 			history.redoClear();
 		}

@@ -42,19 +42,45 @@ public class UndoRedoStack {
 			Relationship curRel = relItr.next();
 			Node start = curRel.getStartNode().copy();
 			Node end = curRel.getEndNode().copy();
+			
+			if (newNodes.contains(start)) {
+				Iterator<Node> newItr = newNodes.iterator();
+				
+				while (newItr.hasNext()) {
+					Node curNode = newItr.next();
+					if (curNode.equals(start)) {
+						start = curNode;
+						break;
+					}
+				}
+			} else {
+				newNodes.add(start);
+			}
+			
+			if (newNodes.contains(end)) {
+				Iterator<Node> newItr = newNodes.iterator();
+				
+				while (newItr.hasNext()) {
+					Node curNode = newItr.next();
+					if (curNode.equals(end)) {
+						end = curNode;
+						break;
+					}
+				}
+			} else {
+				newNodes.add(end);
+			}
 
 			Relationship newRel = curRel.copy(start, end);
 
 			newRels.add(newRel);
-			newNodes.add(start);
-			newNodes.add(end);
 		}
 
 		while (nodeItr.hasNext()) {
 			Node copyNode = nodeItr.next().copy();
 
 			if (newNodes.contains(copyNode)) {
-				break;
+				continue;
 			}
 
 			newNodes.add(copyNode);
@@ -83,19 +109,47 @@ public class UndoRedoStack {
 			Relationship curRel = relItr.next();
 			Node start = curRel.getStartNode().copy();
 			Node end = curRel.getEndNode().copy();
+			
+			if (newNodes.contains(start)) {
+				Iterator<Node> newItr = newNodes.iterator();
+				
+				while (newItr.hasNext()) {
+					Node curNode = newItr.next();
+					if (curNode.equals(start)) {
+						start = curNode;
+						break;
+					}
+				}
+			} else {
+				newNodes.add(start);
+			}
+			
+			if (newNodes.contains(end)) {
+				Iterator<Node> newItr = newNodes.iterator();
+				
+				while (newItr.hasNext()) {
+					Node curNode = newItr.next();
+					if (curNode.equals(end)) {
+						end = curNode;
+						break;
+					}
+				}
+			} else {
+				newNodes.add(end);
+			}
+			
+			
 
 			Relationship newRel = curRel.copy(start, end);
 
 			newRels.add(newRel);
-			newNodes.add(start);
-			newNodes.add(end);
 		}
 
 		while (nodeItr.hasNext()) {
 			Node copyNode = nodeItr.next().copy();
 
 			if (newNodes.contains(copyNode)) {
-				break;
+				continue;
 			}
 
 			newNodes.add(copyNode);
